@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import Grid from '@material-ui/core/Grid';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -12,8 +11,6 @@ import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 
@@ -26,7 +23,14 @@ const useStyles = makeStyles((theme) => ({
   media: {
     height: 0,
     paddingTop: '56.25%', // 16:9
+    maxWidth:'70%',
+    flexGrow: 1,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginLeft: '40px',
   },
+
   expand: {
     transform: 'rotate(0deg)',
     marginLeft: 'auto',
@@ -43,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Product(props) {
-  const [spacing] = React.useState(2);
+  const [spacing] = React.useState(1);
   const classes = useStyles();
   const [expanded, setExpanded] = React.useState(false);
 
@@ -54,37 +58,22 @@ function Product(props) {
   return (
         <Card className={classes.root}>
             <CardHeader
-            avatar={
-                <Avatar aria-label="recipe" className={classes.avatar}>
-                R
-                </Avatar>
-            }
-            action={
-                <IconButton aria-label="settings">
-                <MoreVertIcon />
-                </IconButton>
-            }
-            title="Shrimp and Chorizo Paella"
-            subheader="September 14, 2016"
+            title="MacBook Pro 13 (M1)"
             />
             <CardMedia
             className={classes.media}
-            image="/static/images/cards/paella.jpg"
-            title="Paella dish"
+            image="https://d3tctca4ed2xlu.cloudfront.net/images/spree/images/834734/attachments/large/Apple_MacBook_Pro_M1_Space_Gray_1.jpg?1608666218"
+            title="MacBook Pro 13 (M1)"
             />
             <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-                This impressive paella is a perfect party dish and a fun meal to cook together with your
-                guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                El chip M1 de Apple redefine al Macbook Pro de 13 pulgadas.1 Viene con una CPU de 8 núcleos que permite un rendimiento óptimo en los flujos de trabajo más exigentes, como fotografía, programación y edición de video. 
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <IconButton aria-label="add to favorites">
-                <FavoriteIcon />
-            </IconButton>
-            <IconButton aria-label="share">
-                <ShareIcon />
-            </IconButton>
+            <Typography variant="body2" color="textSecondary" component="h2" style={{marginLeft: '10px'}}>
+               Ver más
+            </Typography>
             <IconButton
                 className={clsx(classes.expand, {
                 [classes.expandOpen]: expanded,
@@ -98,28 +87,18 @@ function Product(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <Typography paragraph>Method:</Typography>
+                <Typography paragraph>Información técnica:</Typography>
                 <Typography paragraph>
-                Heat 1/2 cup of the broth in a pot until simmering, add saffron and set aside for 10
-                minutes.
+                  - Chip M1 de Apple que permite un gran avance en el rendimiento de la CPU, GPU y aprendizaje automático
                 </Typography>
                 <Typography paragraph>
-                Heat oil in a (14- to 16-inch) paella pan or a large, deep skillet over medium-high
-                heat. Add chicken, shrimp and chorizo, and cook, stirring occasionally until lightly
-                browned, 6 to 8 minutes. Transfer shrimp to a large plate and set aside, leaving chicken
-                and chorizo in the pan. Add pimentón, bay leaves, garlic, tomatoes, onion, salt and
-                pepper, and cook, stirring often until thickened and fragrant, about 10 minutes. Add
-                saffron broth and remaining 4 1/2 cups chicken broth; bring to a boil.
+                  - La mayor duración de batería en un Mac: hasta 20 horas para que puedas hacer mucho más2
                 </Typography>
                 <Typography paragraph>
-                Add rice and stir very gently to distribute. Top with artichokes and peppers, and cook
-                without stirring, until most of the liquid is absorbed, 15 to 18 minutes. Reduce heat to
-                medium-low, add reserved shrimp and mussels, tucking them down into the rice, and cook
-                again without stirring, until mussels have opened and rice is just tender, 5 to 7
-                minutes more. (Discard any mussels that don’t open.)
+                  - CPU de 8 núcleos que ofrece un rendimiento hasta 2,8 veces más rápido para ejecutar flujos de trabajo a una velocidad increíble1
                 </Typography>
-                <Typography>
-                Set aside off of the heat to let rest for 10 minutes, and then serve.
+                <Typography paragraph>
+                  - GPU de 8 núcleos con gráficas hasta 5 veces más veloces para apps y juegos con gráficas avanzadas2
                 </Typography>
             </CardContent>
             </Collapse>
