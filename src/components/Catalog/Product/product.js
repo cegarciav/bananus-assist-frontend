@@ -44,6 +44,9 @@ const useStyles = makeStyles((theme) => ({
   avatar: {
     backgroundColor: red[500],
   },
+  product: {
+    marginLeft: '10px'
+  }
 }));
 
 function Product(props) {
@@ -71,7 +74,7 @@ function Product(props) {
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
-            <Typography variant="body2" color="textSecondary" component="h2" style={{marginLeft: '10px'}}>
+            <Typography variant="body2" color="textSecondary" component="h2" className={classes.product}>
                Ver más
             </Typography>
             <IconButton
