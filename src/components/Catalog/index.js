@@ -8,7 +8,7 @@ import Box from '@material-ui/core/Box';
 function Catalog(props) {
 
   return (
-    <Box p={15}>
+    <Box p={7}>
       <Grid container justify="center" spacing={3}>
         {[0,1,2,3,4,5,6,7,8, 9, 10,11].map((value) => (
           <Grid item xs={12} sm={9} md={6} lg={4} key={value} >
