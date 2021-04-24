@@ -9,7 +9,7 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/Home';
-import Login from './components/Login/login_page';
+import Backoffice from './components/Backoffice/home';
 
 class App extends Component {
   render() {
@@ -17,9 +17,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
-          
-          <Route path="/backoffice">
-            <Login />
+          <Route exact path="/backoffice">
+            <Backoffice />
           </Route>
           {
           /* Para agregar mas rutas, insertar el siguiente componente: 

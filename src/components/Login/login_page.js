@@ -4,12 +4,20 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import LoginForm from './login_form';
+import { useSelector } from "react-redux";
+import { selectUser } from '../../features/userSlice';
+
 
 
 export default function Login (){
     
+    const user = useSelector(selectUser);
+
+
     return (
-        <div style={{backgroundColor:'#feff96'}} >
+
+
+        <div >
             <Grid
             container
             spacing={0}
@@ -22,7 +30,7 @@ export default function Login (){
                     <CardHeader title={'Login'} style={{textAlign: 'center'}} />
                     <CardContent>
                         <Grid item >
-                            <LoginForm />
+                            {user ? <h1>he</h1> : <LoginForm /> }
                         </Grid>  
                     </CardContent>
                 </Card>
