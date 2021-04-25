@@ -11,6 +11,7 @@ import {
 import Home from './components/Home';
 import Catalog from './components/Catalog';
 import Navbar from './components/Navbar/navbar';
+import Backoffice from './components/Backoffice/home';
 
 function App (props){
 
@@ -29,8 +30,11 @@ function App (props){
           {
           /* Para agregar mas rutas, insertar el siguiente componente: 
             <Route path="/<ruta en browser>" component={<nombre del componente>} />
-          */ 
+            
+          */
+         
           }
+          
         </Switch>
       </Router>  
     )
