@@ -12,6 +12,7 @@ import Home from './components/Home';
 import Catalog from './components/Catalog';
 import Navbar from './components/Navbar/navbar';
 import Backoffice from './components/Backoffice/home';
+import Information from './components/Information';
 
 function App (props){
 
@@ -27,6 +28,8 @@ function App (props){
           <RouteWithNavbar exact path="/Catalog" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/Home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
+          <RouteWithNavbar exact path="/Information" component={() => <Information {...props} />} />
+
           {
           /* Para agregar mas rutas, insertar el siguiente componente: 
             <Route path="/<ruta en browser>" component={<nombre del componente>} />

@@ -104,6 +104,12 @@ function Navbar(props) {
                                              <Link to='/' className={classes.link}> Home </Link>
                                         </Typography >
                                     </MenuItem>
+                                    <MenuItem onClick={handleClose2}>
+                                        <Typography variant="p">
+                                             <Link to='/Information' className={classes.link}> Información </Link>
+                                        </Typography >
+                                    </MenuItem>
+
                                 </Menu>
                             </div>
                     )}
