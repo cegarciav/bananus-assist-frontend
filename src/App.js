@@ -22,24 +22,14 @@ function App (props){
       }}
       />;
     };
+    
     return (
       <Router>
         <Switch>
           <RouteWithNavbar exact path="/Catalog" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/Home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/backoffice">
-            <Backoffice />
-          </Route>
-          {
-          /* Para agregar mas rutas, insertar el siguiente componente: 
-            <Route path="/<ruta en browser>" component={<nombre del componente>} />
-            
-          */
-         
-          }
-          
+          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />          
         </Switch>
       </Router>  
     )

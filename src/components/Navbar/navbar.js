@@ -1,34 +1,20 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { makeStyles } from "@material-ui/core/styles";
+import useStyles from "./styles-navbar";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { useDispatch } from 'react-redux';
+import { logout } from '../../features/userSlice'
+import { useSelector } from "react-redux";
+import { selectUser } from '../../features/userSlice';
+import { useHistory } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    title: {
-      flexGrow: 1,
-    },
-    link:{
-         textDecoration: 'none', 
-         color: 'black',
-         fontSize: 16,
-
-    },
-    menuButton: {
-        marginRight: theme.spacing(2),
-    },
-
-  }));
 
 function Navbar(props) {
 
@@ -36,12 +22,21 @@ function Navbar(props) {
     const [auth, setAuth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
+    const user = useSelector(selectUser);
+    const history = useHistory();
 
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const open2 = Boolean(anchorEl2);
 
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
+    const dispatch = useDispatch();
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        dispatch(logout());
+    };
+
+    const handleLogIn = (e) => {
+        history.push("/backoffice");
     };
 
     const handleMenu = (event) => {
@@ -91,17 +86,20 @@ function Navbar(props) {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    <MenuItem onClick={handleClose2}>Asistentes</MenuItem>
-                                    <MenuItem onClick={handleClose2}>Tiendas</MenuItem>
-                                    <MenuItem onClick={handleClose2}>Puntos de venta</MenuItem>
+                                    {user ? 
+                                    <>
+                                        <MenuItem onClick={handleClose2}>Asistentes</MenuItem>
+                                        <MenuItem onClick={handleClose2}>Tiendas</MenuItem>
+                                        <MenuItem onClick={handleClose2}>Puntos de venta</MenuItem>
+                                        <MenuItem onClick={handleClose2}></MenuItem>
+                                    </>
+                                    :
+                                    <></>
+                                    
+                                }
                                     <MenuItem onClick={handleClose2}>
                                         <Typography variant="p">
                                              <Link to='/Catalog' className={classes.link}> Catálogo </Link>
-                                        </Typography >
-                                    </MenuItem>
-                                    <MenuItem onClick={handleClose2}>
-                                        <Typography variant="p">
-                                             <Link to='/' className={classes.link}> Home </Link>
                                         </Typography >
                                     </MenuItem>
                                 </Menu>
@@ -134,8 +132,11 @@ function Navbar(props) {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    <MenuItem onClick={handleClose}>Iniciar sesión</MenuItem>
-                                    <MenuItem onClick={handleClose}>Cerrar sesión</MenuItem>
+                                    {user ? <MenuItem onClick = {
+                                        (e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
+                                        :
+                                         <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                    }
                                 </Menu>
                             </div>
                     )}
