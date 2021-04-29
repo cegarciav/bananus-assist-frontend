@@ -1,5 +1,4 @@
 import React from 'react';
-
 import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
@@ -13,7 +12,7 @@ const Home = () => {
   const classes = useStyles();
   return (
     <div className={classes.mainContainer}>
-        Pagina inicial
+        Pagina inicial1
     </div>
   )
 };
