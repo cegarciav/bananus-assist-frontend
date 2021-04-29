@@ -16,6 +16,17 @@ const useStyles = makeStyles((theme) => ({
     menuButton: {
         marginRight: theme.spacing(2),
     },
+    assistButton: {
+        color: "#195E6D",
+        fontSize: '20px',
+        borderRadius: '10px',
+        borderColor: "#195E6D",
+        backgroundColor: "white",
+        marginLeft: '10%',
+    },
+    navbar: {
+        backgroundColor: "#195E6D",
+    }
 
   }));
 

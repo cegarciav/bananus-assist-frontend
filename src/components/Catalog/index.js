@@ -4,7 +4,6 @@ import Product from '././Product/product';
 import Box from '@material-ui/core/Box';
 
 
-
 function Catalog(props) {
 
   return (

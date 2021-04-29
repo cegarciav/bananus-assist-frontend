@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useStyles from "./styles-navbar";
+import Assistance from "../Assistance/assistance";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -14,16 +15,28 @@ import { logout } from '../../features/userSlice'
 import { useSelector } from "react-redux";
 import { selectUser } from '../../features/userSlice';
 import { useHistory } from 'react-router-dom';
+import Modal from '@material-ui/core/Modal';
+
 
 
 function Navbar(props) {
 
     const classes = useStyles();
-    const [auth, setAuth] = React.useState(true);
+    const [auth] = React.useState(true);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
     const user = useSelector(selectUser);
     const history = useHistory();
+    const [openModal, setOpenModal] = React.useState(false);
+
+    const handleOpenModal = () => {
+        setOpenModal(true);
+      };
+    
+    const handleCloseModal = () => {
+      setOpenModal(false);
+    };
+    
 
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const open2 = Boolean(anchorEl2);
@@ -57,8 +70,8 @@ function Navbar(props) {
 
 	return (
         <div>
-            <AppBar position="static" style={{backgroundColor: "#195E6D"}} >
-                <Toolbar >
+            <AppBar position="static" >
+                <Toolbar className={classes.navbar}>
                     <div className={classes.item}>
                         {auth && (
                             <div className={classes.item}>
@@ -88,9 +101,15 @@ function Navbar(props) {
                                 >
                                     {user ? 
                                     <>
-                                        <MenuItem onClick={handleClose2}>Asistentes</MenuItem>
-                                        <MenuItem onClick={handleClose2}>Tiendas</MenuItem>
-                                        <MenuItem onClick={handleClose2}>Puntos de venta</MenuItem>
+                                        <MenuItem onClick={handleClose2}>
+                                           <Link to='/Assistants' className={classes.link}> Asistentes</Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose2}>
+                                           <Link to='/Stores' className={classes.link}> Tiendas</Link>
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClose2}>
+                                           <Link to='/PointsOfSale' className={classes.link}> Puntos de venta</Link>
+                                        </MenuItem>
                                         <MenuItem onClick={handleClose2}></MenuItem>
                                     </>
                                     :
@@ -140,6 +159,17 @@ function Navbar(props) {
                                 </Menu>
                             </div>
                     )}
+                    <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
+                          &#x2706; Solicitar asistencia
+                    </button>
+                    <Modal
+                        open={openModal}
+                        onClose={handleCloseModal}
+                        aria-labelledby="simple-modal-title"
+                        aria-describedby="simple-modal-description"
+                    >
+                         <Assistance/>
+                    </Modal>
                 </Toolbar>
             </AppBar>
         </div>
