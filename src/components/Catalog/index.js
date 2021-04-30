@@ -10,7 +10,7 @@ function Catalog(props) {
     <Box p={7}>
       <Grid container justify="center" spacing={3}>
         {[0,1,2,3,4,5,6,7,8, 9, 10,11].map((value) => (
-          <Grid item xs={12} sm={9} md={6} lg={4} key={value} >
+          <Grid item xs={12} sm={6} md={4} key={value} >
                 <Product  {...props}/>
           </Grid>
         ))}
