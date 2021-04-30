@@ -36,7 +36,6 @@ function Navbar(props) {
     const handleCloseModal = () => {
       setOpenModal(false);
     };
-    
 
     const [anchorEl2, setAnchorEl2] = React.useState(null);
     const open2 = Boolean(anchorEl2);

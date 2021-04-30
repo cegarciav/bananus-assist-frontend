@@ -2,11 +2,18 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
     paper: {
-        position: 'absolute',
         width: 400,
         backgroundColor: 'white',
-        border: '2px solid #000',
+        borderRadius: '10px',
+        fontFamily: 'Arial',
+        padding: '10px',
       },
+      paperContainer:{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginTop: '100px'
+      }
 });
 
 export default useStyles;

@@ -29,11 +29,11 @@ function App (props){
     return (
       <Router>
         <Switch>
-          <RouteWithNavbar exact path="/Catalog" component={() => <Catalog {...props} />} />
-          <RouteWithNavbar exact path="/Assistants" component={() => <Assistants {...props} />} />
-          <RouteWithNavbar exact path="/PointsOfSale" component={() => <PointsOfSale {...props} />} />
-          <RouteWithNavbar exact path="/Stores" component={() => <Stores {...props} />} />
-          <RouteWithNavbar exact path="/Home" component={() => <Home {...props} />} />
+          <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
+          <RouteWithNavbar exact path="/assistants" component={() => <Assistants {...props} />} />
+          <RouteWithNavbar exact path="/pointsOfSale" component={() => <PointsOfSale {...props} />} />
+          <RouteWithNavbar exact path="/stores" component={() => <Stores {...props} />} />
+          <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/backoffice" component={Backoffice} />          
         </Switch>
