@@ -1,3 +1,6 @@
+#Para correr este código:
+- yarn install
+- yarn start
 # Metodología de trabajo
 
 1. Gitflow
