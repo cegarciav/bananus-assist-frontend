@@ -9,7 +9,9 @@ import {
 } from 'react-router-dom';
 
 import Home from './components/Home';
-import Backoffice from './components/Backoffice/home';
+import Login from './components/Backoffice/home';
+import Menu from './components/Backoffice/menu';
+import AssignPage from './components/Backoffice/AsignAssistant/assign_page';
 
 class App extends Component {
   render() {
@@ -17,9 +19,11 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/backoffice">
-            <Backoffice />
+            <Menu />
           </Route>
+          <Route path="/Backoffice/assign_location/:userId" component={AssignPage } />
           {
           /* Para agregar mas rutas, insertar el siguiente componente: 
             <Route path="/<ruta en browser>" component={<nombre del componente>} />
