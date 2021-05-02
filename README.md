@@ -84,3 +84,26 @@ Cada commit debería incluir un tipo y mensaje lo suficientemente claro con la e
     2. Descriptión: Una pequeña síntesis de lo que se esperaría poder realizar gracias al contenido del pull request (scope de la branch). Puede incluir un listado de características que deberían cumplirse
     3. Imágenes de las vistas: la persona que hace el pull request debería poder mostrar que las vistas desarrolladas funcionan bien en los distintos browsers soportados: Safari, Chrome, Firefox y Opera. De la misma forma, debería mostrarse al menos un screenshot de la aplicación funcionando en un dispositivo móvil para demostrar responsividad
 3. Un pull request debe ser aprobado y mezclado (merge) por una persona diferente a quien crea el pull request. Como caso excepcional, el merge de develop a main deberá ser aprobado por al menos dos personas
+
+
+### Uso
+
+ **Ejecutar el proyecto**
+
+Instalar dependencias
+
+```sh
+npm install
+```
+
+Levantar el proyecto
+```sh
+npm run start
+```
+
+ **Metodología de trabajo**
+
+1.  **Adición de componente**: 
+    
+
+    En primer lugar en la carpeta "Components" se debe agregar una carpeta con del componente que se desea crear. Dentro de esta carpeta se debe agregar un archivo js que contenga la lógica del componente. Adicionalmente, se debe agregar un archivo js que contenga el estilo del componente creado, el cual debe llevar el nombre de "styles-(nombre del componente)". Es importante destacar que todo el código debe ser escrito en inglés.
