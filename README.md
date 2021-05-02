@@ -106,4 +106,6 @@ npm run start
 1.  **Adición de componente**: 
     
 
-    En primer lugar en la carpeta "Components" se debe agregar una carpeta con del componente que se desea crear. Dentro de esta carpeta se debe agregar un archivo js que contenga la lógica del componente. Adicionalmente, se debe agregar un archivo js que contenga el estilo del componente creado, el cual debe llevar el nombre de "styles-(nombre del componente)". Es importante destacar que todo el código debe ser escrito en inglés.
+    En primer lugar en la carpeta "Components" se debe agregar una carpeta con del componente que se desea crear. Dentro de esta carpeta se debe agregar un archivo js que contenga la lógica del componente. Adicionalmente, se debe agregar un archivo js que contenga el estilo del componente creado, el cual debe llevar el nombre de "styles-(nombre del componente)". Es importante destacar que todo el código debe ser escrito en inglés. 
+
+    Se debe además, en caso de ser necesario agregar la ruta al router de React. Esto se puede realizar utilizando "RouterWithNavbar" el cual permite agregar el navbar a vista creada y además, utilizar la ruta en el browser.
