@@ -1,6 +1,6 @@
 import './App.css';
 
-import React, { Component } from 'react';
+import React from 'react';
 
 import {
   BrowserRouter as Router,
@@ -12,30 +12,38 @@ import Home from './components/Home';
 import Login from './components/Backoffice/home';
 import Menu from './components/Backoffice/menu';
 import AssignPage from './components/Backoffice/AsignAssistant/assign_page';
+import Catalog from './components/Catalog';
+import Stores from './components/Backoffice/stores';
+import PointsOfSale from './components/Backoffice/points-of-sale';
+import Assistants from './components/Backoffice/assistants';
+import Navbar from './components/Navbar/navbar';
+import Backoffice from './components/Backoffice/home';
 
-class App extends Component {
-  render() {
+
+
+function App (props){
+
+    const RouteWithNavbar = ({exact, path, component:Component, ...rest}) => {
+      return <Route exact={exact} path={path} {...rest} render={(routeProps) => {
+        return <><Navbar/><Component {...routeProps}/></>;
+      }}
+      />;
+    };
+
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/login" component={Login} />
-          <Route exact path="/backoffice">
-            <Menu />
-          </Route>
-          <Route path="/Backoffice/assign_location/:userId" component={AssignPage } />
-          {
-          /* Para agregar mas rutas, insertar el siguiente componente: 
-            <Route path="/<ruta en browser>" component={<nombre del componente>} />
-            
-          */
-         
-          }
-          
+          <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
+          <RouteWithNavbar exact path="/assistants" component={() => <Assistants {...props} />} />
+          <RouteWithNavbar exact path="/pointsOfSale" component={() => <PointsOfSale {...props} />} />
+          <RouteWithNavbar exact path="/stores" component={() => <Stores {...props} />} />
+          <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
+          <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
+          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />   
+          <RouteWithNavbar exact path="/login" component={Login} />   
         </Switch>
       </Router>  
     )
   }
-}
 
 export default App;
