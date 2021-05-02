@@ -9,7 +9,7 @@ export default function Backoffice (){
     const user = useSelector(selectUser);
 
     return (
-        <div style={{ backgroundColor:'#feff96'}} >
+        <div >
             { user ?  <Redirect to='/backoffice'  /> : <Login/> }
         </div>
     );
