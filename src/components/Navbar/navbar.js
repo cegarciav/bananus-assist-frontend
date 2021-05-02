@@ -48,7 +48,7 @@ function Navbar(props) {
     };
 
     const handleLogIn = (e) => {
-        history.push("/backoffice");
+        history.push("/login");
     };
 
     const handleMenu = (event) => {
