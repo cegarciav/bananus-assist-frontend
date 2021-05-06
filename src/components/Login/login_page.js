@@ -7,13 +7,9 @@ import LoginForm from './login_form';
 import { useSelector } from "react-redux";
 import { selectUser } from '../../features/userSlice';
 
-
-
 export default function Login (){
     
     const user = useSelector(selectUser);
-
-
     return (
 
 
@@ -34,8 +30,6 @@ export default function Login (){
                         </Grid>  
                     </CardContent>
                 </Card>
-                
-
             </Grid> 
         </div>
     );

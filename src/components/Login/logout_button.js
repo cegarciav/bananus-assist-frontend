@@ -5,14 +5,11 @@ import { useDispatch } from 'react-redux';
 import { logout } from '../../features/userSlice'
 
 export default function Logout (){
-    
-    /* To do: add logic for API integration */
 
     const dispatch = useDispatch();
 
     const handleLogout = (e) => {
         e.preventDefault();
-
         dispatch(logout());
     };
 
