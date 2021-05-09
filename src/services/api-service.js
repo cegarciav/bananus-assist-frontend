@@ -22,7 +22,6 @@ async function apiGet(path, body, params){
         {
           method: 'GET',
           mode: 'cors',
-          body,
           headers: {
             'Content-Type': 'application/json'
           }
