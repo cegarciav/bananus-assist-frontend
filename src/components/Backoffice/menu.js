@@ -7,10 +7,12 @@ import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import Grid from '@material-ui/core/Grid';
 import UserList from './AsignAssistant/user_list';
+import useStyles from "./styles-menu";
 
 
 export default function Menu() {
   const [value, setValue] = React.useState(0);
+  const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
       };
@@ -20,10 +22,9 @@ export default function Menu() {
       <Grid
       container
       spacing={0}
-      justify="center"
-      style={{ minHeight: '100vh' }}
+      className={classes.menu} 
       >
-        <Container maxWidth="sm">
+        <Container  xs={12} sm={6} md={4} >
             <Paper >
                 <Tabs
                     value={value}

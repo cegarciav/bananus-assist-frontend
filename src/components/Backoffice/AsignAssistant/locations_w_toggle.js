@@ -12,6 +12,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
+import useStyles from "./styles-locations_w_toggle";
 
 
 function generate(element) {
@@ -25,18 +26,19 @@ function generate(element) {
 export default function LocationListToggle( props ) {
 
   const employee = props.employee;
+  const classes = useStyles();
 
   return (
     <div >
         <Card  >
-            <CardHeader title={employee.name} subheader='Asignar Tiendas' style={{textAlign: 'center'}} />
-            <CardContent style={{textAlign: 'center'}}>        
-            <Grid container direction="column"alginItems='center' justify='center' spacing={3}>
-                <Grid alginItems='center' item xs={11} md={11}>
+            <CardHeader className={classes.cardHeader} title={employee.name} subheader='Asignar Tiendas' />
+            <CardContent className={classes.cardContent} >        
+            <Grid container direction="column" spacing={3} className={classes.gridContainer} >
+                <Grid  item xs={9} md={11} className={classes.grid} >
                 <div>
                     <List  >
                     {generate(
-                        <ListItem  >
+                        <ListItem >
                         <ListItemAvatar>
                             <Avatar>
                             <LocalGroceryStoreIcon />
@@ -57,7 +59,7 @@ export default function LocationListToggle( props ) {
                     </List>
                 </div>
                 </Grid>
-                <Grid item alginItems='center'>
+                <Grid item className={classes.grid}>
                     <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
                 </Grid>
             </Grid>

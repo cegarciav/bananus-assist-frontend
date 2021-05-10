@@ -2,7 +2,9 @@ import React from 'react';
 import useStyles from "./styles-modal";
 
 const Assistance = () => {
+  
     const classes = useStyles();
+
     return (
       <div className={classes.paperContainer}>
         <div className={classes.paper}>

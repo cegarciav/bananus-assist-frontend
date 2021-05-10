@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useStyles from "./styles-navbar";
-import Assistance from "../Assistance/assistance";
+import Assistance from "./Modal/assistance";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -16,7 +16,6 @@ import { useSelector } from "react-redux";
 import { selectUser } from '../../features/userSlice';
 import { useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
-
 
 
 function Navbar(props) {
@@ -98,23 +97,6 @@ function Navbar(props) {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    {user ? 
-                                    <>
-                                        <MenuItem onClick={handleClose2}>
-                                           <Link to='/Assistants' className={classes.link}> Asistentes</Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose2}>
-                                           <Link to='/Stores' className={classes.link}> Tiendas</Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose2}>
-                                           <Link to='/PointsOfSale' className={classes.link}> Puntos de venta</Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose2}></MenuItem>
-                                    </>
-                                    :
-                                    <></>
-                                    
-                                }
                                     <MenuItem onClick={handleClose2}>
                                         <Typography variant="p">
                                              <Link to='/Catalog' className={classes.link}> Catálogo </Link>
@@ -150,10 +132,19 @@ function Navbar(props) {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    {user ? <MenuItem onClick = {
-                                        (e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
+                                    {user ? 
+                                        <>
+                                            <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
+                                            <MenuItem onClick={handleClose2}>
+                                                 <Typography variant="p">
+                                                    <Link to='/backoffice' className={classes.link}> Home </Link>
+                                                </Typography >
+                                            </MenuItem>
+                                        </>
                                         :
-                                         <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                        <>
+                                            <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                        </>
                                     }
                                 </Menu>
                             </div>
@@ -167,7 +158,7 @@ function Navbar(props) {
                         aria-labelledby="simple-modal-title"
                         aria-describedby="simple-modal-description"
                     >
-                         <Assistance/>
+                         <Assistance />
                     </Modal>
                 </Toolbar>
             </AppBar>

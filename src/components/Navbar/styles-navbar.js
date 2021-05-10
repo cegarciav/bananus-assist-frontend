@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
          textDecoration: 'none', 
          color: 'black',
          fontSize: 16,
-
     },
     menuButton: {
         marginRight: theme.spacing(2),

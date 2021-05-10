@@ -23,7 +23,7 @@ export default function UserList( ) {
   return (
     <div >
       <Grid container spacing={0}>
-        <Grid item xs={11} md={11}>
+        <Grid item xs={9} md={11}>
           <div >
             <List>
               <Link

@@ -6,18 +6,20 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import DeviceStatus from './device_status';
 import Divider from '@material-ui/core/Divider';
+import useStyles from './styles-location_devices';
 
 export default function DevicesList( props ) {
 
-  
+  const classes = useStyles();
+
   return (
     <div >
         <Card>
-            <CardHeader title={props.store} subheader='Estado de dispositivos' style={{textAlign: 'center'}} />
+            <CardHeader title={props.store} subheader='Estado de dispositivos' className={classes.cardHeader} />
             <Divider />
-            <CardContent style={{textAlign: 'center'}}>        
+            <CardContent className={classes.cardContent } >        
             <Grid container>
-                <Grid alginItems='center' item xs={11} md={11}>
+                <Grid alginItems='center' item xs={11} md={11} className={classes.grid }>
                 <div>
                     <List  >
                         <DeviceStatus device={{isOn: true, name: 'Tablet central'}}/>
