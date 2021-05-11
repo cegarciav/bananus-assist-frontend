@@ -87,7 +87,7 @@ Cada commit debería incluir un tipo y mensaje lo suficientemente claro con la e
 
 
 ## Consideraciones para usar ESLint
-Para verificar por consola los problemas de estilo identificados, correr el comando **docker-compose run app npm run lint**. Esto ejecutará ESLint y entregará un output como el siguiente:
+Para verificar por consola los problemas de estilo identificados, correr el comando **npm run lint**. Esto ejecutará ESLint y entregará un output como el siguiente:
 ![Screenshot from 2021-05-09 19-36-42](https://user-images.githubusercontent.com/30679639/117590516-e6c7cb80-b0fd-11eb-90f8-2aaba06206ce.png)
 
 ### Uso de ESLint en VSCode
