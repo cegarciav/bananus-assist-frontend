@@ -1,3 +1,7 @@
+# Para correr este código:
+- El código esta en la carpeta `facemesh`
+- yarn install
+- yarn start
 # Metodología de trabajo
 
 1. Gitflow
