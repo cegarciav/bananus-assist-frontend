@@ -84,3 +84,15 @@ Cada commit debería incluir un tipo y mensaje lo suficientemente claro con la e
     2. Descriptión: Una pequeña síntesis de lo que se esperaría poder realizar gracias al contenido del pull request (scope de la branch). Puede incluir un listado de características que deberían cumplirse
     3. Imágenes de las vistas: la persona que hace el pull request debería poder mostrar que las vistas desarrolladas funcionan bien en los distintos browsers soportados: Safari, Chrome, Firefox y Opera. De la misma forma, debería mostrarse al menos un screenshot de la aplicación funcionando en un dispositivo móvil para demostrar responsividad
 3. Un pull request debe ser aprobado y mezclado (merge) por una persona diferente a quien crea el pull request. Como caso excepcional, el merge de develop a main deberá ser aprobado por al menos dos personas
+
+
+## Consideraciones para usar ESLint
+Para verificar por consola los problemas de estilo identificados, correr el comando **npm run lint**. Esto ejecutará ESLint y entregará un output como el siguiente:
+![Screenshot from 2021-05-09 19-36-42](https://user-images.githubusercontent.com/30679639/117590516-e6c7cb80-b0fd-11eb-90f8-2aaba06206ce.png)
+
+### Uso de ESLint en VSCode
+1. Instalar la extensión ESLint mostrada a continuación:![Screenshot from 2021-05-09 19-38-16](https://user-images.githubusercontent.com/30679639/117590568-20003b80-b0fe-11eb-8961-0c046ecdbb13.png)
+
+2. ESLint debería funcionar inmediatamente una vez instalado. En caso de no funcionar:
+    1. Reiniciar VSCode y verificar si los cambios surtieron
+    2. Si lo anterior no funciona, reiniciar el computador para que los cambios hagan efecto
