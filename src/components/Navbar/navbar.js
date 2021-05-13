@@ -97,11 +97,13 @@ function Navbar(props) {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    <MenuItem onClick={handleClose2}>
-                                        <Typography variant="p">
-                                             <Link to='/Catalog' className={classes.link}> Catálogo </Link>
-                                        </Typography >
-                                    </MenuItem>
+                                    <Link to='/Catalog' className={classes.link}>
+                                        <MenuItem onClick={handleClose2}>
+                                            <Typography >
+                                                Catálogo 
+                                            </Typography >
+                                        </MenuItem>
+                                    </Link>
                                 </Menu>
                             </div>
                     )}
@@ -135,11 +137,13 @@ function Navbar(props) {
                                     {user ? 
                                         <>
                                             <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
-                                            <MenuItem onClick={handleClose2}>
-                                                 <Typography variant="p">
-                                                    <Link to='/backoffice' className={classes.link}> Home </Link>
-                                                </Typography >
-                                            </MenuItem>
+                                            <Link to='/backoffice' className={classes.link}>
+                                                <MenuItem onClick={handleClose2}>
+                                                   <Typography >
+                                                        Home 
+                                                    </Typography>
+                                                </MenuItem>
+                                            </Link>
                                         </>
                                         :
                                         <>
@@ -155,8 +159,6 @@ function Navbar(props) {
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
                     >
                          <Assistance />
                     </Modal>
