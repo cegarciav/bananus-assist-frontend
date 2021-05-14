@@ -1,3 +1,7 @@
+# Para correr este código:
+- El código esta en la carpeta `facemesh`
+- yarn install
+- yarn start
 # Metodología de trabajo
 
 1. Gitflow
@@ -45,7 +49,29 @@ https://www.maxpou.fr/git-conventional-commits
 
 ## Configuraciones y consideraciones para hacer funcionar el código
 
-**(Debe ser completado por el equipo de front-end)**
+### Uso
+
+ **Ejecutar el proyecto**
+
+Instalar dependencias
+
+```sh
+npm install
+```
+
+Levantar el proyecto
+```sh
+npm run start
+```
+
+ **Metodología de trabajo**
+
+1.  **Adición de componente**: 
+    
+
+    En primer lugar en la carpeta "Components" se debe agregar una carpeta con del componente que se desea crear. Dentro de esta carpeta se debe agregar un archivo js que contenga la lógica del componente. Adicionalmente, se debe agregar un archivo js que contenga el estilo del componente creado, el cual debe llevar el nombre de "styles-(nombre del componente)". Es importante destacar que todo el código debe ser escrito en inglés. 
+
+    Se debe además, en caso de ser necesario agregar la ruta al router de React. Esto se puede realizar utilizando "RouterWithNavbar" el cual permite agregar el navbar a vista creada y además, utilizar la ruta en el browser.
 
 ## Convenciones de trabajo
 

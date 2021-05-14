@@ -15,11 +15,14 @@ import PointsOfSale from './components/Backoffice/points-of-sale';
 import Assistants from './components/Backoffice/assistants';
 import Navbar from './components/Navbar/navbar';
 import Backoffice from './components/Backoffice/home';
+import VideoStream from './components/FaceRecognition/video_stream';
 
-function App(props) {
-  const RouteWithNavbar = ({
-    exact, path, component: Component, ...rest
-  }) => <Route exact={exact} path={path} {...rest} render={(routeProps) => <><Navbar/><Component {...routeProps}/></>}
+function App (props){
+
+    const RouteWithNavbar = ({exact, path, component:Component, ...rest}) => {
+      return <Route exact={exact} path={path} {...rest} render={(routeProps) => {
+        return <><Navbar/><Component {...routeProps}/></>;
+      }}
       />;
 
   return (
@@ -31,7 +34,8 @@ function App(props) {
           <RouteWithNavbar exact path="/stores" component={() => <Stores {...props} />} />
           <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
-          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />
+          <RouteWithNavbar exact path="/backoffice" component={Backoffice} /> 
+          <RouteWithNavbar exact path="/videostream" component={VideoStream} />         
         </Switch>
       </Router>
   );

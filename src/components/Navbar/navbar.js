@@ -93,27 +93,14 @@ function Navbar(props) {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    {user
-                                      ? <>
+                                    <Link to='/Catalog' className={classes.link}>
                                         <MenuItem onClick={handleClose2}>
-                                           <Link to='/Assistants' className={classes.link}> Asistentes</Link>
+                                            <Typography >
+                                                Catálogo 
+                                            </Typography >
                                         </MenuItem>
-                                        <MenuItem onClick={handleClose2}>
-                                           <Link to='/Stores' className={classes.link}> Tiendas</Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose2}>
-                                           <Link to='/PointsOfSale' className={classes.link}> Puntos de venta</Link>
-                                        </MenuItem>
-                                        <MenuItem onClick={handleClose2}></MenuItem>
-                                    </>
-                                      : <></>
+                                    </Link>
 
-                                }
-                                    <MenuItem onClick={handleClose2}>
-                                        <Typography variant="p">
-                                             <Link to='/Catalog' className={classes.link}> Catálogo </Link>
-                                        </Typography >
-                                    </MenuItem>
                                 </Menu>
                             </div>
                         )}
@@ -157,8 +144,6 @@ function Navbar(props) {
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}
-                        aria-labelledby="simple-modal-title"
-                        aria-describedby="simple-modal-description"
                     >
                          <Assistance/>
                     </Modal>

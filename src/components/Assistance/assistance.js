@@ -15,4 +15,5 @@ const Assistance = () => {
   );
 };
 
-export default Assistance;
+export default React.forwardRef((props, ref) => <Assistance {...props} forwardedRef={ref} />);
+  
