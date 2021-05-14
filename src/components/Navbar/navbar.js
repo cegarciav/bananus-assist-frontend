@@ -15,7 +15,7 @@ import { logout, selectUser } from '../../features/userSlice';
 import Assistance from '../Assistance/assistance';
 import useStyles from './styles-navbar';
 
-function Navbar(props) {
+function Navbar() {
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
