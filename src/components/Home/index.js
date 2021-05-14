@@ -14,7 +14,7 @@ const Home = () => {
     <div className={classes.mainContainer}>
         Pagina inicial1
     </div>
-  )
+  );
 };
 
 export default Home;

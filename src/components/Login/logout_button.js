@@ -1,19 +1,18 @@
 import React from 'react';
-import { Button} from '@material-ui/core';
+import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { useDispatch } from 'react-redux';
-import { logout } from '../../features/userSlice'
+import { logout } from '../../features/userSlice';
 
-export default function Logout (){
-    
-    const dispatch = useDispatch();
+export default function Logout() {
+  const dispatch = useDispatch();
 
-    const handleLogout = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-    };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
-    return (
+  return (
         <Grid
             container
             spacing={0}
@@ -26,5 +25,5 @@ export default function Logout (){
                 Cerrar Sesión
             </Button>
         </Grid>
-    );
+  );
 }

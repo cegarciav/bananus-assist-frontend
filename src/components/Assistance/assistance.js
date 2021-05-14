@@ -1,9 +1,9 @@
 import React from 'react';
-import useStyles from "./styles-modal";
+import useStyles from './styles-modal';
 
 const Assistance = () => {
-    const classes = useStyles();
-    return (
+  const classes = useStyles();
+  return (
       <div className={classes.paperContainer}>
         <div className={classes.paper}>
             <h2 id="simple-modal-title">Text in a modal</h2>
@@ -12,8 +12,7 @@ const Assistance = () => {
             </p>
         </div>
       </div>
-    )
-  };
+  );
+};
 
 export default Assistance;
-  

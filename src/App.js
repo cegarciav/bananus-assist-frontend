@@ -5,7 +5,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -16,17 +16,13 @@ import Assistants from './components/Backoffice/assistants';
 import Navbar from './components/Navbar/navbar';
 import Backoffice from './components/Backoffice/home';
 
-
-function App (props){
-
-    const RouteWithNavbar = ({exact, path, component:Component, ...rest}) => {
-      return <Route exact={exact} path={path} {...rest} render={(routeProps) => {
-        return <><Navbar/><Component {...routeProps}/></>;
-      }}
+function App(props) {
+  const RouteWithNavbar = ({
+    exact, path, component: Component, ...rest
+  }) => <Route exact={exact} path={path} {...rest} render={(routeProps) => <><Navbar/><Component {...routeProps}/></>}
       />;
-    };
 
-    return (
+  return (
       <Router>
         <Switch>
           <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
@@ -35,10 +31,10 @@ function App (props){
           <RouteWithNavbar exact path="/stores" component={() => <Stores {...props} />} />
           <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
-          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />          
+          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />
         </Switch>
-      </Router>  
-    )
-  }
+      </Router>
+  );
+}
 
 export default App;

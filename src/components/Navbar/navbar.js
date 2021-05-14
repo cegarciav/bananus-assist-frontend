@@ -1,73 +1,68 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useStyles from "./styles-navbar";
-import Assistance from "../Assistance/assistance";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import { Link, useHistory } from 'react-router-dom';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { useDispatch } from 'react-redux';
-import { logout } from '../../features/userSlice'
-import { useSelector } from "react-redux";
-import { selectUser } from '../../features/userSlice';
-import { useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
+import { logout, selectUser } from '../../features/userSlice';
 
-
+import Assistance from '../Assistance/assistance';
+import useStyles from './styles-navbar';
 
 function Navbar(props) {
+  const classes = useStyles();
+  const [auth] = React.useState(true);
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open = Boolean(anchorEl);
+  const user = useSelector(selectUser);
+  const history = useHistory();
+  const [openModal, setOpenModal] = React.useState(false);
 
-    const classes = useStyles();
-    const [auth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-    const user = useSelector(selectUser);
-    const history = useHistory();
-    const [openModal, setOpenModal] = React.useState(false);
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
 
-    const handleOpenModal = () => {
-        setOpenModal(true);
-      };
-    
-    const handleCloseModal = () => {
-      setOpenModal(false);
-    };
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
-    const [anchorEl2, setAnchorEl2] = React.useState(null);
-    const open2 = Boolean(anchorEl2);
+  const [anchorEl2, setAnchorEl2] = React.useState(null);
+  const open2 = Boolean(anchorEl2);
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-    const handleLogout = (e) => {
-        e.preventDefault();
-        dispatch(logout());
-    };
+  const handleLogout = (e) => {
+    e.preventDefault();
+    dispatch(logout());
+  };
 
-    const handleLogIn = (e) => {
-        history.push("/backoffice");
-    };
+  const handleLogIn = (e) => {
+    history.push('/backoffice');
+  };
 
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
-    const handleClose2 = () => {
-        setAnchorEl2(null);
-    };
+  const handleClose2 = () => {
+    setAnchorEl2(null);
+  };
 
-    const handleMenu2 = (event) => {
-        setAnchorEl2(event.currentTarget);
-    };
+  const handleMenu2 = (event) => {
+    setAnchorEl2(event.currentTarget);
+  };
 
-	return (
+  return (
         <div>
             <AppBar position="static" >
                 <Toolbar className={classes.navbar}>
@@ -87,19 +82,19 @@ function Navbar(props) {
                                     id="menu-appbar"
                                     anchorEl={anchorEl2}
                                     anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                      vertical: 'top',
+                                      horizontal: 'right',
                                     }}
                                     keepMounted
                                     transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                      vertical: 'top',
+                                      horizontal: 'right',
                                     }}
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    {user ? 
-                                    <>
+                                    {user
+                                      ? <>
                                         <MenuItem onClick={handleClose2}>
                                            <Link to='/Assistants' className={classes.link}> Asistentes</Link>
                                         </MenuItem>
@@ -111,9 +106,8 @@ function Navbar(props) {
                                         </MenuItem>
                                         <MenuItem onClick={handleClose2}></MenuItem>
                                     </>
-                                    :
-                                    <></>
-                                    
+                                      : <></>
+
                                 }
                                     <MenuItem onClick={handleClose2}>
                                         <Typography variant="p">
@@ -122,7 +116,7 @@ function Navbar(props) {
                                     </MenuItem>
                                 </Menu>
                             </div>
-                    )}
+                        )}
                     </div>
                         {auth && (
                             <div className={classes.item}>
@@ -139,25 +133,24 @@ function Navbar(props) {
                                     id="menu-appbar"
                                     anchorEl={anchorEl}
                                     anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                      vertical: 'top',
+                                      horizontal: 'right',
                                     }}
                                     keepMounted
                                     transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
+                                      vertical: 'top',
+                                      horizontal: 'right',
                                     }}
                                     open={open}
                                     onClose={handleClose}
                                 >
                                     {user ? <MenuItem onClick = {
-                                        (e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
-                                        :
-                                         <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                        (e) => handleLogout(e)} >Cerrar sesión</MenuItem>
+                                      : <MenuItem onClick = {(e) => handleLogIn(e)} > Iniciar sesión</MenuItem>
                                     }
                                 </Menu>
                             </div>
-                    )}
+                        )}
                     <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
                           &#x2706; Solicitar asistencia
                     </button>
@@ -173,6 +166,6 @@ function Navbar(props) {
             </AppBar>
         </div>
 	    );
-	}
+}
 
 export default Navbar;
