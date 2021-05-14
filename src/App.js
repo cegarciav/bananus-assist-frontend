@@ -5,7 +5,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route,
+  Route
 } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -24,8 +24,8 @@ function App (props){
         return <><Navbar/><Component {...routeProps}/></>;
       }}
       />;
-
-  return (
+    };
+    return (
       <Router>
         <Switch>
           <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
@@ -37,8 +37,8 @@ function App (props){
           <RouteWithNavbar exact path="/backoffice" component={Backoffice} /> 
           <RouteWithNavbar exact path="/videostream" component={VideoStream} />         
         </Switch>
-      </Router>
-  );
-}
+      </Router>  
+    )
+  }
 
 export default App;
