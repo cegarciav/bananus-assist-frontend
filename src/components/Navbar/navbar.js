@@ -150,7 +150,7 @@ function Navbar(props) {
                         open={openModal}
                         onClose={handleCloseModal}
                     >
-                         <Assistance/>
+                         <Assistance hideModal ={() => setOpenModal(false) } />
                     </Modal>
                 </Toolbar>
             </AppBar>
@@ -159,3 +159,4 @@ function Navbar(props) {
 	}
 
 export default Navbar;
+
