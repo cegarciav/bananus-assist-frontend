@@ -1,5 +1,4 @@
 import React from 'react';
-import useStyles from './styles-product';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -10,7 +9,7 @@ import Collapse from '@material-ui/core/Collapse';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import useStyles from './styles-product';
 
 function Product(props) {
   const classes = useStyles();
@@ -32,7 +31,7 @@ function Product(props) {
             />
             <CardContent>
             <Typography variant="body2" color="textSecondary" component="p">
-                El chip M1 de Apple redefine al Macbook Pro de 13 pulgadas.1 Viene con una CPU de 8 núcleos que permite un rendimiento óptimo en los flujos de trabajo más exigentes, como fotografía, programación y edición de video. 
+                El chip M1 de Apple redefine al Macbook Pro de 13 pulgadas.1 Viene con una CPU de 8 núcleos que permite un rendimiento óptimo en los flujos de trabajo más exigentes, como fotografía, programación y edición de video.
             </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -41,7 +40,7 @@ function Product(props) {
             </Typography>
             <IconButton
                 className={clsx(classes.expand, {
-                [classes.expandOpen]: expanded,
+                  [classes.expandOpen]: expanded,
                 })}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
