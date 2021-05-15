@@ -8,8 +8,7 @@ import DeviceStatus from './device_status';
 import Divider from '@material-ui/core/Divider';
 import useStyles from './styles-location_devices';
 
-export default function DevicesList( props ) {
-
+export default function DevicesList(props) {
   const classes = useStyles();
 
   return (
