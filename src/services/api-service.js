@@ -1,7 +1,6 @@
-const apiOrigin = process.env.REACT_APP_API_ORIGIN;
+const apiOrigin = "http://localhost:3001";
 if (!apiOrigin)
     throw "API ORIGIN variable is missing";
-
 
 /**
  * Realiza un HTTP GET a la API del sistema
@@ -10,6 +9,7 @@ if (!apiOrigin)
  * @param {Object} params Los queryparams
  * @returns El recurso entregado por la API
  */
+
 async function apiGet(path, body, params){
   const url = new URL(`${apiOrigin}/${path}`);
   if (params) {
@@ -28,8 +28,12 @@ async function apiGet(path, body, params){
         }
       )
       .then(r => r.json())
-      .catch(e => e);
-  return results;
+      .catch(e => e)
+      .then(function(data) {
+        var request = data;
+        return request;
+      });
+   return results;
 }
 
 
