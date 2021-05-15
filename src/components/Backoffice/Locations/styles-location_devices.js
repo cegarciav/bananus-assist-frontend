@@ -2,7 +2,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
     cardHeader: {
-     textAlign: 'center',
+        textAlign: 'center',
     },
     cardContent: {
         textAlign: 'center',
@@ -12,6 +12,6 @@ const useStyles = makeStyles((theme) => ({
             color: 'primary',
         }
     },
-  }));
+    }));
 
   export default useStyles;

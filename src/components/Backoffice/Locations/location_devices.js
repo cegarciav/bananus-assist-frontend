@@ -17,23 +17,22 @@ export default function DevicesList( props ) {
         <Card>
             <CardHeader title={props.store} subheader='Estado de dispositivos' className={classes.cardHeader} />
             <Divider />
-            <CardContent className={classes.cardContent } >        
+            <CardContent className={classes.cardContent } >
             <Grid container>
                 <Grid alginItems='center' item xs={11} md={11} className={classes.grid }>
                 <div>
-                    <List  >
-                        <DeviceStatus device={{isOn: true, name: 'Tablet central'}}/>
+                    <List>
+                        <DeviceStatus device={ { isOn: true, name: 'Tablet central' } }/>
                     </List>
-                    <List  >
-                        <DeviceStatus device={{isOn: false, name: 'Tablet catalogo 1'}}/>
+                    <List>
+                        <DeviceStatus device={ { isOn: false, name: 'Tablet catalogo 1' }}/>
                     </List>
-                    <List  >
-                        <DeviceStatus device={{isOn: true, name: 'Tablet catalogo 2'}}/>
+                    <List>
+                        <DeviceStatus device={ { isOn: true, name: 'Tablet catalogo 2' }}/>
                     </List>
                 </div>
                 </Grid>
             </Grid>
-                
             </CardContent>
             <Divider />
         </Card>
