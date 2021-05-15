@@ -15,34 +15,35 @@ export default function Menu() {
   const classes = useStyles();
   const handleChange = (event, newValue) => {
     setValue(newValue);
-      };
+  };
 
   return (
     <div >
+      <Tabs
+      value={value}
+      onChange={handleChange}
+      indicatorColor="primary"
+      textColor="primary"
+      centered
+      className={classes.tab}
+      >
+        <Tab label="Atención de Tiendas" />
+        <Tab label="Estado de dispositivos" />
+        <Tab label="Asignar Tiendas" />
+      </Tabs>
       <Grid
       container
       spacing={0}
-      className={classes.menu} 
+      className={classes.menu}
       >
-        <Container  xs={12} sm={6} md={4} >
+        <Container xs={12} sm={6} md={4} >
             <Paper >
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    indicatorColor="primary"
-                    textColor="primary"
-                    centered
-                >
-                    <Tab label="Atención de Tiendas" />
-                    <Tab label="Estado de dispositivos" />
-                    <Tab label="Asignar Tiendas" />
-                </Tabs>
                 { value === 0 ? <LocationList /> : <div/> }
-                { value === 1 ? <StoreList />: <div/> }
+                { value === 1 ? <StoreList /> : <div/> }
                 { value === 2 ? <UserList /> : <div/> }
                 </Paper>
         </Container>
-      </Grid> 
+      </Grid>
     </div>
   );
 }
