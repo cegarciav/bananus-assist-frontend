@@ -1,11 +1,9 @@
 import React from 'react';
 
-const PointsOfSale = () => {
-  return (
+const PointsOfSale = () => (
     <div >
         Puntos de venta
     </div>
-  )
-};
+);
 
-export default PointsOfSale ;
+export default PointsOfSale;

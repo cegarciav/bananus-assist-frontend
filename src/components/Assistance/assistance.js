@@ -39,5 +39,5 @@ const Assistance = (props) => {
     }
   };
 
-  export default React.forwardRef((props, ref) => <Assistance {...props} forwardedRef={ref} />);
+export default React.forwardRef((props, ref) => <Assistance {...props} forwardedRef={ref} />);
   
