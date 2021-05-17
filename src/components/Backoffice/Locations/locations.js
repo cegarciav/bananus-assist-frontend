@@ -48,7 +48,6 @@ export default function LocationList() {
                     {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
                     </IconButton>
                   </ListItemSecondaryAction>
-                  
                 </ListItem>,
               )}
             </List>

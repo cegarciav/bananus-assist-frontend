@@ -5,9 +5,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 
-
-export default function DeviceStatus( props ) {
-  
+export default function DeviceStatus(props) {
   return (
     <div >
         <ListItem>
@@ -16,7 +14,7 @@ export default function DeviceStatus( props ) {
             </ListItemText>
             <ListItemSecondaryAction>
                 {props.device.isOn ? <WifiIcon edge="end" color="primary"/> : <WifiOffIcon edge="end" color="secondary"/> }
-            </ListItemSecondaryAction>        
+            </ListItemSecondaryAction>
         </ListItem>
     </div>
   );
