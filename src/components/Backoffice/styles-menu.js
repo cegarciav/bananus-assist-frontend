@@ -9,7 +9,6 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     paddingTop: '5vh',
-    minWidth: '400px',
   },
 }));
 

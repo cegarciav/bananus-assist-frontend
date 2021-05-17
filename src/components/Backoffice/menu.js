@@ -20,6 +20,8 @@ export default function Menu() {
   return (
     <div >
       <Tabs
+      variant="scrollable"
+      scrollButtons="on"
       value={value}
       onChange={handleChange}
       indicatorColor="primary"
