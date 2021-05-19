@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -10,27 +10,36 @@ import Grid from '@material-ui/core/Grid';
 import CallIcon from '@material-ui/icons/Call';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
-
-
-function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
-}
+import { apiGet } from '../../../services/api-service';
 
 export default function LocationList() {
  
   const store = {incoming_call: true};
+  const [stores, setStores] = useState(null);
 
+  useEffect(() => {
+    if (!stores) {
+      apiGet('stores').then((result) => setStores(
+        { result },
+      ));
+    }
+  }, [stores]);
+
+  if (!stores) {
+    return(
+      <>
+      Loading...
+    </>
+    )
+  }
+  else{
   return (
     <div>
       <Grid container spacing={0}>
         <Grid item xs={11} md={11}>
           <div >
             <List >
-              {generate(
+            {stores.result.map((store) => (
                 <ListItem>
                   <ListItemAvatar>
                     <Avatar>
@@ -38,7 +47,7 @@ export default function LocationList() {
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary="Generic Store Location Name"
+                    primary={store.name}
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
@@ -48,12 +57,13 @@ export default function LocationList() {
                     {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
                     </IconButton>
                   </ListItemSecondaryAction>
-                </ListItem>,
-              )}
+                </ListItem>
+              ))}
             </List>
           </div>
         </Grid>
       </Grid>
     </div>
   );
+}
 }

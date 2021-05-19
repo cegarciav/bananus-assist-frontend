@@ -23,20 +23,18 @@ function generate(element) {
   );
 }
 
-export default function LocationListToggle( props ) {
+export default function LocationListToggle(user) {
 
-  const employee = props.employee;
   const classes = useStyles();
-
   return (
     <div >
-        <Card  >
-            <CardHeader className={classes.cardHeader} title={employee.name} subheader='Asignar Tiendas' />
-            <CardContent className={classes.cardContent} >        
+        <Card >
+            <CardHeader className={classes.cardHeader} title={user.name} subheader='Asignar Tiendas' />
+            <CardContent className={classes.cardContent} >
             <Grid container direction="column" spacing={3} className={classes.gridContainer} >
-                <Grid  item xs={9} md={11} className={classes.grid} >
+                <Grid item xs={9} md={11} className={classes.grid} >
                 <div>
-                    <List  >
+                    <List >
                     {generate(
                         <ListItem >
                         <ListItemAvatar>
@@ -51,9 +49,7 @@ export default function LocationListToggle( props ) {
                             <Switch
                                 edge="end"
                             />
-                        
                         </ListItemSecondaryAction>
-                        
                         </ListItem>,
                     )}
                     </List>
@@ -63,7 +59,6 @@ export default function LocationListToggle( props ) {
                     <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
                 </Grid>
             </Grid>
-                
             </CardContent>
         </Card>
     </div>
