@@ -20,7 +20,7 @@ const useStyles = makeStyles({
         margin: '100px'
       },
       img: {
-        maxWidth: '90%',
+        maxWidth: '70%',
         marginLeft:'20px',
       },
       close:{

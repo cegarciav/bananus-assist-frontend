@@ -7,7 +7,7 @@ const Assistance = (props) => {
     const classes = useStyles();
 
     //dentro de las props debería venir la respuesta de la bbdd a la consulta de asistentes disponibles
-    const available = 1;
+    const available = 3;
 
     if(available === 1){
       return (
