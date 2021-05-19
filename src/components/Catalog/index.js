@@ -1,20 +1,17 @@
 import React, {useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
-import Product from '././Product/product';
 import Box from '@material-ui/core/Box';
-import {apiGet} from '../../services/api-service';
-
+import { apiGet } from '../../services/api-service';
 
 function Catalog(props) {
-
-  const [products, setProducts]  = useState(null);
+  const [products, setProducts] = useState(null);
 
   useEffect(() => {
     if (!products) {
       apiGet('products').then(result => setProducts({
-        result
-      }))
-    }
+        result,
+      })),
+    };
 	}, [products]);
 
   if (!products){
