@@ -1,7 +1,7 @@
 import React from 'react';
-import useStyles from "./styles-modal";
-import assistance from '../../assets/assistance.png'
-import information from '../../assets/information.png'
+import useStyles from './styles-modal';
+import assistance from '../../../assets/assistance.png';
+import information from '../../../assets/information.png';
 
 const Assistance = (props) => {
   const classes = useStyles();
