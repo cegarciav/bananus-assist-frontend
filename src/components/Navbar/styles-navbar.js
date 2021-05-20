@@ -11,7 +11,6 @@ const useStyles = makeStyles((theme) => ({
     textDecoration: 'none',
     color: 'black',
     fontSize: 16,
-
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -27,7 +26,6 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: '#195E6D',
   },
-
 }));
 
 export default useStyles;

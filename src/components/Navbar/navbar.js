@@ -1,10 +1,13 @@
 import React from 'react';
+
+import useStyles from "./styles-navbar";
+import Assistance from "./Modal/assistance";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from 'react-router-dom';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -12,10 +15,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
 import { logout, selectUser } from '../../features/userSlice';
 
-import Assistance from '../Assistance/assistance';
-import useStyles from './styles-navbar';
-
-function Navbar() {
+function Navbar(props) {
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -43,7 +43,7 @@ function Navbar() {
   };
 
   const handleLogIn = (e) => {
-    history.push('/backoffice');
+    history.push('/login');
   };
 
   const handleMenu = (event) => {
@@ -131,9 +131,21 @@ function Navbar() {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    {user ? <MenuItem onClick = {
-                                        (e) => handleLogout(e)} >Cerrar sesión</MenuItem>
-                                      : <MenuItem onClick = {(e) => handleLogIn(e)} > Iniciar sesión</MenuItem>
+                                    {user ? 
+                                        <>
+                                            <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
+                                            <Link to='/backoffice' className={classes.link}>
+                                                <MenuItem onClick={handleClose2}>
+                                                   <Typography >
+                                                        Home 
+                                                    </Typography>
+                                                </MenuItem>
+                                            </Link>
+                                        </>
+                                        :
+                                        <>
+                                            <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                        </>
                                     }
                                 </Menu>
                             </div>
