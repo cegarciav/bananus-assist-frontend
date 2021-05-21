@@ -8,6 +8,7 @@ import {
   Route
 } from 'react-router-dom';
 
+
 import Home from './components/Home';
 import Catalog from './components/Catalog';
 import Stores from './components/Backoffice/stores';
@@ -15,7 +16,7 @@ import PointsOfSale from './components/Backoffice/points-of-sale';
 import Assistants from './components/Backoffice/assistants';
 import Navbar from './components/Navbar/navbar';
 import Backoffice from './components/Backoffice/home';
-import Information from './components/Information';
+import Information from './components/Information/information';
 
 function App (props){
 
@@ -25,6 +26,8 @@ function App (props){
       }}
       />;
     };
+
+
 
     return (
       <Router>
@@ -39,6 +42,7 @@ function App (props){
           <RouteWithNavbar exact path="/backoffice" component={Backoffice} />          
         </Switch>
       </Router>  
+      
     )
   }
 
