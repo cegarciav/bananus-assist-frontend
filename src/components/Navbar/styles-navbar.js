@@ -26,6 +26,11 @@ const useStyles = makeStyles((theme) => ({
     },
     navbar: {
         backgroundColor: "#195E6D",
+    },
+    infoButton:{
+      color:'#FFFFFF',
+      marginLeft: '20%',
+
     }
 
   }));

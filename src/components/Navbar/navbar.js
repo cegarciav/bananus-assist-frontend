@@ -16,6 +16,8 @@ import { useSelector } from "react-redux";
 import { selectUser } from '../../features/userSlice';
 import { useHistory } from 'react-router-dom';
 import Modal from '@material-ui/core/Modal';
+import Button from '@material-ui/core/Button';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 
 
 
@@ -65,6 +67,10 @@ function Navbar(props) {
 
     const handleMenu2 = (event) => {
         setAnchorEl2(event.currentTarget);
+    };
+
+    const handleInfo = (event) => {
+        history.push("/information");
     };
 
 	return (
@@ -171,6 +177,15 @@ function Navbar(props) {
                     <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
                           &#x2706; Solicitar asistencia
                     </button>
+
+                    
+        <IconButton className={classes.infoButton} aria-label="información" component="span"
+        onClick={handleInfo}
+        >
+          <InfoOutlinedIcon fontSize = "large"/>
+          
+        </IconButton>
+      
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}

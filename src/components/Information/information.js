@@ -103,36 +103,32 @@ export default function Information() {
 
       <Container maxWidth="lg" component="how" >
       <Typography align= "justify" variant = "h5" className={classes.infoHow}>
-      ¿Como funciona?
+      ¿Cómo funciona?
         </Typography>
-        
       </Container>
-
-      
-
 
       <Container  component="steps" >
       <Divider className={classes.dividerLine}/>
       {steps.map((step) => (
         <div>
-        <Grid container spacing={1}>
-        <Grid item xs>
-        <Typography align= "justify" variant = "h5" className={classes.stepTitle}>
-        {step.title}
+        <Grid container spacing={3}>
+        <Grid item xs={1} sm={1} md={1}>
+        <Typography align= "left" variant = "h4" className={classes.stepTitle}>
+        {step.title} 
           </Typography>
+          
         </Grid>
-        <Grid item xs={8}>
-          <Typography align= "justify" variant = "body1" className={classes.stepDescription}>
+        <Grid item xs={7} sm={9} md={9}>
+          <Typography align= "left" variant = "body1" className={classes.stepDescription}>
         {step.description}
           </Typography>    
           </Grid>
           
-          <Grid item xs>
-          <Paper variant="outlined">
+          <Grid item xs={3} sm={2} md={2}>
+          <Paper elevation={0} className = {classes.stepImagePaper}>
         <img alt = "" src={step.img} className = {classes.stepImage}/>
             </Paper>    
-            </Grid>  
-          
+            </Grid>   
           </Grid>
           <Divider />
           </div>
@@ -145,15 +141,15 @@ export default function Information() {
 
 <div className={classes.root}>
       
-
-          
-       
-        <Container maxWidth="lg" component="main">
+        <Container maxWidth="lg" component="main" className={classes.pf}>
         <Typography align= "justify" variant = "h5" className={classes.infoHow}>
         Preguntas frecuentes
         </Typography>
+        </Container>
+
+        <Container maxWidth="lg" component="main" className={classes.gridPf}>
           
-      <Grid container spacing={5} alignItems="flex-end">
+      <Grid container spacing={4} alignItems="flex-end">
       {qas.map((tier) => (
             
     <Grid item  xs={12} sm={6} md={4}>

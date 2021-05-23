@@ -36,11 +36,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3,0,0,3),
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
-    fontWeight: 600,
-    fontSize: '24px',
-    lineHeight: '29px',
-    display: 'flex',
-    alignItems: 'center',
+    fontWeight: 600,  
   },
 
   stepTitle: {
@@ -49,14 +45,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 500,
-    fontSize: '57px',
-    lineHeight: '69px',
-    display: 'flex',
-    alignItems: 'center',
-    width: '63px',
-    height: '40px',
-    
-    top: '685px',
   },
   stepDescription: {
     color: '#000000',
@@ -65,17 +53,20 @@ const useStyles = makeStyles((theme) => ({
     fontStyle: 'normal',
   },
   stepImage: {
-    width: '30%',
+    width: '100%',
     height: 'auto',
   },
-
-
-
-
+  stepImagePaper: {
+    padding: theme.spacing(2,0,0,0),
+  },
   cardHeader: {
-    backgroundColor: '#195E6D',
-   
-      
+    backgroundColor: '#195E6D',   
+  },
+  pf: {
+    padding: theme.spacing(2,0,0,0),   
+  },
+  gridPf: {
+    padding: theme.spacing(2,0,0,0),   
   },
 
 
