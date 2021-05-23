@@ -1,17 +1,16 @@
 import React from 'react';
-import useStyles from "./styles-navbar";
-import Assistance from "./Modal/assistance";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
+import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
 
@@ -42,7 +41,7 @@ function Navbar() {
     dispatch(logout());
   };
 
-  const handleLogIn = (e) => {
+  const handleLogIn = () => {
     history.push('/login');
   };
 
@@ -144,7 +143,7 @@ function Navbar() {
                                                     </Link>
                                             </>
                                       : <>
-                                            <MenuItem onClick = {(e) => handleLogIn(e)} >
+                                            <MenuItem onClick = {() => handleLogIn()} >
                                               Iniciar sesión
                                             </MenuItem >
                                         </>
