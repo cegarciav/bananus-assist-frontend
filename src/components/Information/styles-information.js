@@ -14,10 +14,8 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 600,
-    fontSize: '34px',
-    lineHeight: '41px',
-    display: 'flex',
-    alignItems: 'center',
+    fontSize: '300%',   
+    align: 'left',
   },
 
   infoDescription: {
@@ -25,14 +23,12 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
     fontWeight: 'normal',
-    fontSize: '24px',
-    lineHeight: '29px',
+    lineHeight: '140%',
     display: 'flex',
     alignItems: 'center',
-    width: '1092px',
-    height: '122px',
-    left: '149px',
-    top: '296px',
+    width: '100%',
+    height: '50%',
+    align: 'left',
   },
 
   infoHow: {

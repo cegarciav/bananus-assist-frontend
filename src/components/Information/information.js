@@ -84,7 +84,7 @@ export default function Information() {
       </head>
   
       <Container maxWidth="lg"  component ="Title" >
-        <Typography variant="h3" align = "left" className={classes.infoTitle}>
+        <Typography variant="h3"  className={classes.infoTitle}>
         <InfoOutlinedIcon fontSize = "large" align = "center" />
           Informaciones
         </Typography>
@@ -92,7 +92,7 @@ export default function Information() {
 
       <Container maxWidth="lg" component="description" >
   
-      <Typography align= "justify" variant="body1" className={classes.infoDescription}>
+      <Typography  variant="body1" className={classes.infoDescription}>
       Bananus assist es una plataforma que permite ofrecer asistencia y acompañar a los 
       clientes de manera remota en su proceso de compra. 
       De esta manera los clientes pueden comprar de manera segura minimizando el contacto físico.
