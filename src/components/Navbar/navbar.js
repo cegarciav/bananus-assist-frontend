@@ -41,7 +41,7 @@ function Navbar() {
     dispatch(logout());
   };
 
-  const handleLogIn = (e) => {
+  const handleLogIn = () => {
     history.push('/login');
   };
 
@@ -143,7 +143,7 @@ function Navbar() {
                                                     </Link>
                                             </>
                                       : <>
-                                            <MenuItem onClick = {(e) => handleLogIn(e)} >
+                                            <MenuItem onClick = {() => handleLogIn()} >
                                               Iniciar sesión
                                             </MenuItem >
                                         </>

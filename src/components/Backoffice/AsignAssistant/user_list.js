@@ -5,12 +5,18 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import AddUser from './AddUser/add_user';
 import { apiGet } from '../../../services/api-service';
+import useStyles from './styles-user_list';
 
 export default function UserList() {
   const [users, setUsers] = useState(null);
+  const [reload, setReload] = useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
+  const classes = useStyles();
 
   useEffect(() => {
     if (!users) {
@@ -20,31 +26,55 @@ export default function UserList() {
     }
   }, [users]);
 
-  if (!users) {
-    return (
-      <>
-       loading...
-      </>
-    );
-  } else {
-    return (
+  useEffect(() => {
+    if (reload) {
+      apiGet('users').then((result) => setUsers(
+        { result },
+      ));
+      setReload(false);
+    }
+  }, [reload]);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
+
+  return (
       <div >
         <Grid container spacing={0}>
           <Grid item xs={9} md={11}>
+          <button type="button" onClick={handleOpenModal} className={classes.button} >
+                + Agregar usuario
+          </button>
+          <Modal
+              open={openModal}
+              onClose={handleCloseModal}
+          >
+             <AddUser close={handleCloseModal}
+               hideModal ={() => setOpenModal(false) }
+               reload ={() => setReload(true) }
+             />
+          </Modal>
             <div >
               <List>
+              {!users ? <>Loading...</>
+                : <>
               {users.result.map((user) => (
                     <Link
                     to={{
-                      pathname: String("/backoffice/assign_location/") + user.id,
+                      pathname: String('/backoffice/assign_location/') + user.id,
                       state: {
-                        user: user.name
+                        user: user.name,
                       },
                     }}
                     key = {user.id}
                     >
                     <ListItem
-                    button 
+                    button
                     >
                       <ListItemAvatar>
                         <Avatar>
@@ -57,11 +87,12 @@ export default function UserList() {
                     </ListItem >
                   </Link>
               ))}
+              </>
+            }
               </List>
             </div>
           </Grid>
         </Grid>
       </div>
-    );
-  }
+  );
 }

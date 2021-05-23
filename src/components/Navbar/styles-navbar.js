@@ -22,6 +22,11 @@ const useStyles = makeStyles((theme) => ({
     borderColor: '#195E6D',
     backgroundColor: 'white',
     marginLeft: '10%',
+    '&:hover': {
+      borderColor: 'white',
+      backgroundColor: '#064654',
+      color: 'white',
+    },
   },
   navbar: {
     backgroundColor: '#195E6D',
