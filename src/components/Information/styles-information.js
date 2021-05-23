@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
     alignItems: 'center',
     width: '63px',
     height: '40px',
-    left: '204px',
+    
     top: '685px',
   },
   stepDescription: {
@@ -68,6 +68,11 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Montserrat',
     fontStyle: 'normal',
   },
+  stepImage: {
+    width: '30%',
+    height: 'auto',
+  },
+
 
 
 
