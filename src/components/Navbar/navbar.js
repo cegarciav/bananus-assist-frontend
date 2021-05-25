@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -15,6 +15,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
+import { apiGet } from '../../services/api-service';
+import socket from '../socket';
+
+function groupBy(objectArray, property) {
+  return objectArray.reduce(function (acc, obj) {
+    var key = obj[property];
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(obj);
+    return acc;
+  }, {});
+}
 
 function Navbar() {
   const classes = useStyles();
@@ -25,12 +38,53 @@ function Navbar() {
   const history = useHistory();
   const [openModal, setOpenModal] = React.useState(false);
   const [location, setLocation] = React.useState(null);
+  const [Peticiones, SetPeticiones] = useState([]);
+  const [stores, setStores] = useState(null);
+  const [update, setUpdate] = useState(null);
+  const [salePoints, setSalePoints] = useState(null);
+
+  useEffect(() => {
+    if (!salePoints && !location) {
+      apiGet('sale-points').then((result) => setSalePoints(
+        { result },
+      ));
+    }
+    if (!stores) {
+      apiGet('stores').then((result) => setStores(
+        { result },
+      ));
+    }
+    setUpdate(true);
+  }, [salePoints, stores, location]);
+
+  useEffect(() => {
+    if (update && stores && salePoints && !location) {
+      setUpdate(false);
+      salePoints.result.map((salePoint) => {
+        const store = stores.result.find((u) => u.id === salePoint.storeId);
+        // eslint-disable-next-line no-param-reassign
+        salePoint.storeName = store.name;
+        return salePoint;
+      });
+    }
+  }, [update, stores, salePoints, location]);
+
+  useEffect(() => {
+    socket.on('llegada_peticion', (idClientSocket) => {
+      SetPeticiones([...Peticiones, idClientSocket]);
+    });
+  }, [Peticiones]);
+
+  const peticion = (idSalePoint) => {
+    socket.emit('peticion_asistentes', idSalePoint);
+  };
 
   const handleChange = (event) => {
     setLocation(event.target.value);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (e) => {
+    peticion(e.target.value);
     setOpenModal(true);
   };
 
@@ -74,20 +128,24 @@ function Navbar() {
                 <Toolbar className={classes.navbar}>
                 {
                     location ? <Typography className={classes.location}>
-                                    Punto de venta: {location}
+                                    <h3>Punto de venta:</h3>
+                                    <p>{location}</p>
                                 </Typography >
                       : <FormControl variant="outlined" className={classes.location}>
-                            <Select
+                         { !salePoints ? <></>
+                           : <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
                                 value={location}
                                 className={classes.location}
                                 onChange={handleChange}
                             >
-                                <MenuItem value={1}>Location1</MenuItem>
-                                <MenuItem value={2}>Location2</MenuItem>
-                                <MenuItem value={3}>Location3</MenuItem>
+                                { salePoints.result.map((salePointOrdered) => <option className={classes.option} key={salePointOrdered.id} value={salePointOrdered.id} >
+                                                                                  {salePointOrdered.storeName} {salePointOrdered.id}
+                                                                              </option>)
+                                }
                             </Select>
+                        }
                         </FormControl>
                         }
                     <div className={classes.item}>
@@ -159,7 +217,8 @@ function Navbar() {
                                         <MenuItem onClick = {(e) => handleLogout(e)} >
                                             Cerrar sesión
                                         </MenuItem>
-                                            <Link to='/backoffice' className={classes.link}>
+                                            <Link to = {{ pathname: '/backoffice', state: { location } }}
+                                             className={classes.link}>
                                                 <MenuItem onClick={handleClose2}>
                                                    <Typography >
                                                         Home
@@ -176,7 +235,7 @@ function Navbar() {
                                 </Menu>
                             </div>
                         )}
-                    <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
+                    <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
                           &#x2706; Solicitar asistencia
                     </button>
                     <Modal

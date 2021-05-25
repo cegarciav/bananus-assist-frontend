@@ -15,7 +15,7 @@ import useStyles from './styles-user_list';
 export default function UserList() {
   const [users, setUsers] = useState(null);
   const [reload, setReload] = useState(false);
-  const [openModal, setOpenModal] = React.useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const classes = useStyles();
 
   useEffect(() => {

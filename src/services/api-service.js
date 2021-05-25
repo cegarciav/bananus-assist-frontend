@@ -60,7 +60,7 @@ async function apiPost(path, body, params) {
           mode: 'cors',
           body,
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
           }
         }
       )

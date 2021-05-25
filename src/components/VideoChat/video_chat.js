@@ -57,10 +57,10 @@ export default function VideoChat() {
 
     return (
         <div>
-            <button value = {"1"} onClick={e => peticion(e.target.value)}>PETICION ASISTENTE</button>
+            <button value = {"2"} onClick={e => peticion(e.target.value)}>PETICION ASISTENTE</button>
             <button value = {"1"} onClick={e => soy_asistente(e.target.value)}>SOY ASISTENTE</button>
-            <button value = {"1"} onClick={e => soy_home(e.target.value)}>SOY HOME</button>
-            <button value = {"1"} onClick={e => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
+            <button value = {"2"} onClick={e => soy_home(e.target.value)}>SOY HOME</button>
+            <button value = {"2"} onClick={e => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
             <br />
             {Peticiones.map((id)=>{
                 return(<button key={id} value = {[id,"1"]} onClick={e => aceptar_videocall(e.target.value)}>aceptar</button>)

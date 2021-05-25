@@ -40,6 +40,11 @@ const useStyles = makeStyles((theme) => ({
       borderColor: 'white',
     },
   },
+  option: {
+    color: 'black',
+    fontFamily: 'Arial',
+    margin: '1em',
+  },
 }));
 
 export default useStyles;
