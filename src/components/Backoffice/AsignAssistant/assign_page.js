@@ -1,20 +1,15 @@
 import React from 'react';
+import { useLocation } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import LocationListToggle from './locations_w_toggle';
 import Grid from '@material-ui/core/Grid';
 import useStyles from "./styles-assign_page";
 
-export default function AsignPage( props ) {
+export default function AsignPage(props) {
 
-  const classes = useStyles();
-  const userId = props.match.params.userId;
-
-  const users = {
-    1 : {name: 'Pedro Perez'} ,
-    2 : {name: 'Pablo Perez'} ,
-  }
-
-  const user = users[userId];
+  const classes = useStyles(props);
+  const location = useLocation();
+  const user_ = location.state.user;
 
   return (
     <div >
@@ -23,10 +18,10 @@ export default function AsignPage( props ) {
       container
       >
         <Container maxWidth="sm">
-            <LocationListToggle employee={user}>
+            <LocationListToggle name = {user_} >
             </LocationListToggle>
         </Container>
-      </Grid> 
+      </Grid>
     </div>
   );
 }

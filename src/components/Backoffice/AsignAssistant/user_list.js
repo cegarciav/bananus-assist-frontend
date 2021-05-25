@@ -1,72 +1,98 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
+import Modal from '@material-ui/core/Modal';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import AddUser from './AddUser/add_user';
+import { apiGet } from '../../../services/api-service';
+import useStyles from './styles-user_list';
 
-export default function UserList( ) {
-  
-  
-  const user1 = {
-    name: 'Pedro Perez',
-    id: 1,
-  }
-  const user2 = {
-    name: 'Pablo Perez',
-    id: 2,
-  }
+export default function UserList() {
+  const [users, setUsers] = useState(null);
+  const [reload, setReload] = useState(false);
+  const [openModal, setOpenModal] = React.useState(false);
+  const classes = useStyles();
+
+  useEffect(() => {
+    if (!users) {
+      apiGet('users').then((result) => setUsers(
+        { result },
+      ));
+    }
+  }, [users]);
+
+  useEffect(() => {
+    if (reload) {
+      apiGet('users').then((result) => setUsers(
+        { result },
+      ));
+      setReload(false);
+    }
+  }, [reload]);
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
+  };
 
   return (
-    <div >
-      <Grid container spacing={0}>
-        <Grid item xs={9} md={11}>
-          <div >
-            <List>
-              <Link
-                to={{
-                  pathname: "/backoffice/assign_location/1",
-                }}
-              >
-                <ListItem
-                button 
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <AccountCircleIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={user1.name}
-                  />
-                </ListItem >
-              </Link>
-              <Link
-                to={{
-                  pathname: "/backoffice/assign_location/2"
-                }}
-              >
-                <ListItem
-                button 
-                >
-                  <ListItemAvatar>
-                    <Avatar>
-                      <AccountCircleIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={user2.name}
-                  />
-                </ListItem >
-              </Link>
-                
-            </List>
-          </div>
+      <div >
+        <Grid container spacing={0}>
+          <Grid item xs={9} md={11}>
+          <button type="button" onClick={handleOpenModal} className={classes.button} >
+                + Agregar usuario
+          </button>
+          <Modal
+              open={openModal}
+              onClose={handleCloseModal}
+          >
+             <AddUser close={handleCloseModal}
+               hideModal ={() => setOpenModal(false) }
+               reload ={() => setReload(true) }
+             />
+          </Modal>
+            <div >
+              <List>
+              {!users ? <>Loading...</>
+                : <>
+              {users.result.map((user) => (
+                    <Link
+                    to={{
+                      pathname: String('/backoffice/assign_location/') + user.id,
+                      state: {
+                        user: user.name,
+                      },
+                    }}
+                    key = {user.id}
+                    >
+                    <ListItem
+                    button
+                    >
+                      <ListItemAvatar>
+                        <Avatar>
+                          <AccountCircleIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                         primary={user.name}
+                      />
+                    </ListItem >
+                  </Link>
+              ))}
+              </>
+            }
+              </List>
+            </div>
+          </Grid>
         </Grid>
-      </Grid>
-    </div>
+      </div>
   );
 }

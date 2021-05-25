@@ -9,6 +9,7 @@ const useStyles = makeStyles((theme) => ({
   },
   tab: {
     paddingTop: '5vh',
+    marginLeft: '10%',
   },
 }));
 

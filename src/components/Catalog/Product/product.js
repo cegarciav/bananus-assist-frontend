@@ -22,11 +22,12 @@ function Product(props) {
   return (
         <Card className={classes.root}>
             <CardHeader
-            title="MacBook Pro 13 (M1)"
+            title={props.name}
+            subheader={props.price + String(' CLP')}
             />
             <CardMedia
             className={classes.media}
-            image="https://d3tctca4ed2xlu.cloudfront.net/images/spree/images/834734/attachments/large/Apple_MacBook_Pro_M1_Space_Gray_1.jpg?1608666218"
+            image= {props.image}
             title="MacBook Pro 13 (M1)"
             />
             <CardContent>
