@@ -1,20 +1,22 @@
 import React from 'react';
-import useStyles from "./styles-navbar";
-import Assistance from "./Modal/assistance";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Modal from '@material-ui/core/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
-import Modal from '@material-ui/core/Modal';
+import useStyles from './styles-navbar';
+import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
 
-function Navbar(props) {
+function Navbar() {
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -22,6 +24,11 @@ function Navbar(props) {
   const user = useSelector(selectUser);
   const history = useHistory();
   const [openModal, setOpenModal] = React.useState(false);
+  const [location, setLocation] = React.useState(null);
+
+  const handleChange = (event) => {
+    setLocation(event.target.value);
+  };
 
   const handleOpenModal = () => {
     setOpenModal(true);
@@ -41,7 +48,7 @@ function Navbar(props) {
     dispatch(logout());
   };
 
-  const handleLogIn = (e) => {
+  const handleLogIn = () => {
     history.push('/login');
   };
 
@@ -65,6 +72,24 @@ function Navbar(props) {
         <div>
             <AppBar position="static" >
                 <Toolbar className={classes.navbar}>
+                {
+                    location ? <Typography className={classes.location}>
+                                    Punto de venta: {location}
+                                </Typography >
+                      : <FormControl variant="outlined" className={classes.location}>
+                            <Select
+                                labelId="demo-simple-select-outlined-label"
+                                id="demo-simple-select-outlined"
+                                value={location}
+                                className={classes.location}
+                                onChange={handleChange}
+                            >
+                                <MenuItem value={1}>Location1</MenuItem>
+                                <MenuItem value={2}>Location2</MenuItem>
+                                <MenuItem value={3}>Location3</MenuItem>
+                            </Select>
+                        </FormControl>
+                        }
                     <div className={classes.item}>
                         {auth && (
                             <div className={classes.item}>
@@ -95,7 +120,7 @@ function Navbar(props) {
                                     <Link to='/Catalog' className={classes.link}>
                                         <MenuItem onClick={handleClose2}>
                                             <Typography >
-                                                Catálogo 
+                                                Catálogo
                                             </Typography >
                                         </MenuItem>
                                     </Link>
@@ -130,20 +155,22 @@ function Navbar(props) {
                                     open={open}
                                     onClose={handleClose}
                                 >
-                                    {user ? 
-                                        <>
-                                            <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
+                                    {user ? <>
+                                        <MenuItem onClick = {(e) => handleLogout(e)} >
+                                            Cerrar sesión
+                                        </MenuItem>
                                             <Link to='/backoffice' className={classes.link}>
                                                 <MenuItem onClick={handleClose2}>
                                                    <Typography >
-                                                        Home 
+                                                        Home
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>
                                         </>
-                                        :
-                                        <>
-                                            <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
+                                      : <>
+                                            <MenuItem onClick = {() => handleLogIn()} >
+                                               Iniciar sesión
+                                            </MenuItem>
                                         </>
                                     }
                                 </Menu>
@@ -160,9 +187,7 @@ function Navbar(props) {
                     </Modal>
                 </Toolbar>
             </AppBar>
-        </div>
-	    );
+        </div>);
 }
 
 export default Navbar;
-
