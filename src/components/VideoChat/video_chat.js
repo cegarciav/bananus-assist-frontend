@@ -38,13 +38,11 @@ export default function VideoChat() {
 	const [ idToCall, setIdToCall ] = useState("")
 	const [ callEnded, setCallEnded] = useState(false)
 	const [ name, setName ] = useState("")
-    const [ refUser, SetrefUser] = useState(null)
-	const myVideo = useRef()
-	var userVideo = useCallbackRef(null, ref => ref && ref.focus());
+	const myVideo = useRef();
+	var userVideo = useRef();
 	const connectionRef= useRef()
 
-    const history = useHistory();
-
+    
     useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
 			setStream(stream)
@@ -93,6 +91,7 @@ export default function VideoChat() {
 			setCallAccepted(true)
 			peer.signal(data.signal)
             setCaller(data.from)
+            setCallEnded(false)
 		})
 
         peer.on("stream", (stream) => {
@@ -103,6 +102,7 @@ export default function VideoChat() {
 	}
 
 	const answerCall =() =>  {
+        setCallEnded(false)
 		setCallAccepted(true)
 		var peer = new Peer({
 			initiator: false,
