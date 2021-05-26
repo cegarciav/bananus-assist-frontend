@@ -36,7 +36,7 @@ export default function VideoChat() {
 	const [ callEnded, setCallEnded] = useState(false)
 	const [ name, setName ] = useState("")
 	const myVideo = useRef()
-	const userVideo = useRef()
+	var userVideo = useRef()
 	const connectionRef= useRef()
 
     useEffect(() => {
@@ -44,6 +44,8 @@ export default function VideoChat() {
 			setStream(stream)
 				myVideo.current.srcObject = stream
 		})
+        
+        socket.emit("me_ida", {});
 
         socket.on("me", (id) => {
                 setMe(id)
@@ -55,10 +57,16 @@ export default function VideoChat() {
 			setName(data.name)
 			setCallerSignal(data.signal)
 		})
+        socket.on("finished", () => {
+            setCallEnded(true)
+		    connectionRef.current.destroy()
+        })
+        
 	}, [])
 
     const callUser = (id) => {
-		const peer = new Peer({
+        socket.off("callAccepted")
+		var peer = new Peer({
 			initiator: true,
 			trickle: false,
 			stream: stream
@@ -68,17 +76,20 @@ export default function VideoChat() {
 				userToCall: id,
 				signalData: data,
 				from: me,
-				name: name
+				name: name,
+                sale_point_id: "1"
 			})
 		})
+
+        if(userVideo)
 		peer.on("stream", (stream) => {
-			
 				userVideo.current.srcObject = stream
-			
 		})
-		socket.on("callAccepted", (signal) => {
+
+		socket.on("callAccepted", (data) => {
 			setCallAccepted(true)
-			peer.signal(signal)
+			peer.signal(data.signal)
+            setCaller(data.from)
 		})
 
 		connectionRef.current = peer
@@ -86,13 +97,13 @@ export default function VideoChat() {
 
 	const answerCall =() =>  {
 		setCallAccepted(true)
-		const peer = new Peer({
+		var peer = new Peer({
 			initiator: false,
 			trickle: false,
 			stream: stream
 		})
 		peer.on("signal", (data) => {
-			socket.emit("answerCall", { signal: data, to: caller })
+			socket.emit("answerCall", { signal: data, to: caller, from: me})
 		})
 		peer.on("stream", (stream) => {
 			userVideo.current.srcObject = stream
@@ -103,8 +114,10 @@ export default function VideoChat() {
 	}
 
 	const leaveCall = () => {
+        socket.emit("ended", {to: caller})
 		setCallEnded(true)
 		connectionRef.current.destroy()
+        
 	}
 
 
@@ -157,10 +170,10 @@ export default function VideoChat() {
 
     return (
         <div>
-            <button value = {"2"} onClick={e => peticion(e.target.value)}>PETICION ASISTENTE</button>
+            <button value = {"1"} onClick={e => peticion(e.target.value)}>PETICION ASISTENTE</button>
             <button value = {"1"} onClick={e => soy_asistente(e.target.value)}>SOY ASISTENTE</button>
-            <button value = {"2"} onClick={e => soy_home(e.target.value)}>SOY HOME</button>
-            <button value = {"2"} onClick={e => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
+            <button value = {"1"} onClick={e => soy_home(e.target.value)}>SOY HOME</button>
+            <button value = {"1"} onClick={e => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
             <br />
             {Peticiones.map((id)=>{
                 return(<button key={id} value = {[id,"1"]} onClick={e => aceptar_videocall(e.target.value)}>aceptar</button>)
