@@ -11,6 +11,26 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: '5vh',
     marginLeft: '10%',
   },
+  location: {
+    marginLeft: '90px',
+    marginTop: '10px',
+    marginBottom: '0px',
+    color: 'black',
+    border: 'white',
+    fontFamily: 'Arial',
+    '&:before': {
+      borderColor: 'white',
+    },
+  },
+  option: {
+    color: 'black',
+    fontFamily: 'Arial',
+    margin: '1em',
+  },
+  request: {
+    width: '40%',
+    height: '40%',
+  },
 }));
 
 export default useStyles;

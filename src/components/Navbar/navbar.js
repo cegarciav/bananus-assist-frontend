@@ -31,7 +31,7 @@ function groupBy(objectArray, property) {
 
 function Navbar() {
   const classes = useStyles();
-  const [auth] = React.useState(true);
+  const [auth] = useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const user = useSelector(selectUser);
@@ -126,13 +126,13 @@ function Navbar() {
         <div>
             <AppBar position="static" >
                 <Toolbar className={classes.navbar}>
-                {
-                    location ? <Typography className={classes.location}>
+                { user ? <></>
+                  : <>{ location ? <Typography className={classes.location}>
                                     <h3>Punto de venta:</h3>
                                     <p>{location}</p>
                                 </Typography >
-                      : <FormControl variant="outlined" className={classes.location}>
-                         { !salePoints ? <></>
+                    : <FormControl variant="outlined" className={classes.location}>
+                         { (!salePoints && !user) ? <></>
                            : <Select
                                 labelId="demo-simple-select-outlined-label"
                                 id="demo-simple-select-outlined"
@@ -140,14 +140,19 @@ function Navbar() {
                                 className={classes.location}
                                 onChange={handleChange}
                             >
-                                { salePoints.result.map((salePointOrdered) => <option className={classes.option} key={salePointOrdered.id} value={salePointOrdered.id} >
-                                                                                  {salePointOrdered.storeName} {salePointOrdered.id}
-                                                                              </option>)
+                                { salePoints.result.map(
+                                  (salePointOrdered) => <option className={classes.option}
+                                                                key={salePointOrdered.id}
+                                                                value={salePointOrdered.id} >
+                                                 {salePointOrdered.storeName} {salePointOrdered.id}
+                                                        </option>,
+                                )
                                 }
                             </Select>
                         }
                         </FormControl>
-                        }
+                        } </>
+                    }
                     <div className={classes.item}>
                         {auth && (
                             <div className={classes.item}>
@@ -235,9 +240,11 @@ function Navbar() {
                                 </Menu>
                             </div>
                         )}
-                    <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
+                    {user ? <></>
+                      : <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
                           &#x2706; Solicitar asistencia
-                    </button>
+                        </button>
+                    }
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}

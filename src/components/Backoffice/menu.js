@@ -9,6 +9,7 @@ import FormControl from '@material-ui/core/FormControl';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import UserList from './AsignAssistant/user_list';
+import VideoChat from './video-chat';
 import useStyles from './styles-menu';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
@@ -18,8 +19,10 @@ export default function Menu() {
   const classes = useStyles();
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
+  const [inCall, setInCall] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
   const [location, setLocation] = useState(null);
+  const [Peticiones, setPeticiones] = useState([]);
 
   useEffect(() => {
     if (!salePoints) {
@@ -47,11 +50,9 @@ export default function Menu() {
     }
   }, [update, stores, salePoints]);
 
-  const [Peticiones, SetPeticiones] = useState([]);
-
   useEffect(() => {
     socket.on('llegada_peticion', (id_client_socket)=> {
-      SetPeticiones([...Peticiones, id_client_socket]);
+      setPeticiones([...Peticiones, id_client_socket]);
     });
   }, [Peticiones]);
 
@@ -60,9 +61,11 @@ export default function Menu() {
   };
 
   const aceptarVideocall = (args) => {
-    const arg_array = args.split(",");
-    socket.emit("accept_videocall", arg_array[0], arg_array[1]);
-    socket.emit("join_to_videocall_room", arg_array[1]);
+    const arg_array = args.split(',');
+    setInCall(true);
+    setPeticiones([]);
+    socket.emit('accept_videocall', arg_array[0], arg_array[1]);
+    socket.emit('join_to_videocall_room', arg_array[1]);
   };
 
   const handleChange = (event, newValue) => {
@@ -76,7 +79,9 @@ export default function Menu() {
 
   return (
     <div >
-      <FormControl variant="outlined" className={classes.location}>
+      { inCall ? <VideoChat stopCall ={() => setInCall(false) }/>
+        : <><FormControl variant="outlined" className={classes.location}>
+          <h3 className={classes.location}>Selecciona el punto de venta</h3>
         { !salePoints ? <></>
           : <Select
               labelId="demo-simple-select-outlined-label"
@@ -85,19 +90,31 @@ export default function Menu() {
               className={classes.location}
               onChange={handleChangeLocation}
           >
-          { salePoints.result.map((salePointOrdered) => <option className={classes.option} key={salePointOrdered.id} value={salePointOrdered.id} >
-                                                            {salePointOrdered.storeName} {salePointOrdered.id}
-                                                        </option>)
-              }
+          { salePoints.result.map(
+            (salePointOrdered) => < option className={classes.option}
+                                           key={salePointOrdered.id}
+                                            value={salePointOrdered.id} >
+                                      {salePointOrdered.storeName} {salePointOrdered.id}
+                                    </option>,
+          )
+          }
           </Select>
         }
       </FormControl>
-      <div>
-          {Peticiones.map((id) => {
-            return (<button key={id} value = {[id, location]} onClick={(e) => aceptarVideocall(e.target.value)}>
-                        aceptar
-                    </button>);
-          })}
+      <div >
+        { Peticiones.length === 0 ? <></>
+          : <div className={classes.request}>
+              <h3>Solicitudes de asistencia</h3>
+              <div>
+                Tienes una solicitud de asistencia en el local
+              </div>
+              <button key={Peticiones[0]}
+                                value = {[Peticiones[0], location]}
+                                onClick={(e) => aceptarVideocall(e.target.value)}>
+                                Atender a cliente
+              </button>
+            </div>
+        }
       </div>
       <Tabs
       variant="scrollable"
@@ -126,6 +143,8 @@ export default function Menu() {
                 </Paper>
         </Container>
       </Grid>
+     </>
+     }
     </div>
   );
 }
