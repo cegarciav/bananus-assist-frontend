@@ -6,6 +6,7 @@ import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
+import Alert from '@material-ui/lab/Alert';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import UserList from './AsignAssistant/user_list';
@@ -101,19 +102,15 @@ export default function Menu() {
           </Select>
         }
       </FormControl>
-      <div >
+      <div className={classes.alert}>
         { Peticiones.length === 0 ? <></>
-          : <div className={classes.request}>
-              <h3>Solicitudes de asistencia</h3>
-              <div>
-                Tienes una solicitud de asistencia en el local
-              </div>
-              <button key={Peticiones[0]}
-                                value = {[Peticiones[0], location]}
-                                onClick={(e) => aceptarVideocall(e.target.value)}>
-                                Atender a cliente
-              </button>
-            </div>
+          : <Alert severity="info">Tienes una solicitud de asistencia
+                <button className={classes.request_btn} key={Peticiones[0]}
+                                    value = {[Peticiones[0], location]}
+                                    onClick={(e) => aceptarVideocall(e.target.value)}>
+                                    Atender a cliente
+                  </button>
+            </Alert>
         }
       </div>
       <Tabs

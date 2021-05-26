@@ -1,6 +1,6 @@
 import { makeStyles } from "@material-ui/core/styles";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   menu: {
     minHeight: '100vh',
     paddingTop: '5vh',
@@ -27,9 +27,15 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     margin: '1em',
   },
-  request: {
-    width: '40%',
-    height: '40%',
+  request_btn: {
+    marginLeft: '10px',
+    backgroundColor: 'white',
+    border: 'solid 1px #195E6D',
+    color: '#195E6D',
+    borderRadius: '3px',
+  },
+  alert: {
+    marginTop: '10px',
   },
 }));
 

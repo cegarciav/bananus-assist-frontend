@@ -1,11 +1,14 @@
 import React from 'react';
+import useStyles from './styles-video-chat';
 
-const VideoChat = (props) => (
+export default function Menu(props) {
+  const classes = useStyles();
+
+  return (
     <div >
-        <button onClick={props.stopCall}>
-                Terminar llamada
-        </button>);
+        <button className={classes.btn} onClick={props.stopCall}>
+                Volver al panel
+        </button>
     </div>
-);
-
-export default VideoChat;
+  );
+}

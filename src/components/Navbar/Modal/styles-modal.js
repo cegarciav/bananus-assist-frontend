@@ -32,7 +32,7 @@ const useStyles = makeStyles({
     paddingTop: '5px',
     paddingBottom: '5px',
     fontSize: '18px',
-  }
+  },
 });
 
 export default useStyles;
