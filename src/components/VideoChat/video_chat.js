@@ -60,14 +60,21 @@ export default function VideoChat() {
 			setCaller(data.from)
 			setName(data.name)
 			setCallerSignal(data.signal)
+            setCallAccepted(false)
+            console.log("me estan llamando ctm ")
 		})
         socket.on("finished", () => {
             setCallEnded(true)
+        })
+        
+        socket.on("te_llame", (msge) => {
+            console.log(msge)
         })
 	},[callEnded, callAccepted])
 
 
     const callUser = (id) => {
+        
         socket.off("callAccepted")
 		var peer = new Peer({
 			initiator: true,
@@ -82,6 +89,7 @@ export default function VideoChat() {
 				name: name,
                 sale_point_id: "1"
 			})
+            setCallAccepted(false)
 		})
 
         
@@ -122,7 +130,7 @@ export default function VideoChat() {
 
 	const leaveCall = () => {
         socket.emit("ended", {to: caller})
-		setCallEnded(true)
+		setCallEnded(true);
 		connectionRef.current.destroy()
         
 	}
