@@ -24,7 +24,7 @@ Array.prototype.remove = function() {
     return this;
 };
 
-export default function VideoChat() {
+export default function VideoChat(props) {
 
     const [ me, setMe ] = useState("")
 	const [ stream, setStream ] = useState()
@@ -45,9 +45,12 @@ export default function VideoChat() {
 				myVideo.current.srcObject = stream
 		})
 
+        socket.emit('me_ida', {});
+
         socket.on("me", (id) => {
-                setMe(id)
-            })
+                    setMe(id);
+                })
+            
         
 		socket.on("callUser", (data) => {
 			setReceivingCall(true)
@@ -107,8 +110,6 @@ export default function VideoChat() {
 		connectionRef.current.destroy()
 	}
 
-
-
     const [Peticiones, SetPeticiones] = useState([])
     const [Sala, SetSala] = useState("1")
     useEffect(() => {
@@ -128,10 +129,7 @@ export default function VideoChat() {
             console.log("descargando datos de video: ...")
             console.log(video_stream)
         })
-    }, [Peticiones])
-
-
-    
+    }, [Peticiones])    
 
     const peticion = (id_sale_point) =>{
         socket.emit("peticion_asistentes", id_sale_point)
@@ -165,10 +163,7 @@ export default function VideoChat() {
             {Peticiones.map((id)=>{
                 return(<button key={id} value = {[id,"1"]} onClick={e => aceptar_videocall(e.target.value)}>aceptar</button>)
             })}
-    
-
-
-
+ 
         <h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
     <div className="container">
         <div className="video-container">

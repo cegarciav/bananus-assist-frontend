@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
@@ -24,6 +25,7 @@ export default function Menu() {
   const [salePoints, setSalePoints] = useState(null);
   const [location, setLocation] = useState(null);
   const [Peticiones, setPeticiones] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     if (!salePoints) {
@@ -52,21 +54,26 @@ export default function Menu() {
   }, [update, stores, salePoints]);
 
   useEffect(() => {
-    socket.on('llegada_peticion', (id_client_socket)=> {
-      setPeticiones([...Peticiones, id_client_socket]);
+    socket.on('llegada_peticion', (idClientSocket) => {
+      setPeticiones([...Peticiones, idClientSocket]);
     });
   }, [Peticiones]);
 
-  const soyAsistente = (id_sale_point) => {
-    socket.emit('join_sala_asistente', id_sale_point);
+  const soyAsistente = (idSalePoint) => {
+    socket.emit('join_sala_asistente', idSalePoint);
   };
 
   const aceptarVideocall = (args) => {
-    const arg_array = args.split(',');
+    const argArray = args.split(',');
     setInCall(true);
     setPeticiones([]);
-    socket.emit('accept_videocall', arg_array[0], arg_array[1]);
-    socket.emit('join_to_videocall_room', arg_array[1]);
+    socket.emit('accept_videocall', argArray[0], argArray[1]);
+    socket.emit('join_to_videocall_room', argArray[1]);
+    // eslint-disable-next-line no-restricted-globals
+    history.push({
+      pathname: '/videocall/'.concat(location),
+      state: { location },
+    });
   };
 
   const handleChange = (event, newValue) => {
@@ -109,7 +116,7 @@ export default function Menu() {
                                     value = {[Peticiones[0], location]}
                                     onClick={(e) => aceptarVideocall(e.target.value)}>
                                     Atender a cliente
-                  </button>
+                </button>
             </Alert>
         }
       </div>
