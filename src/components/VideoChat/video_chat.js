@@ -4,14 +4,17 @@ import IconButton from "@material-ui/core/IconButton"
 import TextField from "@material-ui/core/TextField"
 import AssignmentIcon from "@material-ui/icons/Assignment"
 import PhoneIcon from "@material-ui/icons/Phone"
+import { useHistory } from 'react-router-dom';
 
 import React, { useRef, useEffect, useState} from 'react';
 import socket from "../socket";
+import {useCallbackRef} from 'use-callback-ref'
 
 import { CopyToClipboard } from "react-copy-to-clipboard"
 import Peer from "simple-peer"
 
 import "../../assets/video.css"
+import { render } from "@testing-library/react"
 
 Array.prototype.remove = function() {
     var what, a = arguments, L = a.length, ax;
@@ -35,9 +38,12 @@ export default function VideoChat() {
 	const [ idToCall, setIdToCall ] = useState("")
 	const [ callEnded, setCallEnded] = useState(false)
 	const [ name, setName ] = useState("")
+    const [ refUser, SetrefUser] = useState(null)
 	const myVideo = useRef()
-	var userVideo = useRef()
+	var userVideo = useCallbackRef(null, ref => ref && ref.focus());
 	const connectionRef= useRef()
+
+    const history = useHistory();
 
     useEffect(() => {
 		navigator.mediaDevices.getUserMedia({ video: true, audio: true }).then((stream) => {
@@ -59,10 +65,9 @@ export default function VideoChat() {
 		})
         socket.on("finished", () => {
             setCallEnded(true)
-		    connectionRef.current.destroy()
         })
-        
-	}, [])
+	},[callEnded, callAccepted])
+
 
     const callUser = (id) => {
         socket.off("callAccepted")
@@ -81,15 +86,17 @@ export default function VideoChat() {
 			})
 		})
 
-        if(userVideo)
-		peer.on("stream", (stream) => {
-				userVideo.current.srcObject = stream
-		})
+        
+		
 
 		socket.on("callAccepted", (data) => {
 			setCallAccepted(true)
 			peer.signal(data.signal)
             setCaller(data.from)
+		})
+
+        peer.on("stream", (stream) => {
+				userVideo.current.srcObject = stream
 		})
 
 		connectionRef.current = peer
