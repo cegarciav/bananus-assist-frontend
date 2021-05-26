@@ -32,7 +32,7 @@ function App(props) {
           <RouteWithNavbar path="/backoffice/assign_location/:userId" component={AssignPage } />
           <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
-          <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
+          <RouteWithNavbar exact path="/" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/login" component={Login} />
           <RouteWithNavbar exact path="/backoffice" component={Backoffice} />
           <RouteWithNavbar exact path="/videostream" component={VideoStream} />

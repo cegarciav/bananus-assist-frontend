@@ -4,7 +4,7 @@ import Box from '@material-ui/core/Box';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 
-function Catalog(props) {
+function Catalog() {
   const [products, setProducts] = useState(null);
 
   useEffect(() => {
