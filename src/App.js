@@ -38,7 +38,7 @@ function App(props) {
           <RouteWithNavbar exact path="/backoffice" component={Backoffice} />
           <RouteWithNavbar exact path="/videocall/:id" component={VideoChat} />
           <RouteWithNavbar exact path="/videostream" component={VideoStream} />
-          <RouteWithNavbar exact path="/videochat" component={VideoChat} />
+          <RouteWithNavbar exact path="/videochat" component={VideoChat2} />
         </Switch>
       </Router>
   );

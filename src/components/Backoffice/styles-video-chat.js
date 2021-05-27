@@ -2,12 +2,11 @@ import makeStyles from '@material-ui/core/styles/makeStyles';
 
 const useStyles = makeStyles({
   btn: {
-    marginLeft: '10px',
-    marginTop: '10px',
-    backgroundColor: 'white',
-    border: 'solid 1px #195E6D',
-    color: '#195E6D',
-    borderRadius: '3px',
+    display: 'block',
+    alignItems: 'center',
+    float: 'left',
+    marginLeft: '50em',
+    marginTop: '5em',
   },
 });
 
