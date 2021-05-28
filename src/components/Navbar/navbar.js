@@ -39,6 +39,7 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push('/')
   };
 
   const handleLogIn = () => {
@@ -59,6 +60,13 @@ function Navbar() {
 
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
+  };
+  const renderUserInfo = () => {
+    
+    if (user) {
+    return  <Typography className={classes.greeting}> Bienvenido/a {user["username"]} </Typography>
+    } 
+    
   };
 
   return (
@@ -154,6 +162,7 @@ function Navbar() {
                     <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
                           &#x2706; Solicitar asistencia
                     </button>
+                    {renderUserInfo()}
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}

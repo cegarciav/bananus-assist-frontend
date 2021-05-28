@@ -10,7 +10,7 @@ import { apiPost } from '../../services/api-service';
 import useStyles from './styles-login_form';
 
 export default function LoginForm() {
-  /* To do: add logic for API integration */
+  /* To do: fix login  */
   const classes = useStyles();
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
@@ -30,7 +30,7 @@ export default function LoginForm() {
     console.log(raw);
    
     
-  apiPost ('sessions',raw).then((result) => setSession(
+  apiPost ('sessions',raw,'').then((result) => setSession(
     { result },
   ));
   };
@@ -74,7 +74,7 @@ export default function LoginForm() {
   const renderErrorMsg = () => {
     if (error) {
 
-      return  <Typography className= {classes.errorMsg}>{error} </Typography>
+      return  <Typography className= {classes.errorMsg}>Error: Correo y/o contraseña invalido/s </Typography>
     } 
   }
 
@@ -85,7 +85,7 @@ export default function LoginForm() {
                 <Typography component="div" >
                     <Grid container direction="column" alginItems='center' justify='center' spacing={3} >
                         <Grid item alginItems='center'>
-                            <TextField id="outlined-basic" label="Usuario" variant="outlined" value={username} onChange={(e) => setUserame(e.target.value)}/>
+                            <TextField id="outlined-basic" label="Correo" variant="outlined" value={username} onChange={(e) => setUserame(e.target.value)}/>
                         </Grid>
                         <Grid item alginItems='center'>
                             <TextField id="outlined-basic" label="Contraseña" type="password" variant="outlined" value={password} onChange={(e) => setPassword(e.target.value)} />

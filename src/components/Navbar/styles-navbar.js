@@ -26,6 +26,9 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: '#195E6D',
   },
+  greeting:{
+    marginLeft: theme.spacing(4),
+  },
 }));
 
 export default useStyles;
