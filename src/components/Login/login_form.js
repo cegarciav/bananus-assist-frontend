@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import { Button } from '@material-ui/core';
@@ -7,43 +7,81 @@ import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/userSlice';
 import { apiPost } from '../../services/api-service';
+import useStyles from './styles-login_form';
 
 export default function LoginForm() {
   /* To do: add logic for API integration */
-
+  const classes = useStyles();
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState(null);
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
+
+  const fetchData = () =>{
+    console.log(username);
+    console.log(password);
+
+    var raw = JSON.stringify({
+      "email": username,
+      "password": password
+    });
+    console.log(raw);
+   
+    
+  apiPost ('sessions',raw).then((result) => setSession(
+    { result },
+  ));
+  };
+
+  const errors = (ers) =>{
+    setError(ers)
+
+  };
+  
+  useEffect((ers)=>{
+    errors(ers)
+  },[])
+
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const raw = JSON.stringify({
-        "email": username,
-        "password": password
-      });
-      
+    fetchData();
+    const response = session["result"];
+    const state = response["state"];
+    if (state === "OK"){
+      const token = response["token"]
+      dispatch(login({
+        username,
+        password,
+        token,
+        loggedIn: true,
+      }));
 
-    /*apiPost ('sessions',raw).then((result) => setSession(
-      { result },
-    ));*/
-    apiPost ('sessions',raw).then((result) => 
-    console.log(result)
-    );
+    }
+    else{
+      errors(response["error"]);
+      console.log(response);
+    }
     
-
-    dispatch(login({
-      username,
-      password,
-      loggedIn: true,
-    }));
   };
+
+  const renderErrorMsg = () => {
+    if (error) {
+
+      return  <Typography className= {classes.errorMsg}>{error} </Typography>
+    } 
+  }
 
   return (
         <form className="login_form" onSubmit={(e) => handleSubmit(e)}>
             <Container maxWidth="sm">
+              {renderErrorMsg()}
                 <Typography component="div" >
                     <Grid container direction="column" alginItems='center' justify='center' spacing={3} >
                         <Grid item alginItems='center'>
