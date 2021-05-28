@@ -1,20 +1,21 @@
 import React from 'react';
-import useStyles from "./styles-navbar";
-import Assistance from "./Modal/assistance";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { useDispatch, useSelector } from 'react-redux';
 import Modal from '@material-ui/core/Modal';
+import { useDispatch, useSelector } from 'react-redux';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import useStyles from './styles-navbar';
+import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
 
-function Navbar(props) {
+function Navbar() {
   const classes = useStyles();
   const [auth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -33,136 +34,162 @@ function Navbar(props) {
 
   const [anchorEl2, setAnchorEl2] = React.useState(null);
   const open2 = Boolean(anchorEl2);
-
   const dispatch = useDispatch();
-
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
   };
-
-  const handleLogIn = (e) => {
-    history.push('/login');
+  const handleLogIn = () => {
+    history.push('/backoffice');
   };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
 
-  return (
-        <div>
-            <AppBar position="static" >
-                <Toolbar className={classes.navbar}>
-                    <div className={classes.item}>
-                        {auth && (
-                            <div className={classes.item}>
-                                <IconButton
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleMenu2}
-                                    color="inherit"
-                                >
-                                    <MenuIcon />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorEl2}
-                                    anchorOrigin={{
-                                      vertical: 'top',
-                                      horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                      vertical: 'top',
-                                      horizontal: 'right',
-                                    }}
-                                    open={open2}
-                                    onClose={handleClose2}
-                                >
-                                    <Link to='/Catalog' className={classes.link}>
-                                        <MenuItem onClick={handleClose2}>
-                                            <Typography >
-                                                Catálogo 
-                                            </Typography >
-                                        </MenuItem>
-                                    </Link>
+  const handleInfo = () => {
+    history.push('/information');
+  };
 
-                                </Menu>
-                            </div>
-                        )}
-                    </div>
-                        {auth && (
-                            <div className={classes.item}>
-                                <IconButton
-                                    aria-label="account of current user"
-                                    aria-controls="menu-appbar"
-                                    aria-haspopup="true"
-                                    onClick={handleMenu}
-                                    color="inherit"
-                                >
-                                    <AccountCircle />
-                                </IconButton>
-                                <Menu
-                                    id="menu-appbar"
-                                    anchorEl={anchorEl}
-                                    anchorOrigin={{
-                                      vertical: 'top',
-                                      horizontal: 'right',
-                                    }}
-                                    keepMounted
-                                    transformOrigin={{
-                                      vertical: 'top',
-                                      horizontal: 'right',
-                                    }}
-                                    open={open}
-                                    onClose={handleClose}
-                                >
-                                    {user ? 
-                                        <>
-                                            <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem> 
-                                            <Link to='/backoffice' className={classes.link}>
-                                                <MenuItem onClick={handleClose2}>
-                                                   <Typography >
-                                                        Home 
-                                                    </Typography>
-                                                </MenuItem>
-                                            </Link>
-                                        </>
-                                        :
-                                        <>
-                                            <MenuItem onClick = {(e) => handleLogIn(e)}  > Iniciar sesión</MenuItem> 
-                                        </>
-                                    }
-                                </Menu>
-                            </div>
-                        )}
-                    <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
-                          &#x2706; Solicitar asistencia
-                    </button>
-                    <Modal
-                        open={openModal}
-                        onClose={handleCloseModal}
-                    >
-                         <Assistance hideModal ={() => setOpenModal(false) } />
-                    </Modal>
-                </Toolbar>
-            </AppBar>
-        </div>
-	    );
+  return (
+    <div>
+      <AppBar position="static" >
+        <Toolbar className={classes.navbar}>
+          <div className={classes.item}>
+            {auth && (
+              <div className={classes.item}>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu2}
+                  color="inherit"
+                >
+                  <MenuIcon />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl2}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right',
+                  }}
+                  open={open2}
+                  onClose={handleClose2}
+                >
+                  { user
+                    ? <>
+                      <MenuItem onClick={handleClose2}>
+                        <Link to='/Assistants' className={classes.link}> Asistentes</Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose2}>
+                        <Link to='/Stores' className={classes.link}> Tiendas</Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose2}>
+                        <Link to='/PointsOfSale' className={classes.link}> Puntos de venta</Link>
+                      </MenuItem>
+                      <MenuItem onClick={handleClose2}></MenuItem>
+                    </>
+                    : <></>
+
+                  }
+                  <MenuItem onClick={handleClose2}>
+                    <Typography variant="p">
+                      <Link to='/Catalog' className={classes.link}> Catálogo </Link>
+                    </Typography >
+                  </MenuItem>
+                  <MenuItem onClick={handleClose2}>
+                    <Typography variant="p">
+                      <Link to='/' className={classes.link}> Home </Link>
+                    </Typography >
+                  </MenuItem>
+                  <MenuItem onClick={handleClose2}>
+                    <Typography variant="p">
+                      <Link to='/Information' className={classes.link}> Información </Link>
+                    </Typography >
+                  </MenuItem>
+                </Menu>
+              </div>
+            )}
+          </div>
+          { auth && (
+            <div className={classes.item}>
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                { user
+                  ? <>
+                    <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem>
+                    <Link to='/backoffice' className={classes.link}>
+                      <MenuItem onClick={handleClose2}>
+                        <Typography >
+                          Home
+                        </Typography>
+                      </MenuItem>
+                    </Link>
+                  </>
+                  : <>
+                      <MenuItem onClick = {(e) => handleLogIn(e)} > Iniciar sesión</MenuItem>
+                    </>
+                }
+              </Menu>
+            </div>
+          )}
+          <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
+            &#x2706; Solicitar asistencia
+          </button>
+
+          <IconButton className={classes.infoButton} aria-label="información" component="span"
+            onClick={handleInfo}
+          >
+            <InfoOutlinedIcon fontSize = "large"/>
+          </IconButton>
+          <Modal
+            open={openModal}
+            onClose={handleCloseModal}
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+          >
+            <Assistance hideModal ={() => setOpenModal(false) }/>
+          </Modal>
+        </Toolbar>
+      </AppBar>
+    </div>
+  );
 }
 
 export default Navbar;
-

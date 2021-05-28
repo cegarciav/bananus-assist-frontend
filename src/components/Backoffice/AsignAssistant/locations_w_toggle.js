@@ -12,60 +12,53 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
-import useStyles from "./styles-locations_w_toggle";
-
+import useStyles from './styles-locations_w_toggle';
 
 function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
+  return [0, 1, 2].map((value) => React.cloneElement(element, {
+    key: value,
+  }));
 }
 
-export default function LocationListToggle( props ) {
-
-  const employee = props.employee;
+export default function LocationListToggle(props) {
+  const { employee } = props;
   const classes = useStyles();
 
   return (
     <div >
-        <Card  >
-            <CardHeader className={classes.cardHeader} title={employee.name} subheader='Asignar Tiendas' />
-            <CardContent className={classes.cardContent} >        
-            <Grid container direction="column" spacing={3} className={classes.gridContainer} >
-                <Grid  item xs={9} md={11} className={classes.grid} >
-                <div>
-                    <List  >
-                    {generate(
-                        <ListItem >
-                        <ListItemAvatar>
-                            <Avatar>
-                            <LocalGroceryStoreIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Generic Store Location Name"
+      <Card >
+        <CardHeader className={classes.cardHeader} title={employee.name} subheader='Asignar Tiendas' />
+        <CardContent className={classes.cardContent} >
+          <Grid container direction="column" spacing={3} className={classes.gridContainer} >
+            <Grid item xs={9} md={11} className={classes.grid} >
+              <div>
+                <List >
+                  {generate(
+                    <ListItem >
+                      <ListItemAvatar>
+                        <Avatar>
+                        <LocalGroceryStoreIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary="Generic Store Location Name"
+                      />
+                      <ListItemSecondaryAction>
+                        <Switch
+                          edge="end"
                         />
-                        <ListItemSecondaryAction>
-                            <Switch
-                                edge="end"
-                            />
-                        
-                        </ListItemSecondaryAction>
-                        
-                        </ListItem>,
-                    )}
-                    </List>
-                </div>
-                </Grid>
-                <Grid item className={classes.grid}>
-                    <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
-                </Grid>
+                      </ListItemSecondaryAction>
+                    </ListItem>,
+                  )}
+                </List>
+              </div>
             </Grid>
-                
-            </CardContent>
-        </Card>
+            <Grid item className={classes.grid}>
+              <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
     </div>
   );
 }

@@ -11,7 +11,6 @@ export default function Login() {
   const user = useSelector(selectUser);
 
   return (
-
         <div >
             <Grid
             container
@@ -29,7 +28,6 @@ export default function Login() {
                         </Grid>
                     </CardContent>
                 </Card>
-
             </Grid>
         </div>
   );
