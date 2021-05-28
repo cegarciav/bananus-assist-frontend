@@ -1,11 +1,9 @@
 import React from 'react';
 
-const Assistants= () => {
-  return (
+const Assistants = () => (
     <div >
         Asistentes
     </div>
-  )
-};
+);
 
 export default Assistants;
