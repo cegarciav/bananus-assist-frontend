@@ -24,7 +24,7 @@ function Product(props) {
     if (!qualities) {
       const array = [];
       for (var key in props ) {
-        array .push(props[key]);
+        array.push(props[key]);
       };
       setQualities(array);
     }

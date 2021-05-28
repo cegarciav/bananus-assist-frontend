@@ -5,8 +5,8 @@ import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -15,7 +15,7 @@ function groupBy(objectArray, property) {
   }, {});
 }
 
-function Catalog(props) {
+function Catalog() {
   const [products, setProducts] = useState(null);
   const [techChars, setTechChars] = useState(null);
   const [update, setUpdate] = useState(null);
@@ -23,14 +23,16 @@ function Catalog(props) {
 
   useEffect(() => {
     if (!products) {
-      apiGet('products').then((result) => setProducts(
-        { result },
-      ));
+      apiGet('products')
+        .then((result) => {
+          if (result) setProducts({ result });
+        });
     }
     if (!techChars) {
-      apiGet('chars').then((result) => setTechChars(
-        { result },
-      ));
+      apiGet('chars')
+        .then((result) => {
+          if (result) setTechChars({ result });
+        });
     }
     setUpdate(true);
   }, [products, techChars]);
@@ -40,21 +42,16 @@ function Catalog(props) {
       setUpdate(false);
       const ordered = techChars.result.map((techChar) => {
         const product = products.result.find((u) => u.id === techChar.productId);
-        // eslint-disable-next-line no-param-reassign
-        techChar.productName = product.name;
-        // eslint-disable-next-line no-param-reassign
-        techChar.sku = product.sku;
-        // eslint-disable-next-line no-param-reassign
-        techChar.image = product.image;
-        // eslint-disable-next-line no-param-reassign
-        techChar.price = product.price;
-        return techChar;
+        return {
+          ...techChar,
+          productName: product.name,
+          sku: product.sku,
+          image: product.image,
+          price: product.price,
+        };
       });
       const result = groupBy(ordered, 'productName');
-      const array = [];
-      for (var key in result ) {
-        array.push(result[key]);
-      };
+      const array = Object.keys(result).map((k) => result[k]);
       setProductsOrdered(array);
     }
   }, [update, products, techChars]);

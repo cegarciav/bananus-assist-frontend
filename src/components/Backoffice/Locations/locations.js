@@ -17,9 +17,10 @@ export default function LocationList() {
 
   useEffect(() => {
     if (!stores) {
-      apiGet('stores').then((result) => setStores(
-        { result },
-      ));
+      apiGet('stores')
+        .then((result) => {
+          if (result) setStores({ result });
+        });
     }
   }, [stores]);
 
@@ -43,10 +44,10 @@ export default function LocationList() {
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">
-                        {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon  /> }
+                        {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
                       </IconButton>
                       <IconButton edge="end" aria-label="delete">
-                      {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
+                      {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>

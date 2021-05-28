@@ -4,8 +4,8 @@ import useStyles from './styles-store_list';
 import { apiGet } from '../../../services/api-service';
 
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -23,14 +23,16 @@ export default function StoreList() {
 
   useEffect(() => {
     if (!salePoints) {
-      apiGet('sale-points').then((result) => setSalePoints(
-        { result },
-      ));
+      apiGet('sale-points')
+        .then((result) => {
+          if (result) setSalePoints({ result });
+        });
     }
     if (!stores) {
-      apiGet('stores').then((result) => setStores(
-        { result },
-      ));
+      apiGet('stores')
+        .then((result) => {
+          if (result) setStores({ result });
+        });
     }
     setUpdate(true);
   }, [salePoints, stores]);
@@ -45,10 +47,7 @@ export default function StoreList() {
         return salePoint;
       });
       const result = groupBy(ordered, 'storeName');
-      const array = [];
-      for (var key in result ) {
-        array.push(result[key]);
-      };
+      const array = Object.keys(result).map((k) => result[k]);
       setSalePointsOrdered(array);
     }
   }, [update, stores, salePoints]);

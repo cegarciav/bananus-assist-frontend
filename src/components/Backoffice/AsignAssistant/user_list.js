@@ -14,9 +14,10 @@ export default function UserList() {
 
   useEffect(() => {
     if (!users) {
-      apiGet('users').then((result) => setUsers(
-        { result },
-      ));
+      apiGet('users')
+        .then((result) => {
+          if (result) setUsers({ result });
+        });
     }
   }, [users]);
   return (
