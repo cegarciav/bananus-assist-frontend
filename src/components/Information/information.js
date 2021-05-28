@@ -104,12 +104,12 @@ export default function Information() {
                     {step.title}
                   </Typography>
                 </Grid>
-                <Grid item xs={7} sm={9} md={9}>
+                <Grid item xs={11} sm={9} md={9}>
                   <Typography align= "left" variant = "body1" className={classes.stepDescription}>
                     {step.description}
                   </Typography>
                 </Grid>
-                <Grid item xs={3} sm={2} md={2}>
+                <Grid item xs={12} sm={2} md={2}>
                   <Paper elevation={0} className = {classes.stepImagePaper}>
                     <img alt = "" src={step.img} className = {classes.stepImage}/>
                   </Paper>
