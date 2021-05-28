@@ -1,20 +1,20 @@
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles((theme) => ({
-    cardHeader: {
-     textAlign: 'center',
+const useStyles = makeStyles(() => ({
+  cardHeader: {
+    textAlign: 'center',
+  },
+  cardContent: {
+    textAlign: 'center',
+  },
+  gridContainer: {
+    justify: 'center',
+  },
+  grid: {
+    btn: {
+      color: 'primary',
     },
-    cardContent: {
-        textAlign: 'center',
-    },
-    gridContainer: {
-        justify:'center',
-    },
-    grid: {
-        btn:{
-            color: 'primary',
-        }
-    },
-  }));
+  },
+}));
 
-  export default useStyles;
+export default useStyles;

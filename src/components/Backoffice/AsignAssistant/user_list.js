@@ -6,19 +6,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
-export default function UserList( ) {
-  
-  
+export default function UserList() {
   const user1 = {
     name: 'Pedro Perez',
     id: 1,
-  }
+  };
   const user2 = {
     name: 'Pablo Perez',
     id: 2,
-  }
+  };
 
   return (
     <div >
@@ -28,11 +26,11 @@ export default function UserList( ) {
             <List>
               <Link
                 to={{
-                  pathname: "/backoffice/assign_location/1",
+                  pathname: '/backoffice/assign_location/1',
                 }}
               >
                 <ListItem
-                button 
+                  button
                 >
                   <ListItemAvatar>
                     <Avatar>
@@ -46,11 +44,11 @@ export default function UserList( ) {
               </Link>
               <Link
                 to={{
-                  pathname: "/backoffice/assign_location/2"
+                  pathname: '/backoffice/assign_location/2',
                 }}
               >
                 <ListItem
-                button 
+                  button
                 >
                   <ListItemAvatar>
                     <Avatar>
@@ -62,7 +60,6 @@ export default function UserList( ) {
                   />
                 </ListItem >
               </Link>
-                
             </List>
           </div>
         </Grid>

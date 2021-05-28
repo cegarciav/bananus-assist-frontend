@@ -11,18 +11,14 @@ import CallIcon from '@material-ui/icons/Call';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 
-
 function generate(element) {
-  return [0, 1, 2].map((value) =>
-    React.cloneElement(element, {
-      key: value,
-    }),
-  );
+  return [0, 1, 2].map((value) => React.cloneElement(element, {
+    key: value,
+  }));
 }
 
 export default function LocationList() {
- 
-  const store = {incoming_call: true};
+  const store = { incoming_call: true };
 
   return (
     <div>
@@ -42,10 +38,10 @@ export default function LocationList() {
                   />
                   <ListItemSecondaryAction>
                     <IconButton edge="end" aria-label="delete">
-                      {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon  /> }
+                      {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
                     </IconButton>
                     <IconButton edge="end" aria-label="delete">
-                    {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
+                    {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>,

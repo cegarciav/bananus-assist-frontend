@@ -29,7 +29,6 @@ function Navbar() {
   };
 
   const handleCloseModal = () => {
-    console.log('here');
     setOpenModal(false);
   };
 

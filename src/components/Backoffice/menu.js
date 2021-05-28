@@ -2,13 +2,12 @@ import React from 'react';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab'
+import Tab from '@material-ui/core/Tab';
+import Grid from '@material-ui/core/Grid';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
-import Grid from '@material-ui/core/Grid';
 import UserList from './AsignAssistant/user_list';
-import useStyles from "./styles-menu";
-
+import useStyles from './styles-menu';
 
 export default function Menu() {
   const [value, setValue] = React.useState(0);

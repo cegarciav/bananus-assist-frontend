@@ -4,8 +4,8 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import DeviceStatus from './device_status';
 import Divider from '@material-ui/core/Divider';
+import DeviceStatus from './device_status';
 import useStyles from './styles-location_devices';
 
 export default function DevicesList(props) {

@@ -6,8 +6,10 @@ import information from '../../../assets/information.png';
 const Assistance = (props) => {
   const classes = useStyles();
 
-  // dentro de las props debería venir la respuesta de la bbdd a la consulta de 
-  // asistentes disponibles
+  /**
+   * Dentro de las props debería venir la respuesta de
+   * la bbdd a la consulta de asistentes disponibles
+   */
 
   const available = 1;
 
@@ -24,21 +26,21 @@ const Assistance = (props) => {
         </div>
       </div>
     );
-  } else {
-    return (
-      <div className={classes.paperContainer}>
-        <div className={classes.paper}>
-            <img className={classes.img}  src={information} alt="Logo" />
-            <h2 id="simple-modal-title">No hay asistentes disponibles</h2>
-            <p id="simple-modal-description">
-              Lamentablemente no contamos con asistentes disponibles en este momento. Lo invitamos a revisar la guía
-              del sistema o seguir consultando el catálogo de productos.
-            </p>
-            <button className={classes.close} onClick={props.hideModal}>Cerrar</button>
-        </div>
+  }
+  return (
+    <div className={classes.paperContainer}>
+      <div className={classes.paper}>
+          <img className={classes.img} src={information} alt="Logo" />
+          <h2 id="simple-modal-title">No hay asistentes disponibles</h2>
+          <p id="simple-modal-description">
+            Lamentablemente no contamos con asistentes disponibles en este momento.
+             Lo invitamos a revisar la guía del sistema o seguir consultando el
+             catálogo de productos.
+          </p>
+          <button className={classes.close} onClick={props.hideModal}>Cerrar</button>
       </div>
-    );
-  };
+    </div>
+  );
 };
 
 export default React.forwardRef((props, ref) => <Assistance {...props} forwardedRef={ref} />);
