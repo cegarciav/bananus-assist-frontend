@@ -6,17 +6,33 @@ import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
 import { login } from '../../features/userSlice';
+import { apiPost } from '../../services/api-service';
 
 export default function LoginForm() {
   /* To do: add logic for API integration */
 
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
+  const [session, setSession] = useState(null);
 
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const raw = JSON.stringify({
+        "email": username,
+        "password": password
+      });
+      
+
+    /*apiPost ('sessions',raw).then((result) => setSession(
+      { result },
+    ));*/
+    apiPost ('sessions',raw).then((result) => 
+    console.log(result)
+    );
+    
 
     dispatch(login({
       username,
