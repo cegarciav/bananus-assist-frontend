@@ -21,15 +21,15 @@ export default function UserList() {
     }
   }, [users]);
   return (
-      <div >
-        <Grid container spacing={0}>
-          <Grid item xs={9} md={11}>
-            <div >
-              <List>
+    <div >
+      <Grid container spacing={0}>
+        <Grid item xs={9} md={11}>
+          <div >
+            <List>
               {!users ? <></>
                 : <>
-              {users.result.map((user) => (
-                    <Link
+                {users.result.map((user) => (
+                  <Link
                     to={{
                       pathname: String('/backoffice/assign_location/') + user.id,
                       state: {
@@ -37,9 +37,9 @@ export default function UserList() {
                       },
                     }}
                     key = {user.id}
-                    >
+                  >
                     <ListItem
-                    button
+                      button
                     >
                       <ListItemAvatar>
                         <Avatar>
@@ -51,13 +51,12 @@ export default function UserList() {
                       />
                     </ListItem >
                   </Link>
-              ))}
-              </>
-              }
-              </List>
-            </div>
-          </Grid>
+                ))}
+              </>}
+            </List>
+          </div>
         </Grid>
-      </div>
+      </Grid>
+    </div>
   );
 }

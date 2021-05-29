@@ -6,7 +6,6 @@ import { logout } from '../../features/userSlice';
 
 export default function Logout() {
   const dispatch = useDispatch();
-
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());

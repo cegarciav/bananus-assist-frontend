@@ -22,10 +22,7 @@ function Product(props) {
 
   useEffect(() => {
     if (!qualities) {
-      const array = [];
-      for (var key in props ) {
-        array.push(props[key]);
-      };
+      const array = Object.keys(props).map((k) => props[k]);
       setQualities(array);
     }
   }, [qualities]);
@@ -57,11 +54,15 @@ function Product(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <Typography paragraph>Información técnica:</Typography>
+              <Typography paragraph>Información técnica:</Typography>
                 {
                   !qualities ? <></>
                     : <>
-                    { qualities.map((element) => <Typography key = {element.id} paragraph> - {element.key}  {element.value}</Typography>)}
+                    {
+                      qualities.map((element) => <Typography key = {element.id} paragraph>
+                        - {element.key}  {element.value}
+                      </Typography>)
+                    }
                   </>
                 }
             </CardContent>

@@ -9,4 +9,5 @@ const useStyles = makeStyles(() => ({
     justify: 'center',
   },
 }));
+
 export default useStyles;
