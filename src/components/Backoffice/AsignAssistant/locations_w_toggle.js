@@ -15,19 +15,15 @@ import Button from '@material-ui/core/Button';
 import useStyles from './styles-locations_w_toggle';
 
 function generate(element) {
-  return [0, 1, 2].map((value) => React.cloneElement(element, {
-    key: value,
-  }));
+  return [0, 1, 2].map((value) => React.cloneElement(element, { key: value }));
 }
 
-export default function LocationListToggle(props) {
-  const { employee } = props;
+export default function LocationListToggle(user) {
   const classes = useStyles();
-
   return (
     <div >
       <Card >
-        <CardHeader className={classes.cardHeader} title={employee.name} subheader='Asignar Tiendas' />
+        <CardHeader className={classes.cardHeader} title={user.name} subheader='Asignar Tiendas' />
         <CardContent className={classes.cardContent} >
           <Grid container direction="column" spacing={3} className={classes.gridContainer} >
             <Grid item xs={9} md={11} className={classes.grid} >
@@ -37,16 +33,12 @@ export default function LocationListToggle(props) {
                     <ListItem >
                       <ListItemAvatar>
                         <Avatar>
-                        <LocalGroceryStoreIcon />
+                          <LocalGroceryStoreIcon />
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText
-                        primary="Generic Store Location Name"
-                      />
+                      <ListItemText primary="Generic Store Location Name" />
                       <ListItemSecondaryAction>
-                        <Switch
-                          edge="end"
-                        />
+                        <Switch edge="end" />
                       </ListItemSecondaryAction>
                     </ListItem>,
                   )}

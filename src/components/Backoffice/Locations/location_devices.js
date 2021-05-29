@@ -10,24 +10,19 @@ import useStyles from './styles-location_devices';
 
 export default function DevicesList(props) {
   const classes = useStyles();
-
   return (
     <div >
         <Card>
-            <CardHeader title={props.store} subheader='Estado de dispositivos' className={classes.cardHeader} />
+            <CardHeader title={props.props[0].storeName} subheader='Estado de dispositivos' className={classes.cardHeader} />
             <Divider />
             <CardContent className={classes.cardContent } >
             <Grid container>
                 <Grid alginItems='center' item xs={11} md={11} className={classes.grid }>
                 <div>
                     <List>
-                        <DeviceStatus device={ { isOn: true, name: 'Tablet central' } }/>
-                    </List>
-                    <List>
-                        <DeviceStatus device={ { isOn: false, name: 'Tablet catalogo 1' }}/>
-                    </List>
-                    <List>
-                        <DeviceStatus device={ { isOn: true, name: 'Tablet catalogo 2' }}/>
+                    {
+                     props.props.map((element) => <DeviceStatus device={ { isOn: true, name: 'Tablet central', id: element.id }} key={element.id} />)
+                    }
                     </List>
                 </div>
                 </Grid>

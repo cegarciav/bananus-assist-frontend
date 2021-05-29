@@ -4,9 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Grid from '@material-ui/core/Grid';
+import UserList from './AsignAssistant/user_list';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
-import UserList from './AsignAssistant/user_list';
 import useStyles from './styles-menu';
 
 export default function Menu() {
@@ -28,9 +28,9 @@ export default function Menu() {
       centered
       className={classes.tab}
       >
-        <Tab label="Atención de Tiendas" />
-        <Tab label="Estado de dispositivos" />
-        <Tab label="Asignar Tiendas" />
+        <Tab label="Tiendas" />
+        <Tab label="Puntos de venta" />
+        <Tab label="Usuarios" />
       </Tabs>
       <Grid
       container

@@ -39,6 +39,7 @@ function Navbar() {
     e.preventDefault();
     dispatch(logout());
   };
+
   const handleLogIn = () => {
     history.push('/backoffice');
   };
@@ -54,7 +55,6 @@ function Navbar() {
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
   };
-
   const handleInfo = () => {
     history.push('/information');
   };
@@ -90,37 +90,13 @@ function Navbar() {
                   open={open2}
                   onClose={handleClose2}
                 >
-                  { user
-                    ? <>
-                      <MenuItem onClick={handleClose2}>
-                        <Link to='/Assistants' className={classes.link}> Asistentes</Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose2}>
-                        <Link to='/Stores' className={classes.link}> Tiendas</Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose2}>
-                        <Link to='/PointsOfSale' className={classes.link}> Puntos de venta</Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose2}></MenuItem>
-                    </>
-                    : <></>
-
-                  }
-                  <MenuItem onClick={handleClose2}>
-                    <Typography variant="p">
-                      <Link to='/Catalog' className={classes.link}> Catálogo </Link>
-                    </Typography >
-                  </MenuItem>
-                  <MenuItem onClick={handleClose2}>
-                    <Typography variant="p">
-                      <Link to='/' className={classes.link}> Home </Link>
-                    </Typography >
-                  </MenuItem>
-                  <MenuItem onClick={handleClose2}>
-                    <Typography variant="p">
-                      <Link to='/Information' className={classes.link}> Información </Link>
-                    </Typography >
-                  </MenuItem>
+                  <Link to='/Catalog' className={classes.link}>
+                    <MenuItem onClick={handleClose2}>
+                      <Typography >
+                        Catálogo
+                      </Typography >
+                    </MenuItem>
+                  </Link>
                 </Menu>
               </div>
             )}
@@ -156,23 +132,20 @@ function Navbar() {
                     <MenuItem onClick = {(e) => handleLogout(e)} >Cerrar sesión</MenuItem>
                     <Link to='/backoffice' className={classes.link}>
                       <MenuItem onClick={handleClose2}>
-                        <Typography >
-                          Home
-                        </Typography>
+                        <Typography >Home</Typography>
                       </MenuItem>
                     </Link>
                   </>
                   : <>
                       <MenuItem onClick = {(e) => handleLogIn(e)} > Iniciar sesión</MenuItem>
-                    </>
+                  </>
                 }
               </Menu>
             </div>
           )}
           <button type="button" onClick={handleOpenModal} className={classes.assistButton}>
-            &#x2706; Solicitar asistencia
+                &#x2706; Solicitar asistencia
           </button>
-
           <IconButton className={classes.infoButton} aria-label="información" component="span"
             onClick={handleInfo}
           >
@@ -184,12 +157,11 @@ function Navbar() {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
           >
-            <Assistance hideModal ={() => setOpenModal(false) }/>
+            <Assistance hideModal ={() => setOpenModal(false) } />
           </Modal>
         </Toolbar>
       </AppBar>
-    </div>
-  );
+    </div>);
 }
 
 export default Navbar;

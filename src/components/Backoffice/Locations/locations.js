@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -10,15 +10,19 @@ import Grid from '@material-ui/core/Grid';
 import CallIcon from '@material-ui/icons/Call';
 import LocalGroceryStoreIcon from '@material-ui/icons/LocalGroceryStore';
 import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
-
-function generate(element) {
-  return [0, 1, 2].map((value) => React.cloneElement(element, {
-    key: value,
-  }));
-}
+import { apiGet } from '../../../services/api-service';
 
 export default function LocationList() {
-  const store = { incoming_call: true };
+  const [stores, setStores] = useState(null);
+
+  useEffect(() => {
+    if (!stores) {
+      apiGet('stores')
+        .then((result) => {
+          if (result) setStores({ result });
+        });
+    }
+  }, [stores]);
 
   return (
     <div>
@@ -26,26 +30,30 @@ export default function LocationList() {
         <Grid item xs={11} md={11}>
           <div >
             <List >
-              {generate(
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <LocalGroceryStoreIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary="Generic Store Location Name"
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete">
-                    {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>,
-              )}
+              {!stores ? <></>
+                : <>
+                  {stores.result.map((store) => (
+                    <ListItem key = {store.id}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <LocalGroceryStoreIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={store.name}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                          {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
+                        </IconButton>
+                        <IconButton edge="end" aria-label="delete">
+                          {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </>
+              }
             </List>
           </div>
         </Grid>
