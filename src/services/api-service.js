@@ -2,6 +2,7 @@
 const apiOrigin = process.env.REACT_APP_API_ORIGIN;
 if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
+
 /**
  * Realiza un HTTP GET a la API del sistema
  * @param {string} path La ruta al recurso que se quiere obtener
@@ -9,7 +10,6 @@ if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida
  * @param {Object} params Los queryparams
  * @returns El recurso entregado por la API
  */
-
 async function apiGet(path, params) {
   const url = new URL(`${apiOrigin}/${path}`);
   if (params) {
@@ -49,6 +49,7 @@ async function apiPost(path, body, params) {
     Object.keys(params)
       .forEach((key) => url.searchParams.append(key, params[key]));
   }
+
   if (body) requestBody = body;
   const results = await fetch(
     url,
@@ -66,6 +67,7 @@ async function apiPost(path, body, params) {
       alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
       return null;
     });
+
   return results;
 }
 

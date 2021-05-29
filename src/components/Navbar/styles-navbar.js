@@ -35,6 +35,20 @@ const useStyles = makeStyles((theme) => ({
     color: '#FFFFFF',
     marginLeft: '20%',
   },
+  location: {
+    marginLeft: '10px',
+    float: 'right',
+    color: 'white',
+    border: 'white',
+    '&:before': {
+      borderColor: 'white',
+    },
+  },
+  option: {
+    color: 'black',
+    fontFamily: 'Arial',
+    margin: '1em',
+  },
 }));
 
 export default useStyles;
