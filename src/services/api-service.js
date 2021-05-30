@@ -1,9 +1,5 @@
-const apiOrigin = 'http://localhost:3001';
-
-if (!apiOrigin) {
-  // eslint-disable-next-line no-throw-literal
-  throw 'API ORIGIN variable is missing';
-}
+const apiOrigin = process.env.REACT_APP_API_ORIGIN;
+if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
 /**
  * Realiza un HTTP GET a la API del sistema
@@ -17,7 +13,7 @@ async function apiGet(path, body, params) {
   const url = new URL(`${apiOrigin}/${path}`);
   if ( params ) {
     Object.keys(params)
-      .forEach(key => url.searchParams.append(key, params[key]));
+      .forEach((key) => url.searchParams.append(key, params[key]));
   }
   if (!body) body = {};
   let results = await fetch(
@@ -48,24 +44,28 @@ async function apiGet(path, body, params) {
  */
 async function apiPost(path, body, params) {
   const url = new URL(`${apiOrigin}/${path}`);
+  let requestBody = {};
   if (params) {
     Object.keys(params)
-      .forEach(key => url.searchParams.append(key, params[key]));
+      .forEach((key) => url.searchParams.append(key, params[key]));
   }
-  if (!body) body = {};
-  let results = await fetch(
-        url,
-        {
-          method: 'POST',
-          mode: 'cors',
-          body,
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        }
-      )
-      .then(r => r.json())
-      .catch(e => e);
+  if (body) requestBody = body;
+  const results = await fetch(
+    url,
+    {
+      method: 'POST',
+      mode: 'cors',
+      body: requestBody,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then((r) => r.json())
+    .catch(() => {
+      alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
+      return null;
+    });
   return results;
 }
 
@@ -78,24 +78,28 @@ async function apiPost(path, body, params) {
  */
 async function apiPatch(path, body, params) {
   const url = new URL(`${apiOrigin}/${path}`);
+  let requestBody = {};
   if (params) {
     Object.keys(params)
-      .forEach(key => url.searchParams.append(key, params[key]));
+      .forEach((key) => url.searchParams.append(key, params[key]));
   }
-  if (!body) body = {};
-  let results = await fetch(
-        url,
-        {
-          method: 'PATCH',
-          mode: 'cors',
-          body,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      .then(r => r.json())
-      .catch(e => e);
+  if (body) requestBody = body;
+  const results = await fetch(
+    url,
+    {
+      method: 'PATCH',
+      mode: 'cors',
+      body: requestBody,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then((r) => r.json())
+    .catch(() => {
+      alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
+      return null;
+    });
   return results;
 }
 
@@ -108,24 +112,28 @@ async function apiPatch(path, body, params) {
  */
 async function apiDelete(path, body, params) {
   const url = new URL(`${apiOrigin}/${path}`);
+  let requestBody = {};
   if (params) {
     Object.keys(params)
-      .forEach(key => url.searchParams.append(key, params[key]));
+      .forEach((key) => url.searchParams.append(key, params[key]));
   }
-  if (!body) body = {};
-  let results = await fetch(
-        url,
-        {
-          method: 'DELETE',
-          mode: 'cors',
-          body,
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      .then(r => r.json())
-      .catch(e => e);
+  if (body) requestBody = body;
+  const results = await fetch(
+    url,
+    {
+      method: 'DELETE',
+      mode: 'cors',
+      body: requestBody,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then((r) => r.json())
+    .catch(() => {
+      alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
+      return null;
+    });
   return results;
 }
 

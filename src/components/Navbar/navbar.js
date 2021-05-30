@@ -96,32 +96,29 @@ function Navbar() {
 
   const [anchorEl2, setAnchorEl2] = React.useState(null);
   const open2 = Boolean(anchorEl2);
-
   const dispatch = useDispatch();
-
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
   };
 
   const handleLogIn = () => {
-    history.push('/login');
+    history.push('/backoffice');
   };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
+  };
+  const handleInfo = () => {
+    history.push('/information');
   };
 
   return (

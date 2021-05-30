@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -13,28 +13,30 @@ import useStyles from './styles-product';
 
 function Product(props) {
   const classes = useStyles();
-  const [expanded, setExpanded] = React.useState(false);
+  const [expanded, setExpanded] = useState(false);
+  const [qualities, setQualities] = useState(null);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
+  useEffect(() => {
+    if (!qualities) {
+      const array = Object.keys(props).map((k) => props[k]);
+      setQualities(array);
+    }
+  }, [qualities]);
+
   return (
         <Card className={classes.root}>
             <CardHeader
-            title={props.name}
-            subheader={props.price + String(' CLP')}
+            title={props[0].productName}
+            subheader={props[0].price + String(' CLP')}
             />
             <CardMedia
             className={classes.media}
-            image= {props.image}
-            title="MacBook Pro 13 (M1)"
+            image= {props[0].image}
             />
-            <CardContent>
-            <Typography variant="body2" color="textSecondary" component="p">
-                El chip M1 de Apple redefine al Macbook Pro de 13 pulgadas.1 Viene con una CPU de 8 núcleos que permite un rendimiento óptimo en los flujos de trabajo más exigentes, como fotografía, programación y edición de video.
-            </Typography>
-            </CardContent>
             <CardActions disableSpacing>
             <Typography variant="body2" color="textSecondary" component="h2" className={classes.product}>
                Ver más
@@ -52,19 +54,17 @@ function Product(props) {
             </CardActions>
             <Collapse in={expanded} timeout="auto" unmountOnExit>
             <CardContent>
-                <Typography paragraph>Información técnica:</Typography>
-                <Typography paragraph>
-                  - Chip M1 de Apple que permite un gran avance en el rendimiento de la CPU, GPU y aprendizaje automático
-                </Typography>
-                <Typography paragraph>
-                  - La mayor duración de batería en un Mac: hasta 20 horas para que puedas hacer mucho más2
-                </Typography>
-                <Typography paragraph>
-                  - CPU de 8 núcleos que ofrece un rendimiento hasta 2,8 veces más rápido para ejecutar flujos de trabajo a una velocidad increíble1
-                </Typography>
-                <Typography paragraph>
-                  - GPU de 8 núcleos con gráficas hasta 5 veces más veloces para apps y juegos con gráficas avanzadas2
-                </Typography>
+              <Typography paragraph>Información técnica:</Typography>
+                {
+                  !qualities ? <></>
+                    : <>
+                    {
+                      qualities.map((element) => <Typography key = {element.id} paragraph>
+                        - {element.key}  {element.value}
+                      </Typography>)
+                    }
+                  </>
+                }
             </CardContent>
             </Collapse>
         </Card>

@@ -155,9 +155,9 @@ export default function Menu() {
       centered
       className={classes.tab}
       >
-        <Tab label="Atención de Tiendas" />
-        <Tab label="Estado de dispositivos" />
-        <Tab label="Asignar Tiendas" />
+        <Tab label="Tiendas" />
+        <Tab label="Puntos de venta" />
+        <Tab label="Usuarios" />
       </Tabs>
       <Grid
       container

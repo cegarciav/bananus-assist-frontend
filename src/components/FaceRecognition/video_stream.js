@@ -1,16 +1,25 @@
-import React, { useRef, useEffect} from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import * as faceapi from 'face-api.js';
 import socket from '../socket'
+import {useLocation} from "react-router-dom";
 let count = 0;
 
 /* Seconds of detecting a face to send notification */
 
-const time = 5; 
+const time = 5;
 
 export default function VideoFeed(props) {
+    const [Location, setLocation] = useState(null);
     const videoEl = useRef(null)
-
+    let data = useLocation()
     faceapi.nets.tinyFaceDetector.loadFromUri('/models')
+
+    useEffect(() => {
+      if(data.state){
+        setLocation(data.state.location)
+        console.log(Location)
+      }
+    })
     
     useEffect(() => {
       socket.on("user_alert", (msge) => {
@@ -40,8 +49,8 @@ export default function VideoFeed(props) {
                 }
                 if (count === time){
                   //ADD SOCKETS
-                  socket.emit("face-detected", props.location)
-                  console.log(`Send notification to ${props.location}`);
+                  socket.emit("face-detected", Location)
+                  console.log(`Send notification to ${Location}`);
                 }
             }, 1000)
           })

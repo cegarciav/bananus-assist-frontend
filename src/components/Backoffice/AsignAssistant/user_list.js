@@ -20,18 +20,20 @@ export default function UserList() {
 
   useEffect(() => {
     if (!users) {
-      apiGet('users').then((result) => setUsers(
-        { result },
-      ));
+      apiGet('users')
+        .then((result) => {
+          if (result) setUsers({ result });
+        });
     }
   }, [users]);
 
   useEffect(() => {
     if (reload) {
-      apiGet('users').then((result) => setUsers(
-        { result },
-      ));
-      setReload(false);
+      apiGet('users')
+        .then((result) => {
+          if (result) setUsers({ result });
+          setReload(false);
+        });
     }
   }, [reload]);
 
@@ -44,27 +46,27 @@ export default function UserList() {
   };
 
   return (
-      <div >
-        <Grid container spacing={0}>
-          <Grid item xs={9} md={11}>
+    <div >
+      <Grid container spacing={0}>
+        <Grid item xs={9} md={11}>
           <button type="button" onClick={handleOpenModal} className={classes.button} >
-                + Agregar usuario
+            + Agregar usuario
           </button>
           <Modal
-              open={openModal}
-              onClose={handleCloseModal}
+            open={openModal}
+            onClose={handleCloseModal}
           >
-             <AddUser close={handleCloseModal}
-               hideModal ={() => setOpenModal(false) }
-               reload ={() => setReload(true) }
-             />
+            <AddUser close={handleCloseModal}
+              hideModal ={() => setOpenModal(false) }
+              reload ={() => setReload(true) }
+            />
           </Modal>
-            <div >
-              <List>
+          <div >
+            <List>
               {!users ? <>Loading...</>
                 : <>
-              {users.result.map((user) => (
-                    <Link
+                {users.result.map((user) => (
+                  <Link
                     to={{
                       pathname: String('/backoffice/assign_location/') + user.id,
                       state: {
@@ -72,9 +74,9 @@ export default function UserList() {
                       },
                     }}
                     key = {user.id}
-                    >
+                  >
                     <ListItem
-                    button
+                      button
                     >
                       <ListItemAvatar>
                         <Avatar>
@@ -82,17 +84,16 @@ export default function UserList() {
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
-                         primary={user.name}
+                        primary={user.name}
                       />
                     </ListItem >
                   </Link>
-              ))}
-              </>
-            }
-              </List>
-            </div>
-          </Grid>
+                ))}
+              </>}
+            </List>
+          </div>
         </Grid>
-      </div>
+      </Grid>
+    </div>
   );
 }
