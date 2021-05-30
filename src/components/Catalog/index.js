@@ -4,6 +4,7 @@ import Box from '@material-ui/core/Box';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 
+
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
     const key = obj[property];

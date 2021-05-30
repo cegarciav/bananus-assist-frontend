@@ -31,6 +31,20 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: '#195E6D',
   },
+  location: {
+    marginLeft: '10px',
+    float: 'right',
+    color: 'white',
+    border: 'white',
+    '&:before': {
+      borderColor: 'white',
+    },
+  },
+  option: {
+    color: 'black',
+    fontFamily: 'Arial',
+    margin: '1em',
+  },
   infoButton: {
     color: '#FFFFFF',
     marginLeft: '20%',
