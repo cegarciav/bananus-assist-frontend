@@ -33,9 +33,11 @@ const AddUser = (props) => {
       rol,
     };
     if (validEmail) {
-      apiPost('users', JSON.stringify(body), null);
-      props.reload();
-      props.hideModal();
+      apiPost('users', JSON.stringify(body), null)
+        .then(() => {
+          props.reload();
+          props.hideModal();
+        });
     } else {
       setErrors('Email no está en el formato correcto');
     }
@@ -53,6 +55,7 @@ const AddUser = (props) => {
             </div>
         }
         <TextField id="standard-basic" label="Nombre completo" onChange={(e) => setName(e.target.value)} className={classes.input}/>
+        <TextField id="standard-basic" label="Contraseña" onChange={(e) => setPassword(e.target.value)} className={classes.input}/>
         <FormControl className={classes.input}>
         <InputLabel id="demo-simple-select-label">Rol</InputLabel>
         <Select

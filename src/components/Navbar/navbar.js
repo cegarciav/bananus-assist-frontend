@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -11,7 +12,7 @@ import Modal from '@material-ui/core/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
-import { useDispatch, useSelector } from 'react-redux';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
@@ -76,6 +77,7 @@ function Navbar() {
   }, [Peticiones]);
 
   const peticion = (idSalePoint) => {
+    console.log('pedi');
     socket.emit('peticion_asistentes', idSalePoint);
   };
 
@@ -94,32 +96,29 @@ function Navbar() {
 
   const [anchorEl2, setAnchorEl2] = React.useState(null);
   const open2 = Boolean(anchorEl2);
-
   const dispatch = useDispatch();
-
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
   };
 
   const handleLogIn = () => {
-    history.push('/login');
+    history.push('/backoffice');
   };
-
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
-
   const handleClose = () => {
     setAnchorEl(null);
   };
-
   const handleClose2 = () => {
     setAnchorEl2(null);
   };
-
   const handleMenu2 = (event) => {
     setAnchorEl2(event.currentTarget);
+  };
+  const handleInfo = () => {
+    history.push('/information');
   };
 
   return (
@@ -245,6 +244,11 @@ function Navbar() {
                           &#x2706; Solicitar asistencia
                         </button>
                     }
+                    <IconButton className={classes.infoButton} aria-label="información" component="span"
+                           onClick={handleInfo}
+                    >
+                          <InfoOutlinedIcon fontSize = "large"/>
+                    </IconButton>
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}
@@ -253,7 +257,8 @@ function Navbar() {
                     </Modal>
                 </Toolbar>
             </AppBar>
-        </div>);
+        </div>
+        );
 }
 
 export default Navbar;

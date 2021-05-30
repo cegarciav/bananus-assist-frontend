@@ -45,6 +45,10 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: 'Arial',
     margin: '1em',
   },
+  infoButton: {
+    color: '#FFFFFF',
+    marginLeft: '20%',
+  },
 }));
 
 export default useStyles;

@@ -22,39 +22,35 @@ export default function LocationListToggle(user) {
   const classes = useStyles();
   return (
     <div >
-        <Card >
-            <CardHeader className={classes.cardHeader} title={user.name} subheader='Asignar Tiendas' />
-            <CardContent className={classes.cardContent} >
-            <Grid container direction="column" spacing={3} className={classes.gridContainer} >
-                <Grid item xs={9} md={11} className={classes.grid} >
-                <div>
-                    <List >
-                    {generate(
-                        <ListItem >
-                        <ListItemAvatar>
-                            <Avatar>
-                            <LocalGroceryStoreIcon />
-                            </Avatar>
-                        </ListItemAvatar>
-                        <ListItemText
-                            primary="Generic Store Location Name"
-                        />
-                        <ListItemSecondaryAction>
-                            <Switch
-                                edge="end"
-                            />
-                        </ListItemSecondaryAction>
-                        </ListItem>,
-                    )}
-                    </List>
-                </div>
-                </Grid>
-                <Grid item className={classes.grid}>
-                    <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
-                </Grid>
+      <Card >
+        <CardHeader className={classes.cardHeader} title={user.name} subheader='Asignar Tiendas' />
+        <CardContent className={classes.cardContent} >
+          <Grid container direction="column" spacing={3} className={classes.gridContainer} >
+            <Grid item xs={9} md={11} className={classes.grid} >
+              <div>
+                <List >
+                  {generate(
+                    <ListItem >
+                      <ListItemAvatar>
+                        <Avatar>
+                          <LocalGroceryStoreIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText primary="Generic Store Location Name" />
+                      <ListItemSecondaryAction>
+                        <Switch edge="end" />
+                      </ListItemSecondaryAction>
+                    </ListItem>,
+                  )}
+                </List>
+              </div>
             </Grid>
-            </CardContent>
-        </Card>
+            <Grid item className={classes.grid}>
+              <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
+            </Grid>
+          </Grid>
+        </CardContent>
+      </Card>
     </div>
   );
 }

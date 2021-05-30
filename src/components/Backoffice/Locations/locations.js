@@ -13,57 +13,51 @@ import EmojiEmotionsIcon from '@material-ui/icons/EmojiEmotions';
 import { apiGet } from '../../../services/api-service';
 
 export default function LocationList() {
- 
-  const store = {incoming_call: true};
   const [stores, setStores] = useState(null);
 
   useEffect(() => {
     if (!stores) {
-      apiGet('stores').then((result) => setStores(
-        { result },
-      ));
+      apiGet('stores')
+        .then((result) => {
+          if (result) setStores({ result });
+        });
     }
   }, [stores]);
 
-  if (!stores) {
-    return(
-      <>
-      Loading...
-    </>
-    )
-  }
-  else{
   return (
     <div>
       <Grid container spacing={0}>
         <Grid item xs={11} md={11}>
           <div >
             <List >
-            {stores.result.map((store) => (
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <LocalGroceryStoreIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary={store.name}
-                  />
-                  <ListItemSecondaryAction>
-                    <IconButton edge="end" aria-label="delete">
-                      {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon  /> }
-                    </IconButton>
-                    <IconButton edge="end" aria-label="delete">
-                    {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ))}
+              {!stores ? <></>
+                : <>
+                  {stores.result.map((store) => (
+                    <ListItem key = {store.id}>
+                      <ListItemAvatar>
+                        <Avatar>
+                          <LocalGroceryStoreIcon />
+                        </Avatar>
+                      </ListItemAvatar>
+                      <ListItemText
+                        primary={store.name}
+                      />
+                      <ListItemSecondaryAction>
+                        <IconButton edge="end" aria-label="delete">
+                          {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
+                        </IconButton>
+                        <IconButton edge="end" aria-label="delete">
+                          {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
+                        </IconButton>
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ))}
+                </>
+              }
             </List>
           </div>
         </Grid>
       </Grid>
     </div>
   );
-}
 }
