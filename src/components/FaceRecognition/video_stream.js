@@ -31,7 +31,7 @@ export default function VideoFeed(props) {
             setInterval(async () => {
               const detections = await faceapi.detectAllFaces( video ,
                 new faceapi.TinyFaceDetectorOptions())
-                console.log(detections)
+                //console.log(detections)
                 if (detections.length > 0){
                   count++;
                 }

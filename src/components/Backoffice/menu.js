@@ -24,6 +24,7 @@ export default function Menu() {
   const [inCall, setInCall] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
   const [location, setLocation] = useState(null);
+  const [reconocimiento, setReconocimiento] = useState(false);
   const [Peticiones, setPeticiones] = useState([]);
   const history = useHistory();
 
@@ -35,9 +36,10 @@ export default function Menu() {
     socket.on("face-detected_assistant", (id_socket) => {
       console.log(id_socket)
       console.log("funcione de pana")
+      setReconocimiento(true)
       call_user(id_socket)
     })
-  })
+  }, reconocimiento)
 
   useEffect(() => {
     if (!salePoints) {
@@ -129,6 +131,16 @@ export default function Menu() {
                                     value = {[Peticiones[0], location]}
                                     onClick={(e) => aceptarVideocall(e.target.value)}>
                                     Atender a cliente
+                </button>
+            </Alert>
+        }
+      </div>
+      <div>
+      { !reconocimiento ? <></>
+          : <Alert severity="info">Clientes detectados
+                <button className={classes.request_btn} 
+                                    onClick={() => setReconocimiento(false)}>
+                                    Cerrar
                 </button>
             </Alert>
         }
