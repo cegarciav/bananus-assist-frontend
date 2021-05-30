@@ -6,6 +6,7 @@ import { apiGet } from '../../services/api-service';
 import FaceRecognition from "../FaceRecognition/video_stream";
 import {useLocation} from "react-router-dom";
 
+
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
     const key = obj[property];

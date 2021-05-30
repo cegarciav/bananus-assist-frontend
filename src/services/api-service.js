@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 const apiOrigin = process.env.REACT_APP_API_ORIGIN;
 if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
@@ -9,7 +10,8 @@ if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida
  * @returns El recurso entregado por la API
  */
 
-async function apiGet(path, body, params) {
+async function apiGet(path, params) {
+
   const url = new URL(`${apiOrigin}/${path}`);
   if ( params ) {
     Object.keys(params)

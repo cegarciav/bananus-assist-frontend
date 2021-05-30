@@ -75,7 +75,6 @@ export default function Menu() {
 
   const soyAsistente = (idSalePoint) => {
     socket.emit('join_sala_asistente', idSalePoint);
-    console.log(`Ingrese a la sala ${idSalePoint}`)
   };
 
   const aceptarVideocall = (args) => {
@@ -145,6 +144,7 @@ export default function Menu() {
             </Alert>
         }
       </div>
+
       <Tabs
       variant="scrollable"
       scrollButtons="on"

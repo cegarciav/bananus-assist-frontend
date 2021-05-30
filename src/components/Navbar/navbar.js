@@ -12,6 +12,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
+import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
@@ -66,10 +67,8 @@ function Navbar() {
         salePoint.storeName = store.name;
         return salePoint;
       });
-      
     }
   }, [update, stores, salePoints, location]);
-
 
   useEffect(() => {
     socket.on('llegada_peticion', (idClientSocket) => {
@@ -179,9 +178,10 @@ function Navbar() {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                   
+
                                     <Link to = {{ pathname: '/Catalog', state: { location } }}
                                              className={classes.link}>
+
                                         <MenuItem onClick={handleClose2}>
                                             <Typography >
                                                 Catálogo
@@ -246,6 +246,12 @@ function Navbar() {
                           &#x2706; Solicitar asistencia
                         </button>
                     }
+
+                    <IconButton className={classes.infoButton} aria-label="información" component="span"
+                           onClick={handleInfo}
+                    >
+                          <InfoOutlinedIcon fontSize = "large"/>
+                    </IconButton>
                     <Modal
                         open={openModal}
                         onClose={handleCloseModal}
@@ -254,7 +260,9 @@ function Navbar() {
                     </Modal>
                 </Toolbar>
             </AppBar>
-        </div>);
+
+        </div>
+        );
 }
 
 export default Navbar;
