@@ -3,10 +3,16 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
+import FaceRecognition from "../FaceRecognition/video_stream";
+import {useLocation} from "react-router-dom";
+
+
 
 function Catalog() {
-  const [products, setProducts] = useState(null);
 
+  let data = useLocation();
+  const [products, setProducts] = useState(null);
+  const [Location, setLocation] = useState(null);
   useEffect(() => {
     if (!products) {
       apiGet('products').then((result) => setProducts(
@@ -14,6 +20,11 @@ function Catalog() {
       ));
     }
   }, [products]);
+  useEffect(() => {
+    if(data.state){
+      setLocation(data.state.location)
+    }
+  })
 
   if (!products) {
     return (
@@ -31,6 +42,7 @@ function Catalog() {
             </Grid>
           ))}
         </Grid>
+        <FaceRecognition location={Location} />
       </Box>
     );
   }

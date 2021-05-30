@@ -27,6 +27,18 @@ export default function Menu() {
   const [Peticiones, setPeticiones] = useState([]);
   const history = useHistory();
 
+  const call_user = (id_socket) => {
+    socket.emit("assistant_alert", id_socket, "Hay un asistente disponible para atenderte, pide asistencia para contacto");
+  }
+
+  useEffect(() => {
+    socket.on("face-detected_assistant", (id_socket) => {
+      console.log(id_socket)
+      console.log("funcione de pana")
+      call_user(id_socket)
+    })
+  })
+
   useEffect(() => {
     if (!salePoints) {
       apiGet('sale-points').then((result) => setSalePoints(
@@ -61,6 +73,7 @@ export default function Menu() {
 
   const soyAsistente = (idSalePoint) => {
     socket.emit('join_sala_asistente', idSalePoint);
+    console.log(`Ingrese a la sala ${idSalePoint}`)
   };
 
   const aceptarVideocall = (args) => {
