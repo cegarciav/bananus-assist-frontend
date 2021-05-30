@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -12,6 +11,7 @@ import Modal from '@material-ui/core/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
+import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
@@ -77,7 +77,6 @@ function Navbar() {
   }, [Peticiones]);
 
   const peticion = (idSalePoint) => {
-    console.log('pedi');
     socket.emit('peticion_asistentes', idSalePoint);
   };
 
@@ -179,7 +178,10 @@ function Navbar() {
                                     open={open2}
                                     onClose={handleClose2}
                                 >
-                                    <Link to='/Catalog' className={classes.link}>
+
+                                    <Link to = {{ pathname: '/Catalog', state: { location } }}
+                                             className={classes.link}>
+
                                         <MenuItem onClick={handleClose2}>
                                             <Typography >
                                                 Catálogo
@@ -244,6 +246,7 @@ function Navbar() {
                           &#x2706; Solicitar asistencia
                         </button>
                     }
+
                     <IconButton className={classes.infoButton} aria-label="información" component="span"
                            onClick={handleInfo}
                     >
@@ -257,6 +260,7 @@ function Navbar() {
                     </Modal>
                 </Toolbar>
             </AppBar>
+
         </div>
         );
 }

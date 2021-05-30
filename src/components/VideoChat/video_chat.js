@@ -126,18 +126,11 @@ export default function VideoChat(props) {
             
             SetPeticiones([...Peticiones, id_client_socket])
         })
-        socket.on("accept_call", (msge) => {
-            console.log(msge)
-        })
+        socket.on("accept_call", (msge) => {})
         socket.on("delete_peticion", (id_client_socket) => {
-            console.log(Peticiones)
             Peticiones.remove(id_client_socket)
-
         })
-        socket.on("video_stream_download", (video_stream) => {
-            console.log("descargando datos de video: ...")
-            console.log(video_stream)
-        })
+        socket.on("video_stream_download", (video_stream) => {})
     }, [Peticiones])    
 
     const peticion = (id_sale_point) =>{

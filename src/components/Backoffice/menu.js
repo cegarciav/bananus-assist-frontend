@@ -24,8 +24,20 @@ export default function Menu() {
   const [inCall, setInCall] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
   const [location, setLocation] = useState(null);
+  const [reconocimiento, setReconocimiento] = useState(false);
   const [Peticiones, setPeticiones] = useState([]);
   const history = useHistory();
+
+  const call_user = (id_socket) => {
+    socket.emit("assistant_alert", id_socket, "Hay un asistente disponible para atenderte, pide asistencia para contacto");
+  }
+
+  useEffect(() => {
+    socket.on("face-detected_assistant", (id_socket) => {
+      setReconocimiento(true)
+      call_user(id_socket)
+    })
+  }, reconocimiento)
 
   useEffect(() => {
     if (!salePoints) {
@@ -120,6 +132,17 @@ export default function Menu() {
             </Alert>
         }
       </div>
+      <div>
+      { !reconocimiento ? <></>
+          : <Alert severity="info">Clientes detectados
+                <button className={classes.request_btn} 
+                                    onClick={() => setReconocimiento(false)}>
+                                    Cerrar
+                </button>
+            </Alert>
+        }
+      </div>
+
       <Tabs
       variant="scrollable"
       scrollButtons="on"
