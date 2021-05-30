@@ -1,31 +1,26 @@
-
-import Button from "@material-ui/core/Button"
-import IconButton from "@material-ui/core/IconButton"
-import TextField from "@material-ui/core/TextField"
-import AssignmentIcon from "@material-ui/icons/Assignment"
-import PhoneIcon from "@material-ui/icons/Phone"
+import React, { useRef, useEffect, useState } from 'react';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import TextField from '@material-ui/core/TextField';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import PhoneIcon from '@material-ui/icons/Phone';
 import { useHistory } from 'react-router-dom';
-
-
-import React, { useRef, useEffect, useState} from 'react';
-import socket from "../socket";
-import {useCallbackRef} from 'use-callback-ref'
-
-import { CopyToClipboard } from "react-copy-to-clipboard"
-import Peer from "simple-peer"
-
-import "../../assets/video.css"
-import { render } from "@testing-library/react"
+import { render } from '@testing-library/react';
+import Peer from 'simple-peer';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useCallbackRef } from 'use-callback-ref';
+import socket from '../socket';
+import '../../assets/video.css';
 
 Array.prototype.remove = function() {
-    var what, a = arguments, L = a.length, ax;
-    while (L && this.length) {
-        what = a[--L];
-        while ((ax = this.indexOf(what)) !== -1) {
-            this.splice(ax, 1);
-        }
-    }
-    return this;
+  var what, a = arguments, L = a.length, ax;
+  while (L && this.length) {
+      what = a[--L];
+      while ((ax = this.indexOf(what)) !== -1) {
+          this.splice(ax, 1);
+      }
+  }
+  return this;
 };
 
 export default function VideoChat(props) {
