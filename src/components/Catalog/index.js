@@ -66,7 +66,6 @@ function Catalog() {
   useEffect(() => {
     if(data.state){
       setLocation(data.state.location)
-      console.log(`${Location}`)
     }
   })
 

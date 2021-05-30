@@ -34,8 +34,6 @@ export default function Menu() {
 
   useEffect(() => {
     socket.on("face-detected_assistant", (id_socket) => {
-      console.log(id_socket)
-      console.log("funcione de pana")
       setReconocimiento(true)
       call_user(id_socket)
     })

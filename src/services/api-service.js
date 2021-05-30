@@ -10,32 +10,30 @@ if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida
  * @returns El recurso entregado por la API
  */
 
-async function apiGet(path, params) {
-
+ async function apiGet(path, params) {
   const url = new URL(`${apiOrigin}/${path}`);
   if ( params ) {
     Object.keys(params)
       .forEach((key) => url.searchParams.append(key, params[key]));
   }
-  if (!body) body = {};
-  let results = await fetch(
-        url,
-        {
-          method: 'GET',
-          mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json'
-          }
-        }
-      )
-      .then(r => r.json())
-      .catch(e => e)
-      .then(function(data) {
-        var request = data;
-        return request;
-      });
+  const results = await fetch(
+    url,
+    {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then((r) => r.json())
+    .catch(() => {
+      alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
+      return null;
+    });
+
   return results;
-};
+}
 
 /**
  * Realiza un HTTP POST a la API del sistema

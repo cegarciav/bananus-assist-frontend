@@ -16,9 +16,7 @@ export default function VideoFeed(props) {
   faceapi.nets.tinyFaceDetector.loadFromUri('/models')
     
   useEffect(() => {
-    socket.on("user_alert", (msge) => {
-      console.log(msge)
-    })
+    socket.on("user_alert", (msge) => {})
   }) 
 
   useEffect(() => {
@@ -34,7 +32,6 @@ export default function VideoFeed(props) {
           setInterval(async () => {
             const detections = await faceapi.detectAllFaces( video ,
               new faceapi.TinyFaceDetectorOptions())
-              //console.log(detections)
               if (detections.length > 0){
                 count++;
               }
@@ -44,7 +41,6 @@ export default function VideoFeed(props) {
               if (count === time){
                 //ADD SOCKETS
                 socket.emit("face-detected", props.location)
-                console.log(`Send notification to ${props.location}`);
               }
           }, 1000)
         })
