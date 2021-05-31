@@ -12,6 +12,7 @@ export default function VideoChat() {
   const history = useLocation();
   const classes = useStyles();
   const [me, setMe] = useState('');
+  const [role, setRole] = useState();
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
   const [caller, setCaller] = useState('');
@@ -28,10 +29,12 @@ export default function VideoChat() {
 
   const soyAsistente = (idSalePoint) => {
     socket.emit('join_sala_asistente', idSalePoint);
+    setRole('assistent');
   };
 
   const soyHome = (idSalePoint) => {
     socket.emit('join_to_videocall_room', idSalePoint);
+    setRole('home');
   };
 
   useEffect(() => {
@@ -134,6 +137,17 @@ export default function VideoChat() {
     connectionRef.current.destroy();
   };
 
+  const callButton = () => {
+    if (role === 'assistent') {
+      return (
+        <IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
+          <PhoneIcon fontSize="large" />
+        </IconButton>
+      );
+    }
+    return (<></>);
+  };
+
   return (
         <div>
           <div >
@@ -152,11 +166,7 @@ export default function VideoChat() {
                           <Button variant="contained" color="secondary" onClick={leaveCall} >
                               End Call
                           </Button>
-                      ) : (
-                          <IconButton color="primary" aria-label="call" onClick={() => callUser(idToCall)}>
-                              <PhoneIcon fontSize="large" />
-                          </IconButton>
-                      )}
+                      ) : callButton()}
                       {idToCall}
                   </div>
               </div>

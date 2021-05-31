@@ -10,9 +10,9 @@ if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida
  * @returns El recurso entregado por la API
  */
 
- async function apiGet(path, params) {
+async function apiGet(path, params) {
   const url = new URL(`${apiOrigin}/${path}`);
-  if ( params ) {
+  if (params) {
     Object.keys(params)
       .forEach((key) => url.searchParams.append(key, params[key]));
   }
