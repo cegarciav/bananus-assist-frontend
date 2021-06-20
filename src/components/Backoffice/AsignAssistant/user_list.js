@@ -13,6 +13,7 @@ import { apiGet } from '../../../services/api-service';
 import useStyles from './styles-user_list';
 
 export default function UserList() {
+  const userRoles = {'supervisor':'Supervisor', 'assistant':'Asistente', 'administrator':'Administrador'}
   const [users, setUsers] = useState(null);
   const [reload, setReload] = useState(false);
   const [openModal, setOpenModal] = useState(false);
@@ -84,7 +85,7 @@ export default function UserList() {
                         </Avatar>
                       </ListItemAvatar>
                       <ListItemText
-                        primary={user.name}
+                        primary={user.name + ' [' + userRoles[user.rol] + ']'}
                       />
                     </ListItem >
                   </Link>

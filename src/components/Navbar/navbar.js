@@ -141,8 +141,8 @@ function Navbar() {
                                 { salePoints.result.map(
                                   (salePointOrdered) => <option className={classes.option}
                                                                 key={salePointOrdered.id}
-                                                                value={salePointOrdered.id} >
-                                                 {salePointOrdered.storeName} {salePointOrdered.id}
+                                                                value={salePointOrdered.storeName + ' / ' + salePointOrdered.department} >
+                                                 {salePointOrdered.storeName} / {salePointOrdered.department}
                                                         </option>,
                                 )
                                 }
