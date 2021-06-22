@@ -19,56 +19,45 @@ export default function LoginForm() {
 
   const dispatch = useDispatch();
 
-  const fetchData = () =>{
-    console.log(username);
-    console.log(password);
-
+  const fetchData = async () =>{
     var raw = JSON.stringify({
       "email": username,
       "password": password
     });
-    console.log(raw);
-   
-    
-  apiPost ('sessions',raw,'').then((result) => setSession(
-    { result },
-  ));
+    const result = await apiPost('sessions',raw,'');
+    setSession(result);
   };
 
   const errors = (ers) =>{
     setError(ers)
-
   };
   
   useEffect((ers)=>{
     errors(ers)
   },[])
-
+  
   useEffect(()=>{
-    fetchData()
-  },[])
+    if(session){
+      const state = session["state"];
+      if (state === "OK"){
+        const token = session["token"];
+        dispatch(login({
+          username,
+          password,
+          token,
+          loggedIn: true,
+        }));
+
+      }
+      else{
+        errors(session["error"]);
+      }
+    }
+  },[session])
 
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    fetchData();
-    const response = session["result"];
-    const state = response["state"];
-    if (state === "OK"){
-      const token = response["token"]
-      dispatch(login({
-        username,
-        password,
-        token,
-        loggedIn: true,
-      }));
-
-    }
-    else{
-      errors(response["error"]);
-      console.log(response);
-    }
-    
+    fetchData();    
   };
 
   const renderErrorMsg = () => {
