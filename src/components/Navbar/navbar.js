@@ -99,6 +99,7 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    history.push('/');
   };
 
   const handleLogIn = () => {
