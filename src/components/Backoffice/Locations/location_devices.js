@@ -21,7 +21,9 @@ export default function DevicesList(props) {
                 <div>
                     <List>
                     {
-                     props.props.map((element) => <DeviceStatus device={ { isOn: true, name: element.department, id: element.id }} key={element.id} />)
+                     props.props.map((element) => <DeviceStatus device=
+                     { { isOn: true, name: element.department, id: element.id }}
+                     key={element.id} />)
                     }
                     </List>
                 </div>

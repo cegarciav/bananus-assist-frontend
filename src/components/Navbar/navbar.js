@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -19,9 +20,10 @@ import { logout, selectUser } from '../../features/userSlice';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
 
+// eslint-disable-next-line no-unused-vars
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -103,7 +105,7 @@ function Navbar() {
   };
 
   const handleLogIn = () => {
-    history.push('/backoffice');
+    history.push('/login');
   };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -142,7 +144,7 @@ function Navbar() {
                                 { salePoints.result.map(
                                   (salePointOrdered) => <option className={classes.option}
                                                                 key={salePointOrdered.id}
-                                                                value={salePointOrdered.storeName + ' / ' + salePointOrdered.department} >
+                                                                value={`${salePointOrdered.storeName} / ${salePointOrdered.department}`} >
                                                  {salePointOrdered.storeName} / {salePointOrdered.department}
                                                         </option>,
                                 )
@@ -263,7 +265,7 @@ function Navbar() {
             </AppBar>
 
         </div>
-        );
+  );
 }
 
 export default Navbar;

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
+import { useLocation } from 'react-router-dom';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
-import FaceRecognition from "../FaceRecognition/video_stream";
-import {useLocation} from "react-router-dom";
-
+import FaceRecognition from '../FaceRecognition/video_stream';
 
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
@@ -19,7 +18,6 @@ function groupBy(objectArray, property) {
 }
 
 function Catalog() {
-
   const data = useLocation();
 
   const [products, setProducts] = useState(null);
@@ -64,12 +62,10 @@ function Catalog() {
   }, [update, products, techChars]);
 
   useEffect(() => {
-    if(data.state){
-      setLocation(data.state.location)
+    if (data.state) {
+      setLocation(data.state.location);
     }
-  })
-
-  
+  });
 
   return (
     <div>

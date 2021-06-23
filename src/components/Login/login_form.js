@@ -61,7 +61,7 @@ export default function LoginForm() {
   // eslint-disable-next-line consistent-return
   const renderErrorMsg = () => {
     if (error) {
-      return <Typography className= {classes.errorMsg}>Error: Correo y/o 
+      return <Typography className= {classes.errorMsg}>Error: Correo y/o
       contraseña invalido/s </Typography>;
     }
   };
