@@ -23,9 +23,9 @@ function Product(props) {
   useEffect(() => {
     if (!qualities) {
       const array = [];
-      for (var key in props ) {
-        array .push(props[key]);
-      };
+      for (const key in props) {
+        array.push(props[key]);
+      }
       setQualities(array);
     }
   }, [qualities]);

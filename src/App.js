@@ -5,7 +5,7 @@ import React from 'react';
 import {
   BrowserRouter as Router,
   Switch,
-  Route
+  Route,
 } from 'react-router-dom';
 
 import Home from './components/Home';
@@ -17,15 +17,12 @@ import AssignPage from './components/Backoffice/AsignAssistant/assign_page';
 import Backoffice from './components/Backoffice/home';
 import VideoStream from './components/FaceRecognition/video_stream';
 
-function App (props){
-
-    const RouteWithNavbar = ({exact, path, component:Component, ...rest}) => {
-      return <Route exact={exact} path={path} {...rest} render={(routeProps) => {
-        return <><Navbar/><Component {...routeProps}/></>;
-      }}
+function App(props) {
+  const RouteWithNavbar = ({
+    exact, path, component: Component, ...rest
+  }) => <Route exact={exact} path={path} {...rest} render={(routeProps) => <><Navbar/><Component {...routeProps}/></>}
       />;
-    };
-    return (
+  return (
       <Router>
         <Switch>
           <RouteWithNavbar exact path="/backoffice" component={Menu} />
@@ -33,12 +30,12 @@ function App (props){
           <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Home {...props} />} />
-          <RouteWithNavbar  exact path="/login" component={Login} />   
-          <RouteWithNavbar exact path="/backoffice" component={Backoffice} /> 
-          <RouteWithNavbar exact path="/videostream" component={VideoStream} />         
+          <RouteWithNavbar exact path="/login" component={Login} />
+          <RouteWithNavbar exact path="/backoffice" component={Backoffice} />
+          <RouteWithNavbar exact path="/videostream" component={VideoStream} />
         </Switch>
-      </Router>  
-    )
-  }
+      </Router>
+  );
+}
 
 export default App;

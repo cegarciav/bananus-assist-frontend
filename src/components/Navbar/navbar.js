@@ -39,7 +39,7 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/')
+    history.push('/');
   };
 
   const handleLogIn = () => {
@@ -62,11 +62,9 @@ function Navbar() {
     setAnchorEl2(event.currentTarget);
   };
   const renderUserInfo = () => {
-    
     if (user) {
-    return  <Typography className={classes.greeting}> Bienvenido/a {user["username"]} </Typography>
-    } 
-    
+      return <Typography className={classes.greeting}> Bienvenido/a {user.username} </Typography>;
+    }
   };
 
   return (
@@ -175,4 +173,3 @@ function Navbar() {
 }
 
 export default Navbar;
-

@@ -43,10 +43,10 @@ export default function LocationList() {
                     />
                     <ListItemSecondaryAction>
                       <IconButton edge="end" aria-label="delete">
-                        {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon  /> }
+                        {store.incoming_call ? <CallIcon color="primary" /> : <CallIcon /> }
                       </IconButton>
                       <IconButton edge="end" aria-label="delete">
-                      {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon  /> }
+                      {store.face_detected ? <EmojiEmotionsIcon color="primary" /> : <EmojiEmotionsIcon /> }
                       </IconButton>
                     </ListItemSecondaryAction>
                   </ListItem>

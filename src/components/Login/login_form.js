@@ -19,53 +19,52 @@ export default function LoginForm() {
 
   const dispatch = useDispatch();
 
-  const fetchData = async () =>{
-    var raw = JSON.stringify({
-      "email": username,
-      "password": password
+  const fetchData = async () => {
+    const raw = JSON.stringify({
+      email: username,
+      password,
     });
-    const result = await apiPost('sessions',raw,'');
+    const result = await apiPost('sessions', raw, '');
     setSession(result);
   };
 
-  const errors = (ers) =>{
-    setError(ers)
+  const errors = (ers) => {
+    setError(ers);
   };
-  
-  useEffect((ers)=>{
-    errors(ers)
-  },[])
-  
-  useEffect(()=>{
-    if(session){
-      const state = session["state"];
-      if (state === "OK"){
-        const token = session["token"];
+
+  useEffect((ers) => {
+    errors(ers);
+  }, []);
+
+  useEffect(() => {
+    if (session) {
+      const { state } = session;
+      if (state === 'OK') {
+        const { token } = session;
         dispatch(login({
           username,
           password,
           token,
           loggedIn: true,
         }));
-
-      }
-      else{
-        errors(session["error"]);
+      } else {
+        errors(session.error);
       }
     }
-  },[session])
+  }, [session]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    fetchData();    
+    fetchData();
   };
 
+  // eslint-disable-next-line consistent-return
   const renderErrorMsg = () => {
     if (error) {
-
-      return  <Typography className= {classes.errorMsg}>Error: Correo y/o contraseña invalido/s </Typography>
-    } 
-  }
+      return <Typography className= {classes.errorMsg}>Error: Correo y/o 
+      contraseña invalido/s </Typography>;
+    }
+  };
 
   return (
         <form className="login_form" onSubmit={(e) => handleSubmit(e)}>

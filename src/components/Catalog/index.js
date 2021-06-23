@@ -5,8 +5,8 @@ import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -52,9 +52,9 @@ function Catalog(props) {
       });
       const result = groupBy(ordered, 'productName');
       const array = [];
-      for (var key in result ) {
+      for (const key in result) {
         array.push(result[key]);
-      };
+      }
       setProductsOrdered(array);
     }
   }, [update, products, techChars]);

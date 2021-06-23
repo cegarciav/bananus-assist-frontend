@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   navbar: {
     backgroundColor: '#195E6D',
   },
-  greeting:{
+  greeting: {
     marginLeft: theme.spacing(4),
   },
 }));

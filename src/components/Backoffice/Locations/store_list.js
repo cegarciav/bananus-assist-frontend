@@ -4,8 +4,8 @@ import useStyles from './styles-store_list';
 import { apiGet } from '../../../services/api-service';
 
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -46,9 +46,9 @@ export default function StoreList() {
       });
       const result = groupBy(ordered, 'storeName');
       const array = [];
-      for (var key in result ) {
+      for (const key in result) {
         array.push(result[key]);
-      };
+      }
       setSalePointsOrdered(array);
     }
   }, [update, stores, salePoints]);
