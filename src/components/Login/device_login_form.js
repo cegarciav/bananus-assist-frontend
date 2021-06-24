@@ -13,20 +13,18 @@ export default function DeviceLoginForm() {
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = () => {
-    const res = apiPost('sessions/devices', JSON.stringify({
+  const handleSubmit = async () => {
+    const res = await apiPost('sessions/devices', JSON.stringify({
       serialNumber: username,
       password,
     }));
-    res.then((response) => {
-      if (response.state === 'OK') {
-        Cookies.set('token', response.token);
-        Cookies.set('type', response.type);
-      } else {
-        // eslint-disable-next-line no-alert
-        alert('Contraseña o usuario incorrecto');
-      }
-    });
+    if (res.state === 'OK') {
+      Cookies.set('token', res.token);
+      Cookies.set('type', res.type);
+    } else {
+      // eslint-disable-next-line no-alert
+      alert('Contraseña o usuario incorrecto');
+    }
   };
 
   return (
