@@ -16,6 +16,7 @@ import Menu from './components/Backoffice/menu';
 import AssignPage from './components/Backoffice/AsignAssistant/assign_page';
 import Backoffice from './components/Backoffice/home';
 import Login from './components/Backoffice/home';
+import DeviceLogin from './components/Login/device_login_page';
 import Information from './components/Information/information';
 import VideoStream from './components/FaceRecognition/video_stream';
 import VideoChat2 from './components/VideoChat/video_chat';
@@ -41,6 +42,7 @@ function App(props) {
           <RouteWithNavbar exact path="/videostream" component={VideoStream} />
           <RouteWithNavbar exact path="/Information" component={() => <Information {...props} />} />
           <RouteWithNavbar exact path="/videochat" component={VideoChat2} />
+          <Route exact path="/DeviceLogin" component={DeviceLogin} />
         </Switch>
       </Router>
   );
