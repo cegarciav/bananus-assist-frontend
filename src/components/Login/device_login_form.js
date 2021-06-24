@@ -15,7 +15,8 @@ export default function DeviceLoginForm() {
   const [password, setPassword] = useState('');
   const [token, setToken] = useState(null);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const res = await apiPost('sessions/devices', JSON.stringify({
       serialNumber: username,
       password,
@@ -43,7 +44,13 @@ export default function DeviceLoginForm() {
                         </Grid>
 
                         <Grid item alginItems='center'>
-                            <Button color="primary" variant="contained" onClick={ (e) => handleSubmit(e)}>Ingresar</Button>
+                            <Button color="primary"
+                                    variant="contained"
+                                    type="submit"
+                                    onClick={ (e) => handleSubmit(e)}
+                            >
+                              Ingresar
+                            </Button>
                         </Grid>
                     </Grid>
                 </Typography>
