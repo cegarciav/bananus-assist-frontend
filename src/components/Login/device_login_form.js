@@ -13,7 +13,7 @@ export default function DeviceLoginForm() {
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = () => {
     const res = apiPost('sessions/devices', JSON.stringify({
       serialNumber: username,
       password,
@@ -22,8 +22,8 @@ export default function DeviceLoginForm() {
       if (response.state === 'OK') {
         Cookies.set('token', response.token);
         Cookies.set('type', response.type);
-        alert('Login Exitoso');
       } else {
+        // eslint-disable-next-line no-alert
         alert('Contraseña o usuario incorrecto');
       }
     });

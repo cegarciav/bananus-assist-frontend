@@ -3,11 +3,9 @@ import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
-import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import { Redirect } from 'react-router-dom';
 import DeviceLoginForm from './device_login_form';
-import { selectUser } from '../../features/userSlice';
 
 export default function DeviceLogin() {
   const token = Cookies.get('token');
