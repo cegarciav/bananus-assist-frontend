@@ -20,6 +20,7 @@ export default function StoreList() {
   const [salePointsOrdered, setSalePointsOrdered] = useState([]);
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
+  const [reload, setReload] = useState(null);
 
   useEffect(() => {
     if (!salePoints) {
@@ -38,12 +39,23 @@ export default function StoreList() {
   }, [salePoints, stores]);
 
   useEffect(() => {
+    if (reload) {
+      apiGet('sale-points')
+        .then((result) => {
+          if (result) setSalePoints({ result });
+        });
+    }
+  }, [reload]);
+
+  useEffect(() => {
     if (update && stores && salePoints) {
       setUpdate(false);
       const ordered = salePoints.result.map((salePoint) => {
         const store = stores.result.find((u) => u.id === salePoint.storeId);
         // eslint-disable-next-line no-param-reassign
         salePoint.storeName = store.name;
+        // eslint-disable-next-line no-param-reassign
+        salePoint.storeId = store.id;
         return salePoint;
       });
       const result = groupBy(ordered, 'storeName');
@@ -57,7 +69,10 @@ export default function StoreList() {
         {!salePointsOrdered ? <></>
           : <>
               {
-                salePointsOrdered.map((element) => <DevicesList props={element} key={element.id} />)
+                salePointsOrdered.map((element) => <DevicesList props={element}
+                                                                key={element.id}
+                                                                reload ={() => setReload(true) }
+                                                   />)
               }
             </>
       }
