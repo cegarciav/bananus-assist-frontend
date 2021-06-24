@@ -53,6 +53,7 @@ export default function StoreList() {
   }, [update, stores, salePoints]);
 
   return (
+  <div>
       <div style={{ minHeight: '100vh' }} className={classes.item}>
         {!salePointsOrdered ? <></>
           : <>
@@ -61,6 +62,7 @@ export default function StoreList() {
               }
             </>
       }
+      </div>
       </div>
   );
 }
