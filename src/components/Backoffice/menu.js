@@ -28,14 +28,14 @@ export default function Menu() {
   const [Peticiones, setPeticiones] = useState([]);
   const history = useHistory();
 
-  const call_user = (id_socket) => {
-    socket.emit("assistant_alert", id_socket, "Hay un asistente disponible para atenderte, pide asistencia para contacto");
+  const callUser = (idSocket) => {
+    socket.emit('assistant_alert', idSocket, 'Hay un asistente disponible para atenderte, pide asistencia para contacto');
   };
 
   useEffect(() => {
-    socket.on('face-detected_assistant', (id_socket) => {
+    socket.on('face-detected_assistant', (idSocket) => {
       setReconocimiento(true);
-      call_user(id_socket);
+      callUser(idSocket);
     });
   }, reconocimiento);
 

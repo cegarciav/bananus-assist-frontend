@@ -1,3 +1,4 @@
+/* eslint-disable import/no-duplicates */
 import './App.css';
 
 import React from 'react';
@@ -21,12 +22,11 @@ import VideoChat2 from './components/VideoChat/video_chat';
 import VideoChat from './components/Backoffice/video-chat';
 
 function App(props) {
-  const RouteWithNavbar = ({exact, path, component: Component, ...rest}) => {
-    return <Route exact={exact} path={path} {...rest} render={(routeProps) => {
-      return <><Navbar/><Component {...routeProps}/></>;
-    }}
+  const RouteWithNavbar = ({
+    exact, path, component: Component, ...rest
+  }) => <Route exact={exact} path={path} {...rest}
+  render={(routeProps) => <><Navbar/><Component {...routeProps}/></>}
       />;
-  };
   return (
       <Router>
         <Switch>
