@@ -9,6 +9,7 @@ import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import { useHistory } from 'react-router-dom';
 import useStyles from './styles-show-store';
+import { apiDelete } from '../../../../services/api-service';
 
 export default function ShowStoreToggle(store) {
 /* To do: link para ver supervisores y asistentes. Redirigir a Update o
@@ -19,6 +20,15 @@ ver si es mejor ponerlo ahi en la lista. */
   const history = useHistory();
 
   const GoBack = () => {
+    history.push('/backoffice');
+  };
+
+  const DeleteStore = () => {
+    /* To do: Al apretar el boton desplegar un msje de confirmacióny borrar la tienda. */
+    const body = JSON.stringify({
+      address: currentStore.address,
+    });
+    apiDelete('stores', body, '');
     history.push('/backoffice');
   };
 
@@ -49,6 +59,9 @@ ver si es mejor ponerlo ahi en la lista. */
             </Grid>
             <Grid item className={classes.grid}>
               <Button color="primary" variant="contained" type="submit">Editar Tienda</Button>
+            </Grid>
+            <Grid item className={classes.grid}>
+              <Button onClick={DeleteStore} color="primary" variant="contained" type="submit">Borrar Tienda</Button>
             </Grid>
             <Grid item className={classes.grid}>
               <Button onClick={GoBack} color="primary" variant="contained" type="submit">Volver</Button>
