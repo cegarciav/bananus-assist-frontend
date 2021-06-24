@@ -46,12 +46,10 @@ export default function VideoFeed(props) {
         })
       
       })
-  }, [videoEl])
+  }, [videoEl]);
 
-    
-   
   return (
     <div hidden >
         <video ref={videoEl} />
-    </div>)
+    </div>);
 }

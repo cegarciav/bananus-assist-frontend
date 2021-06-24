@@ -131,7 +131,7 @@ export default function VideoChat(props) {
             Peticiones.remove(id_client_socket)
         })
         socket.on("video_stream_download", (video_stream) => {})
-    }, [Peticiones])    
+    }, [Peticiones])
 
     const peticion = (id_sale_point) =>{
         socket.emit("peticion_asistentes", id_sale_point)
@@ -145,7 +145,6 @@ export default function VideoChat(props) {
         const arg_array = args.split(",")
         socket.emit("accept_videocall", arg_array[0], arg_array[1])
         socket.emit("join_to_videocall_room", arg_array[1])
-        
     }
     const soy_home = (id_sale_point) => {
         socket.emit("join_to_videocall_room", id_sale_point)

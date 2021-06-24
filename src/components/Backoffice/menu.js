@@ -30,14 +30,14 @@ export default function Menu() {
 
   const call_user = (id_socket) => {
     socket.emit("assistant_alert", id_socket, "Hay un asistente disponible para atenderte, pide asistencia para contacto");
-  }
+  };
 
   useEffect(() => {
-    socket.on("face-detected_assistant", (id_socket) => {
-      setReconocimiento(true)
-      call_user(id_socket)
-    })
-  }, reconocimiento)
+    socket.on('face-detected_assistant', (id_socket) => {
+      setReconocimiento(true);
+      call_user(id_socket);
+    });
+  }, reconocimiento);
 
   useEffect(() => {
     if (!salePoints) {
@@ -113,7 +113,7 @@ export default function Menu() {
           { salePoints.result.map(
             (salePointOrdered) => < option className={classes.option}
                                            key={salePointOrdered.id}
-                                            value={salePointOrdered.department} >
+                                            value={salePointOrdered.id} >
                                       {salePointOrdered.storeName} / {salePointOrdered.department}
                                     </option>,
           )
@@ -134,8 +134,8 @@ export default function Menu() {
       </div>
       <div>
       { !reconocimiento ? <></>
-          : <Alert severity="info">Clientes detectados
-                <button className={classes.request_btn} 
+        : <Alert severity="info">Clientes detectados
+                <button className={classes.request_btn}
                                     onClick={() => setReconocimiento(false)}>
                                     Cerrar
                 </button>

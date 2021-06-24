@@ -5,13 +5,8 @@ import information from '../../../assets/information.png';
 
 const Assistance = (props) => {
   const classes = useStyles();
-
-  /**
-   * Dentro de las props debería venir la respuesta de
-   * la bbdd a la consulta de asistentes disponibles
-   */
-
-  const available = 1;
+  const available = props.state;
+  console.log(props.state, 'holaaaaa');
 
   if (available === 1) {
     return (
@@ -31,11 +26,12 @@ const Assistance = (props) => {
     <div className={classes.paperContainer}>
       <div className={classes.paper}>
           <img className={classes.img} src={information} alt="Logo" />
-          <h2 id="simple-modal-title">No hay asistentes disponibles</h2>
+          <h2 id="simple-modal-title">Espere unos minutos</h2>
           <p id="simple-modal-description">
-            Lamentablemente no contamos con asistentes disponibles en este momento.
-             Lo invitamos a revisar la guía del sistema o seguir consultando el
-             catálogo de productos.
+            Su solicitud fue recibida por los asistentes, espere unos minutos.
+            En caso de que demore más de 5 mínutos le pedimos que porfavor realice una
+            nueva solicitud. Puede acceder al botón de informaciones para conocer del
+            sistema o seguir viendo los productos de la tienda.
           </p>
           <button className={classes.close} onClick={props.hideModal}>Cerrar</button>
       </div>
