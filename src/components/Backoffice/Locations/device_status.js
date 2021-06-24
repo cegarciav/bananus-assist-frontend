@@ -6,6 +6,8 @@ import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 
 export default function DeviceStatus(props) {
+  // edit
+  // delete
   return (
     <div >
         <ListItem>

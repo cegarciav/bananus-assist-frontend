@@ -10,6 +10,7 @@ import useStyles from './styles-location_devices';
 
 export default function DevicesList(props) {
   const classes = useStyles();
+  // add one
   return (
     <div >
         <Card>
