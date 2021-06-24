@@ -15,6 +15,13 @@ const useStyles = makeStyles(() => ({
       color: 'primary',
     },
   },
+  item: {
+    minHeight: '50vh',
+    spacing: 0,
+    direction: 'column',
+    alignItems: 'center',
+    justify: 'center',
+  },
 }));
 
 export default useStyles;
