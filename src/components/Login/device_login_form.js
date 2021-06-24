@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import Cookies from 'js-cookie';
+import { Redirect } from 'react-router-dom';
 import { apiPost } from '../../services/api-service';
 
 export default function DeviceLoginForm() {
@@ -12,6 +13,7 @@ export default function DeviceLoginForm() {
 
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
+  const [token, setToken] = useState(null);
 
   const handleSubmit = async () => {
     const res = await apiPost('sessions/devices', JSON.stringify({
@@ -21,14 +23,15 @@ export default function DeviceLoginForm() {
     if (res.state === 'OK') {
       Cookies.set('token', res.token);
       Cookies.set('type', res.type);
+      setToken(res.token);
     } else {
       // eslint-disable-next-line no-alert
       alert('Contraseña o usuario incorrecto');
     }
   };
 
-  return (
-        <form className="login_form" >
+  return (token ? <Redirect to="/Catalog" />
+    : <form className="login_form" >
             <Container maxWidth="sm" >
                 <Typography component="div" >
                     <Grid container direction="column" alginItems='center' justify='center' spacing={3} >
