@@ -16,7 +16,7 @@ const useStyles = makeStyles(() => ({
     },
   },
   item: {
-    minHeight: '50vh',
+    minHeight: '80vh',
     spacing: 0,
     direction: 'column',
     alignItems: 'center',

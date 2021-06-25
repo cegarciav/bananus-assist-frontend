@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -7,9 +7,11 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
 import { useHistory } from 'react-router-dom';
 import useStyles from './styles-show-store';
 import { apiDelete } from '../../../../services/api-service';
+import EditStore from './edit-store';
 
 export default function ShowStoreToggle(store) {
 /* To do: link para ver supervisores y asistentes. Redirigir a Update o
@@ -18,18 +20,27 @@ ver si es mejor ponerlo ahi en la lista. */
   const classes = useStyles();
   const currentStore = store.store;
   const history = useHistory();
+  const [openModal, setOpenModal] = useState(false);
 
   const GoBack = () => {
     history.push('/backoffice');
   };
 
   const DeleteStore = () => {
-    /* To do: Al apretar el boton desplegar un msje de confirmacióny borrar la tienda. */
+    /* To do: Al apretar el boton desplegar un msje de confirmación y borrar la tienda. */
     const body = JSON.stringify({
       address: currentStore.address,
     });
     apiDelete('stores', body, '');
     history.push('/backoffice');
+  };
+
+  const handleOpenModal = () => {
+    setOpenModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setOpenModal(false);
   };
 
   return (
@@ -58,8 +69,17 @@ ver si es mejor ponerlo ahi en la lista. */
               </div>
             </Grid>
             <Grid item className={classes.grid}>
-              <Button color="primary" variant="contained" type="submit">Editar Tienda</Button>
+              <Button onClick={handleOpenModal} color="primary" variant="contained" type="submit">Editar Tienda</Button>
             </Grid>
+            <Modal
+            open={openModal}
+            onClose={handleCloseModal}
+          >
+            <EditStore close={handleCloseModal}
+              hideModal ={() => setOpenModal(false) }
+              store = {currentStore}
+            />
+          </Modal>
             <Grid item className={classes.grid}>
               <Button onClick={DeleteStore} color="primary" variant="contained" type="submit">Borrar Tienda</Button>
             </Grid>
