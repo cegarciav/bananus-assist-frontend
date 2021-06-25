@@ -8,15 +8,16 @@ import WifiIcon from '@material-ui/icons/Wifi';
 import WifiOffIcon from '@material-ui/icons/WifiOff';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import useStyles from './styles-device_status';
 import { apiGet, apiPatch, apiDelete } from '../../../services/api-service';
 
 export default function DeviceStatus(props) {
+  const classes = useStyles();
   const [edit, setEdit] = useState(false);
   const [del, setDel] = useState(false);
   const [name, setName] = useState(false);
-  const [store, setStore] = useState(props.device.storeId);
+  const [store, setStore] = useState(props.device.storeId ? props.device.storeId : '');
   const [stores, setStores] = useState(false);
-  const [errors, setErrors] = useState(false);
 
   const editStore = () => {
     setEdit(true);
@@ -53,9 +54,8 @@ export default function DeviceStatus(props) {
           setDel(false);
           setEdit(false);
           props.reload();
-        });
-    } else {
-      setErrors('');
+        })
+        .catch();
     }
   };
 
@@ -76,49 +76,61 @@ export default function DeviceStatus(props) {
         <ListItem>
             <ListItemText>
               {(edit && !del) ? <>
-                      <TextField id="standard-basic" label={props.device.name} onChange={(e) => setName(e.target.value)}/>
-                      <FormControl variant="outlined" >
-                         <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={store}
-                                onChange={handleChange}
-                          >
-                           <InputLabel
-                              style={{ disableAnimation: false }}
-                              disableAnimation={false}
-                              htmlFor="searchCriteria"
-                           >
-                            {props.device.storeName}
-                           </InputLabel>
-                                { stores.result.map(
-                                  (st) => <option key={st.id}
-                                                     value={st.id} >
-                                                 {st.name}
-                                          </option>,
-                                )
-                                }
-                          </Select>
-                        </FormControl>
-                      <button onClick = {update} >Editar</button>
-                      <button onClick = {cancelAction} >Cancelar</button>
+                      <div className={classes.input}>
+                       <TextField id="standard-basic" label={props.device.name} onChange={(e) => setName(e.target.value)}/>
+                      </div>
+                      <div className={classes.input}>
+                        <FormControl variant="outlined" >
+                          <Select
+                                  labelId="demo-simple-select-outlined-label"
+                                  id="demo-simple-select-outlined"
+                                  value={store}
+                                  onChange={handleChange}
+                            >
+                            <InputLabel
+                                style={{ disableAnimation: false }}
+                                disableAnimation={false}
+                                htmlFor="searchCriteria"
+                            >
+                              {props.device.storeName}
+                            </InputLabel>
+                                  { stores.result.map(
+                                    (st) => <option key={st.id}
+                                                      value={st.id} >
+                                                  {st.name}
+                                            </option>,
+                                  )
+                                  }
+                            </Select>
+                          </FormControl>
+                      </div>
+                      <button onClick = {update} className={classes.button}>
+                        Editar
+                      </button>
+                      <button onClick = {cancelAction} className={classes.deleteButton}>
+                        Cancelar
+                      </button>
                     </>
-                : <>{del ? <></> : <>{props.device.name}{props.device.storeName}</>}</>
+                : <>{del ? <></> : <>{props.device.name}</>}</>
               }
               {del && !edit ? <>
                         <p>
                           ¿Estas seguro que quiere eliminar el punto de venta {props.device.name}?
                         </p>
-                        <button onClick={deleteSalePoint}>Eliminar</button>
-                        <button onClick = {cancelAction} >Cancelar</button>
+                        <button onClick={deleteSalePoint} className={classes.button}>
+                          Eliminar
+                        </button>
+                        <button onClick = {cancelAction} className={classes.deleteButton} >
+                          Cancelar
+                        </button>
                      </>
                 : <></>
               }
             </ListItemText>
             {(edit || del) ? <></>
               : <>
-                  <p onClick = {editStore}>edit</p>
-                  <p onClick = {deleteStore}>delete</p>
+                  <button onClick = {editStore} className={classes.circleButton}>&#x270E;</button>
+                  <button onClick = {deleteStore} className={classes.circleButtonDelete}>&#x2296;</button>
                 </>
             }
             <ListItemSecondaryAction>
