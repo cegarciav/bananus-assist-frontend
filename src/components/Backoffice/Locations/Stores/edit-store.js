@@ -6,7 +6,6 @@ import useStyles from './styles-add-store';
 import { apiPatch } from '../../../../services/api-service';
 
 const EditStore = (props) => {
-/* To do reload */
   const { store } = props;
   const classes = useStyles();
 

@@ -14,8 +14,7 @@ import { apiDelete } from '../../../../services/api-service';
 import EditStore from './edit-store';
 
 export default function ShowStoreToggle(store) {
-/* To do: link para ver supervisores y asistentes. Redirigir a Update o
-ver si es mejor ponerlo ahi en la lista. */
+/* To do: link para ver supervisores y asistentes. */
 
   const classes = useStyles();
   const currentStore = store.store;
