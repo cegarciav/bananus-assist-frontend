@@ -18,6 +18,7 @@ export default function DeviceStatus(props) {
   const [name, setName] = useState(false);
   const [store, setStore] = useState(props.device.storeId ? props.device.storeId : '');
   const [stores, setStores] = useState(false);
+  const [errors, setErrors] = useState(false);
 
   const editStore = () => {
     setEdit(true);
@@ -43,7 +44,7 @@ export default function DeviceStatus(props) {
   }, [stores]);
 
   const update = () => {
-    if (name && store) {
+    if (name) {
       const body = {
         id: props.device.id,
         department: name,
@@ -53,9 +54,13 @@ export default function DeviceStatus(props) {
         .then(() => {
           setDel(false);
           setEdit(false);
-          props.reload();
+          setErrors('');
+          setName();
         })
         .catch();
+      props.reload();
+    } else {
+      setErrors('Debe ingresar un nuevo nombre');
     }
   };
 
@@ -78,6 +83,7 @@ export default function DeviceStatus(props) {
               {(edit && !del) ? <>
                       <div className={classes.input}>
                        <TextField id="standard-basic" label={props.device.name} onChange={(e) => setName(e.target.value)}/>
+                       <p className={classes.error} >{errors}</p>
                       </div>
                       <div className={classes.input}>
                         <FormControl variant="outlined" >

@@ -65,6 +65,10 @@ const useStyles = makeStyles(() => ({
     marginTop: '10px',
     marginBottom: '10px',
   },
+  error: {
+    color: '#E24320',
+    fontSize: '12px',
+  },
 }));
 
 export default useStyles;

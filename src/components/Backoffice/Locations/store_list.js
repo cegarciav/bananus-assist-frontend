@@ -44,6 +44,7 @@ export default function StoreList() {
         .then((result) => {
           if (result) setSalePoints({ result });
         });
+      setReload(false);
     }
   }, [reload]);
 
