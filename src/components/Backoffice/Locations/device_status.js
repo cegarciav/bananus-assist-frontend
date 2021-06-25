@@ -102,7 +102,8 @@ export default function DeviceStatus(props) {
                             </InputLabel>
                                   { stores.result.map(
                                     (st) => <option key={st.id}
-                                                      value={st.id} >
+                                                      value={st.id}
+                                                      className={classes.option} >
                                                   {st.name}
                                             </option>,
                                   )
@@ -135,8 +136,12 @@ export default function DeviceStatus(props) {
             </ListItemText>
             {(edit || del) ? <></>
               : <>
-                  <button onClick = {editStore} className={classes.circleButton}>&#x270E;</button>
-                  <button onClick = {deleteStore} className={classes.circleButtonDelete}>&#x2296;</button>
+                  <button onClick = {editStore} className={classes.circleButton}>
+                    &#x270E;
+                  </button>
+                  <button onClick = {deleteStore} className={classes.circleButtonDelete}>
+                    &#x2296;
+                  </button>
                 </>
             }
             <ListItemSecondaryAction>
