@@ -6,7 +6,6 @@ import information from '../../../assets/information.png';
 const Assistance = (props) => {
   const classes = useStyles();
   const available = props.state;
-  console.log(props.state, 'holaaaaa');
 
   if (available === 1) {
     return (
