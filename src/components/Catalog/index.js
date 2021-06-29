@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import { useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 import FaceRecognition from '../FaceRecognition/video_stream';
-import Cookies from 'js-cookie';
 
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
