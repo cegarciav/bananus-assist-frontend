@@ -24,6 +24,8 @@ export default function DeviceLoginForm() {
     if (res.state === 'OK') {
       Cookies.set('token', res.token);
       Cookies.set('type', res.type);
+      Cookies.set('storeId', res.storeId);
+      Cookies.set('salePointId', res.sale_pointId);
       setToken(res.token);
     } else {
       // eslint-disable-next-line no-alert

@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 import FaceRecognition from '../FaceRecognition/video_stream';
+import Cookies from 'js-cookie';
 
 function groupBy(objectArray, property) {
   return objectArray.reduce((acc, obj) => {
@@ -19,12 +20,12 @@ function groupBy(objectArray, property) {
 
 function Catalog() {
   const data = useLocation();
-
   const [products, setProducts] = useState(null);
   const [Location, setLocation] = useState(null);
   const [techChars, setTechChars] = useState(null);
   const [update, setUpdate] = useState(null);
   const [productsOrdered, setProductsOrdered] = useState(null);
+  const salePointId = Cookies.get('salePointId');
 
   useEffect(() => {
     if (!products) {
@@ -69,7 +70,7 @@ function Catalog() {
 
   return (
     <div>
-      {Location ? <FaceRecognition location={Location}/> : <> </>}
+      {<FaceRecognition location={salePointId}/>}
       <Box p={7}>
         <Grid container justify="center" spacing={3}>
           {

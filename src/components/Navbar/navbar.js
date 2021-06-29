@@ -19,6 +19,8 @@ import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
+import Cookies from 'js-cookie';
+
 
 // eslint-disable-next-line no-unused-vars
 function groupBy(objectArray, property) {
@@ -87,7 +89,8 @@ function Navbar() {
   };
 
   const handleOpenModal = (e) => {
-    peticion(e.target.value);
+    const value = Cookies.get('salePointId');
+    peticion(value);
     setOpenModal(true);
   };
 
