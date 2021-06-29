@@ -67,7 +67,6 @@ function Catalog() {
       setLocation(data.state.location);
     }
   });
-
   return (
     <div>
       {<FaceRecognition location={salePointId}/>}
