@@ -113,7 +113,7 @@ export default function Menu() {
           { salePoints.result.map(
             (salePointOrdered) => < option className={classes.option}
                                            key={salePointOrdered.id}
-                                            value={salePointOrdered.department} >
+                                            value={salePointOrdered.id} >
                                       {salePointOrdered.storeName} / {salePointOrdered.department}
                                     </option>,
           )

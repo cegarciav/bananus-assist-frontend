@@ -14,6 +14,7 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import Alert from '@material-ui/lab/Alert';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
@@ -45,6 +46,7 @@ function Navbar() {
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
+  const [accepted, setAccepted] = useState(null);
 
   useEffect(() => {
     if (!salePoints && !location) {
@@ -78,6 +80,13 @@ function Navbar() {
     });
   }, [Peticiones]);
 
+  useEffect(() => {
+    socket.on('accept_call', () => {
+      setAccepted(1);
+      setOpenModal(true);
+    });
+  }, [accepted]);
+
   const peticion = (idSalePoint) => {
     socket.emit('peticion_asistentes', idSalePoint);
   };
@@ -92,6 +101,7 @@ function Navbar() {
   };
 
   const handleCloseModal = () => {
+    setAccepted(0);
     setOpenModal(false);
   };
 
@@ -144,8 +154,8 @@ function Navbar() {
                                 { salePoints.result.map(
                                   (salePointOrdered) => <option className={classes.option}
                                                                 key={salePointOrdered.id}
-                                                                value={`${salePointOrdered.storeName} / ${salePointOrdered.department}`} >
-                                                 {salePointOrdered.storeName} / {salePointOrdered.department}
+                                                                value={salePointOrdered.id} >
+                                       {salePointOrdered.storeName} / {salePointOrdered.department}
                                                         </option>,
                                 )
                                 }
@@ -246,7 +256,7 @@ function Navbar() {
                         )}
                     {user ? <></>
                       : <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
-                          &#x2706; Solicitar asistencia
+                           &#x2706; Solicitar asistencia
                         </button>
                     }
 
@@ -259,7 +269,7 @@ function Navbar() {
                         open={openModal}
                         onClose={handleCloseModal}
                     >
-                         <Assistance hideModal ={() => setOpenModal(false) } />
+                         <Assistance hideModal ={() => setOpenModal(false) } state = {accepted} />
                     </Modal>
                 </Toolbar>
             </AppBar>

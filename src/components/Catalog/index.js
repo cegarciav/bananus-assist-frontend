@@ -66,7 +66,6 @@ function Catalog() {
       setLocation(data.state.location);
     }
   });
-
   return (
     <div>
       {Location ? <FaceRecognition location={Location}/> : <> </>}
