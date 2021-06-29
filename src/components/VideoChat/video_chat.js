@@ -1,30 +1,29 @@
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import TextField from '@material-ui/core/TextField';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-import PhoneIcon from '@material-ui/icons/Phone';
+import Button from "@material-ui/core/Button"
+import IconButton from "@material-ui/core/IconButton"
+import TextField from "@material-ui/core/TextField"
+import AssignmentIcon from "@material-ui/icons/Assignment"
+import PhoneIcon from "@material-ui/icons/Phone"
 import { useHistory } from 'react-router-dom';
 
-import React, { useRef, useEffect, useState } from 'react';
-import { useCallbackRef } from 'use-callback-ref';
+import React, { useRef, useEffect, useState} from 'react';
+import socket from "../socket";
+import {useCallbackRef} from 'use-callback-ref'
 
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import Peer from 'simple-peer';
+import { CopyToClipboard } from "react-copy-to-clipboard"
+import Peer from "simple-peer"
 
-import '../../assets/video.css';
-import { render } from '@testing-library/react';
-import socket from '../socket';
+import "../../assets/video.css"
+import { render } from "@testing-library/react"
 
-Array.prototype.remove = function () {
-  let what; const a = arguments; let L = a.length; let
-    ax;
-  while (L && this.length) {
-    what = a[--L];
-    while ((ax = this.indexOf(what)) !== -1) {
-      this.splice(ax, 1);
+Array.prototype.remove = function() {
+    var what, a = arguments, L = a.length, ax;
+    while (L && this.length) {
+        what = a[--L];
+        while ((ax = this.indexOf(what)) !== -1) {
+            this.splice(ax, 1);
+        }
     }
-  }
-  return this;
+    return this;
 };
 
 export default function VideoChat(props) {
@@ -39,7 +38,7 @@ export default function VideoChat(props) {
   const [name, setName] = useState('');
   const [refUser, SetrefUser] = useState(null);
   const myVideo = useRef();
-  const userVideo = useCallbackRef(null, (ref) => ref && ref.focus());
+  var userVideo = useCallbackRef(null, ref => ref && ref.focus());
   const connectionRef = useRef();
 
   useEffect(() => {
@@ -47,129 +46,133 @@ export default function VideoChat(props) {
       setStream(stream);
       myVideo.current.srcObject = stream;
     });
-    socket.emit('me_ida', {});
+    socket.emit("me_ida", {});
     socket.emit('me_ida', {});
 
-    socket.on('me', (id) => {
+    socket.on("me", (id) => {
       setMe(id);
     });
-    socket.on('callUser', (data) => {
+    socket.on("callUser", (data) => {
       setReceivingCall(true);
       setCaller(data.from);
       setName(data.name);
       setCallerSignal(data.signal);
     });
-    socket.on('finished', () => {
+    socket.on("finished", () => {
       setCallEnded(true);
     });
   }, [callEnded, callAccepted]);
   const callUser = (id) => {
-    socket.off('callAccepted');
-    const peer = new Peer({
-      initiator: true,
-      trickle: false,
-      stream,
-    });
+    socket.off("callAccepted");
+    var peer = new Peer({
+        initiator: true,
+		trickle: false,
+		stream,
+	});
 
-    peer.on('signal', (data) => {
-      socket.emit('callUser', {
+    peer.on("signal", (data) => {
+      socket.emit("callUser", {
         userToCall: id,
         signalData: data,
         from: me,
         name,
-        sale_point_id: '1',
+        sale_point_id: "1"
       });
     });
-    socket.on('callAccepted', (data) => {
+    socket.on("callAccepted", (data) => {
       setCallAccepted(true);
-      peer.signal(data.signal);
-      setCaller(data.from);
-    });
+      peer.signal(data.signal)
+      setCaller(data.from)
+		})
 
-    peer.on('stream', (stream) => {
-      userVideo.current.srcObject = stream;
-    });
+        peer.on("stream", (stream) => {
+				userVideo.current.srcObject = stream
+		})
 
-    connectionRef.current = peer;
-  };
+		connectionRef.current = peer
+	}
 
-  const answerCall = () => {
-    setCallAccepted(true);
-    const peer = new Peer({
-      initiator: false,
-      trickle: false,
-      stream,
-    });
-    peer.on('signal', (data) => {
-      socket.emit('answerCall', { signal: data, to: caller, from: me });
-    });
-    peer.on('stream', (stream) => {
-      userVideo.current.srcObject = stream;
-    });
+	const answerCall =() =>  {
+		setCallAccepted(true)
+		var peer = new Peer({
+			initiator: false,
+			trickle: false,
+			stream: stream
+		})
+		peer.on("signal", (data) => {
+			socket.emit("answerCall", { signal: data, to: caller, from: me})
+		})
+		peer.on("stream", (stream) => {
+			userVideo.current.srcObject = stream
+		})
 
-    peer.signal(callerSignal);
-    connectionRef.current = peer;
-  };
+		peer.signal(callerSignal)
+		connectionRef.current = peer
+	}
 
-  const leaveCall = () => {
-    socket.emit('ended', { to: caller });
-    setCallEnded(true);
-    connectionRef.current.destroy();
-  };
+	const leaveCall = () => {
+        socket.emit("ended", {to: caller})
+		setCallEnded(true)
+		connectionRef.current.destroy()
+        
+	}
 
-  const [Peticiones, SetPeticiones] = useState([]);
-  const [Sala, SetSala] = useState('1');
-  useEffect(() => {
-    socket.on('llegada_peticion', (id_client_socket) => {
-      SetPeticiones([...Peticiones, id_client_socket]);
-    });
-    socket.on('accept_call', (msge) => {});
-    socket.on('delete_peticion', (id_client_socket) => {
-      Peticiones.remove(id_client_socket);
-    });
-    socket.on('video_stream_download', (video_stream) => {});
-  }, [Peticiones]);
+    const [Peticiones, SetPeticiones] = useState([])
+    const [Sala, SetSala] = useState("1")
+    useEffect(() => {
+        socket.on("llegada_peticion", (id_client_socket)=> {
+            
+            SetPeticiones([...Peticiones, id_client_socket])
+        })
+        socket.on("accept_call", (msge) => {})
+        socket.on("delete_peticion", (id_client_socket) => {
+            Peticiones.remove(id_client_socket)
+        })
+        socket.on("video_stream_download", (video_stream) => {})
+    }, [Peticiones])
 
-  const peticion = (id_sale_point) => {
-    socket.emit('peticion_asistentes', id_sale_point);
-  };
+    const peticion = (id_sale_point) =>{
+        socket.emit("peticion_asistentes", id_sale_point)
+    }
 
-  const soy_asistente = (id_sale_point) => {
-    socket.emit('join_sala_asistente', id_sale_point);
-  };
+    const soy_asistente = (id_sale_point) => {
+        socket.emit("join_sala_asistente", id_sale_point)
+    }
 
-  const aceptar_videocall = (args) => {
-    const arg_array = args.split(',');
-    socket.emit('accept_videocall', arg_array[0], arg_array[1]);
-    socket.emit('join_to_videocall_room', arg_array[1]);
-  };
-  const soy_home = (id_sale_point) => {
-    socket.emit('join_to_videocall_room', id_sale_point);
-  };
+    const aceptar_videocall = (args) => {
+        const arg_array = args.split(",")
+        socket.emit("accept_videocall", arg_array[0], arg_array[1])
+        socket.emit("join_to_videocall_room", arg_array[1])
+    }
+    const soy_home = (id_sale_point) => {
+        socket.emit("join_to_videocall_room", id_sale_point)
+    }
+    
+    const enviar_video = (id_sale_point) => {
+        socket.emit("video_stream_upload", id_sale_point, "enviando datos ...")
+    }
 
-  const enviar_video = (id_sale_point) => {
-    socket.emit('video_stream_upload', id_sale_point, 'enviando datos ...');
-  };
-
-  return (
+    return (
         <div>
-            <button value = {'1'} onClick={(e) => peticion(e.target.value)}>PETICION ASISTENTE</button>
-            <button value = {'1'} onClick={(e) => soy_asistente(e.target.value)}>SOY ASISTENTE</button>
-            <button value = {'1'} onClick={(e) => soy_home(e.target.value)}>SOY HOME</button>
-            <button value = {'1'} onClick={(e) => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
+            <button value = {"1"} onClick={e => peticion(e.target.value)}>PETICION ASISTENTE</button>
+            <button value = {"1"} onClick={e => soy_asistente(e.target.value)}>SOY ASISTENTE</button>
+            <button value = {"1"} onClick={e => soy_home(e.target.value)}>SOY HOME</button>
+            <button value = {"1"} onClick={e => enviar_video(e.target.value)}>ENVIAR_VIDEO</button>
             <br />
-            {Peticiones.map((id) => (<button key={id} value = {[id, '1']} onClick={(e) => aceptar_videocall(e.target.value)}>aceptar</button>))}
-
-        <h1 style={{ textAlign: 'center', color: '#fff' }}>Zoomish</h1>
+            {Peticiones.map((id)=>{
+                return(<button key={id} value = {[id,"1"]} onClick={e => aceptar_videocall(e.target.value)}>aceptar</button>)
+            })}
+ 
+        <h1 style={{ textAlign: "center", color: '#fff' }}>Zoomish</h1>
     <div className="container">
         <div className="video-container">
             <div className="video">
-                {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: '300px' }} />}
+                {stream &&  <video playsInline muted ref={myVideo} autoPlay style={{ width: "300px" }} />}
             </div>
             <div className="video">
-                {callAccepted && !callEnded
-                  ? <video playsInline ref={userVideo} autoPlay style={{ width: '300px' }} />
-                  : null}
+                {callAccepted && !callEnded ?
+                <video playsInline ref={userVideo} autoPlay style={{ width: "300px"}} />:
+                null}
             </div>
         </div>
         <div className="myId">
@@ -179,9 +182,9 @@ export default function VideoChat(props) {
                 variant="filled"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                style={{ marginBottom: '20px' }}
+                style={{ marginBottom: "20px" }}
             />
-            <CopyToClipboard text={me} style={{ marginBottom: '2rem' }}>
+            <CopyToClipboard text={me} style={{ marginBottom: "2rem" }}>
                 <Button variant="contained" color="primary" startIcon={<AssignmentIcon fontSize="large" />}>
                     Copy ID
                 </Button>
@@ -219,5 +222,5 @@ export default function VideoChat(props) {
         </div>
     </div>
     </div>
-  );
-}
+    )
+  }

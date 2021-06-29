@@ -50,6 +50,7 @@ function Navbar() {
   const [accepted, setAccepted] = useState(null);
   const salePointId = Cookies.get('salePointId');
 
+
   useEffect(() => {
     if (!salePoints && !location) {
       apiGet('sale-points').then((result) => setSalePoints(
