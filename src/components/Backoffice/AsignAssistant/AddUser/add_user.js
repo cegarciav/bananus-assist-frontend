@@ -17,7 +17,6 @@ const AddUser = (props) => {
   const [rol, setRol] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [name, setName] = React.useState('');
-  const [password, setPassword] = React.useState('');
   const [error, setErrors] = React.useState('');
 
   const handleChange = (event) => {
@@ -28,7 +27,6 @@ const AddUser = (props) => {
     const validEmail = validateEmail(email);
     const body = {
       name,
-      password,
       email,
       rol,
     };
@@ -55,7 +53,6 @@ const AddUser = (props) => {
             </div>
         }
         <TextField id="standard-basic" label="Nombre completo" onChange={(e) => setName(e.target.value)} className={classes.input}/>
-        <TextField id="standard-basic" label="Contraseña" onChange={(e) => setPassword(e.target.value)} className={classes.input}/>
         <FormControl className={classes.input}>
         <InputLabel id="demo-simple-select-label">Rol</InputLabel>
         <Select
@@ -64,9 +61,9 @@ const AddUser = (props) => {
             value={rol}
             onChange={handleChange}
         >
-            <MenuItem value={1}>Asistente</MenuItem>
-            <MenuItem value={2}>Administrador</MenuItem>
-            <MenuItem value={3}>Supervisor</MenuItem>
+            <MenuItem value={'assistant'}>Asistente</MenuItem>
+            <MenuItem value={'administrator'}>Administrador</MenuItem>
+            <MenuItem value={'supervisor'}>Supervisor</MenuItem>
         </Select>
         </FormControl>
         <button className={classes.add} onClick={register}>Agregar</button>
