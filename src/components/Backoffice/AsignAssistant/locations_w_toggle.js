@@ -15,33 +15,29 @@ import Button from '@material-ui/core/Button';
 import useStyles from './styles-locations_w_toggle';
 import { apiGet } from '../../../services/api-service';
 
-function generate(element) {
-  return [0, 1, 2].map((value) => React.cloneElement(element, { key: value }));
+function isStore(userStores, storeId) {
+  console.log(userStores);
+  for (let i = 0; i < userStores.length; i++) {
+    if (userStores[i] === storeId) {
+      return i;
+    }
+  }
+  return -1;
 }
 
-/*
-
-             {user.stores.map((store) => (
-                   <ListItem key = {store.id}>
-                   <ListItemAvatar>
-                     <Avatar>
-                       <LocalGroceryStoreIcon />
-                     </Avatar>
-                   </ListItemAvatar>
-                   <ListItemText primary={store.name} />
-                   <ListItemSecondaryAction>
-                     <Switch edge="end" />
-                   </ListItemSecondaryAction>
-                 </ListItem>
-
-                ))}
-
-*/
 export default function LocationListToggle(props) {
+  // To do: agregar boton volver, submit, solo supervisores pueden cambiar a asistentes.
   const classes = useStyles();
   // eslint-disable-next-line object-curly-newline
   const { userName, email, rol, userStores } = props;
   const [stores, setStores] = useState(null);
+
+  const userStoresIds = [];
+
+  for (let i = 0; i < userStores.length; i++) {
+    userStoresIds.push(userStores[i].id);
+  }
+  const [storesIds, setIds] = useState(userStoresIds);
 
   useEffect(() => {
     if (!stores) {
@@ -51,6 +47,25 @@ export default function LocationListToggle(props) {
         });
     }
   }, [stores]);
+
+  const handleToggle = (value) => () => {
+    const currentIndex = isStore(storesIds, value.id);
+    let aux = [];
+
+    for (let i = 0; i < storesIds.length; i++) {
+      aux.push(storesIds[i]);
+    }
+
+    if (currentIndex === -1) {
+      aux.push(value.id);
+    } else {
+      aux.splice(currentIndex, 1);
+    }
+    setIds(aux);
+  };
+  const handleSubmit = () => () => {
+    console.log('assign stores');
+  };
 
   return (
     <div >
@@ -63,7 +78,7 @@ export default function LocationListToggle(props) {
                 <List >
                 {!stores ? <></>
                   : <>
-                  {stores.result.map((store) => ( 
+                  {stores.result.map((store) => (
                       <ListItem key = {store.id}>
                       <ListItemAvatar>
                         <Avatar>
@@ -72,7 +87,11 @@ export default function LocationListToggle(props) {
                       </ListItemAvatar>
                       <ListItemText primary={store.name} />
                       <ListItemSecondaryAction>
-                        <Switch edge="end" />
+                        <Switch
+                        edge="end"
+                        checked = {isStore(storesIds, store.id) !== -1}
+                        onChange = {handleToggle(store)}
+                        />
                       </ListItemSecondaryAction>
                     </ListItem>
                   ))}
@@ -82,7 +101,7 @@ export default function LocationListToggle(props) {
               </div>
             </Grid>
             <Grid item className={classes.grid}>
-              <Button color="primary" variant="contained" type="submit">Guardar Cambios</Button>
+              <Button color="primary" variant="contained" onClick = {handleSubmit()} type="submit">Guardar Cambios </Button>
             </Grid>
           </Grid>
         </CardContent>
