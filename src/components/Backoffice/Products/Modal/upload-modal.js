@@ -1,23 +1,21 @@
 import React, { useState } from 'react';
 import useStyles from './styles-modal';
-import { apiPost } from '../../../../services/api-service';
+import { apiPostMassiveUpload } from '../../../../services/api-service';
 // masive-charge
 
 const UploadProduct = (props) => {
   const classes = useStyles();
   const [file, setFile] = useState({ selectedFile: null });
+
   const onFileChange = (event) => {
     setFile({ selectedFile: event.target.files[0] });
   };
-  const uploadProducts = () => {
-    const formData = new FormData();
 
-    formData.append(
-      'myFile',
-      file.selectedFile,
-      file.selectedFile.name,
-    );
-    apiPost('/masive-charge', null, null);
+  const uploadProducts = () => {
+    const fromdata = new FormData();
+    fromdata.append('excel', file);
+    fromdata.append('name', 'fileData');
+    apiPostMassiveUpload('massive_charge', fromdata).then((e) => console.log(e, "respuesta"));
   };
 
   const fileData = () => {
@@ -51,15 +49,12 @@ const UploadProduct = (props) => {
           <div>
             <div>
                 <input type="file" onChange={onFileChange} accept=".xlsx" />
-                <button onClick={uploadProducts}>
-                  Upload!
-                </button>
             </div>
           {fileData()}
         </div>
-          <button className={classes.close} onClick={props.hideModal}>No, no estoy seguro</button>
-          <button className={classes.delete} onClick={uploadProducts}>
-              Si, los quiero eliminar
+          <button className={classes.delete} onClick={props.hideModal}>No, no estoy seguro</button>
+          <button className={classes.close} onClick={uploadProducts}>
+              Realizar carga masiva
           </button>
       </div>
     </div>
