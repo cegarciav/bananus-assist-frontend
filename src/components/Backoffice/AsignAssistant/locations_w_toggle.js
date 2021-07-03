@@ -13,12 +13,12 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles-locations_w_toggle';
-import { apiGet } from '../../../services/api-service';
+import { apiGet, apiPost, apiDelete } from '../../../services/api-service';
+import { CodeSharp } from '@material-ui/icons';
 
-function isStore(userStores, storeId) {
-  console.log(userStores);
+function isStore(userStores, storeAddress) {
   for (let i = 0; i < userStores.length; i++) {
-    if (userStores[i] === storeId) {
+    if (userStores[i] === storeAddress) {
       return i;
     }
   }
@@ -32,12 +32,12 @@ export default function LocationListToggle(props) {
   const { userName, email, rol, userStores } = props;
   const [stores, setStores] = useState(null);
 
-  const userStoresIds = [];
+  const userStoresAddress = [];
 
   for (let i = 0; i < userStores.length; i++) {
-    userStoresIds.push(userStores[i].id);
+    userStoresAddress.push(userStores[i].address);
   }
-  const [storesIds, setIds] = useState(userStoresIds);
+  const [storesAds, setAds] = useState(userStoresAddress);
 
   useEffect(() => {
     if (!stores) {
@@ -49,22 +49,32 @@ export default function LocationListToggle(props) {
   }, [stores]);
 
   const handleToggle = (value) => () => {
-    const currentIndex = isStore(storesIds, value.id);
+    const currentIndex = isStore(storesAds, value.address);
     let aux = [];
 
-    for (let i = 0; i < storesIds.length; i++) {
-      aux.push(storesIds[i]);
+    for (let i = 0; i < storesAds.length; i++) {
+      aux.push(storesAds[i]);
     }
 
     if (currentIndex === -1) {
-      aux.push(value.id);
+      aux.push(value.address);
     } else {
       aux.splice(currentIndex, 1);
     }
-    setIds(aux);
+    setAds(aux);
   };
   const handleSubmit = () => () => {
-    console.log('assign stores');
+    for (let i = 0; i < stores.result.length; i++) {
+      const body = JSON.stringify({
+        address: stores.result[i].address,
+        email,
+      });
+      if (isStore(storesAds, stores.result[i].address) === -1) {
+        apiDelete('assistants', body);
+      } else {
+        apiPost('assistants', body);
+      }
+    }
   };
 
   return (
@@ -89,7 +99,7 @@ export default function LocationListToggle(props) {
                       <ListItemSecondaryAction>
                         <Switch
                         edge="end"
-                        checked = {isStore(storesIds, store.id) !== -1}
+                        checked = {isStore(storesAds, store.address) !== -1}
                         onChange = {handleToggle(store)}
                         />
                       </ListItemSecondaryAction>
