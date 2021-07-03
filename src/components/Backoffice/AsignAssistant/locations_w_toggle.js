@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
@@ -13,35 +13,71 @@ import CardContent from '@material-ui/core/CardContent';
 import CardHeader from '@material-ui/core/CardHeader';
 import Button from '@material-ui/core/Button';
 import useStyles from './styles-locations_w_toggle';
+import { apiGet } from '../../../services/api-service';
 
 function generate(element) {
   return [0, 1, 2].map((value) => React.cloneElement(element, { key: value }));
 }
 
-export default function LocationListToggle(user) {
+/*
+
+             {user.stores.map((store) => (
+                   <ListItem key = {store.id}>
+                   <ListItemAvatar>
+                     <Avatar>
+                       <LocalGroceryStoreIcon />
+                     </Avatar>
+                   </ListItemAvatar>
+                   <ListItemText primary={store.name} />
+                   <ListItemSecondaryAction>
+                     <Switch edge="end" />
+                   </ListItemSecondaryAction>
+                 </ListItem>
+
+                ))}
+
+*/
+export default function LocationListToggle(props) {
   const classes = useStyles();
+  // eslint-disable-next-line object-curly-newline
+  const { userName, email, rol, userStores } = props;
+  const [stores, setStores] = useState(null);
+
+  useEffect(() => {
+    if (!stores) {
+      apiGet('stores')
+        .then((result) => {
+          if (result) setStores({ result });
+        });
+    }
+  }, [stores]);
+
   return (
     <div >
       <Card >
-        <CardHeader className={classes.cardHeader} title={user.name} subheader='Asignar Tiendas' />
+        <CardHeader className={classes.cardHeader} title = {userName} subheader='Asignar Tiendas' />
         <CardContent className={classes.cardContent} >
           <Grid container direction="column" spacing={3} className={classes.gridContainer} >
             <Grid item xs={9} md={11} className={classes.grid} >
               <div>
                 <List >
-                  {generate(
-                    <ListItem >
+                {!stores ? <></>
+                  : <>
+                  {stores.result.map((store) => ( 
+                      <ListItem key = {store.id}>
                       <ListItemAvatar>
                         <Avatar>
                           <LocalGroceryStoreIcon />
                         </Avatar>
                       </ListItemAvatar>
-                      <ListItemText primary="Generic Store Location Name" />
+                      <ListItemText primary={store.name} />
                       <ListItemSecondaryAction>
                         <Switch edge="end" />
                       </ListItemSecondaryAction>
-                    </ListItem>,
-                  )}
+                    </ListItem>
+                  ))}
+                   </>
+              }
                 </List>
               </div>
             </Grid>

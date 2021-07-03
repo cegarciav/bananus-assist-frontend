@@ -72,6 +72,9 @@ export default function UserList() {
                       pathname: String('/backoffice/assign_location/') + user.id,
                       state: {
                         user: user.name,
+                        rol: user.rol,
+                        email: user.email,
+                        stores: user.stores,
                       },
                     }}
                     key = {user.id}
