@@ -10,6 +10,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Alert from '@material-ui/lab/Alert';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
+import ProductList from './Products/products-list';
 import UserList from './AsignAssistant/user_list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
@@ -156,6 +157,7 @@ export default function Menu() {
         <Tab label="Tiendas" />
         <Tab label="Puntos de venta" />
         <Tab label="Usuarios" />
+        <Tab label="Productos" />
       </Tabs>
       <Grid
       container
@@ -167,6 +169,7 @@ export default function Menu() {
                 { value === 0 ? <LocationList /> : <div/> }
                 { value === 1 ? <StoreList /> : <div/> }
                 { value === 2 ? <UserList /> : <div/> }
+                { value === 3 ? <ProductList /> : <div/> }
                 </Paper>
         </Container>
       </Grid>
