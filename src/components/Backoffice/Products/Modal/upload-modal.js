@@ -13,8 +13,7 @@ const UploadProduct = (props) => {
 
   const uploadProducts = () => {
     const fromdata = new FormData();
-    fromdata.append('excel', file);
-    fromdata.append('name', 'fileData');
+    fromdata.append('excel', file.selectedFile, 'excel');
     apiPostMassiveUpload('massive_charge', fromdata).then((e) => console.log(e, "respuesta"));
   };
 
