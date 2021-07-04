@@ -20,7 +20,7 @@ const UploadProduct = (props) => {
     if (file.selectedFile) {
       const fromdata = new FormData();
       fromdata.append('excel', file.selectedFile, 'excel');
-      apiPostMassiveUpload('massive_charge', fromdata).then((e) => setErrors(e.failed_products));
+      apiPostMassiveUpload('massive-charge', fromdata).then((e) => setErrors(e.failed_products));
       props.reload();
     }
     setFile({ selectedFile: null });
