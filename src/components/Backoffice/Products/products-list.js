@@ -61,7 +61,7 @@ export default function ProductList() {
       <div style={{ minHeight: '100vh' }}>
           <button
             onClick={() => handleOpenUploadModal()}
-            className={classes.delete}
+            className={classes.close}
           >
               Carga masiva
           </button>
