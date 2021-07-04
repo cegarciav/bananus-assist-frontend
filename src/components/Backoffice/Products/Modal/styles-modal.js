@@ -40,6 +40,10 @@ const useStyles = makeStyles({
     paddingBottom: '5px',
     fontSize: '18px',
   },
+  alert: {
+    marginTop: '10vh',
+    marginBottom: '10vh',
+  },
 });
 
 export default useStyles;
