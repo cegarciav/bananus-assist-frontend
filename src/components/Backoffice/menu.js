@@ -161,7 +161,7 @@ export default function Menu(v) {
       >
         <Tab label="Tiendas" />
         <Tab label="Puntos de venta" />
-        <Tab label="Usuarios" />
+        <Tab label="Asistentes" />
       </Tabs>
       <Grid
       container

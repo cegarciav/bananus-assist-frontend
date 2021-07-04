@@ -67,7 +67,9 @@ export default function UserList() {
               {!users ? <>Loading...</>
                 : <>
                 {users.result.map((user) => (
-                  <Link
+                  <>
+                     { (user.rol) === 'assistant'
+                       ? <Link
                     to={{
                       pathname: String('/backoffice/assign_location/') + user.id,
                       state: {
@@ -92,6 +94,10 @@ export default function UserList() {
                       />
                     </ListItem >
                   </Link>
+                       : <>
+                  </>
+                  }
+                  </>
                 ))}
               </>}
             </List>
