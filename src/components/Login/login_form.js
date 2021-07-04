@@ -41,10 +41,12 @@ export default function LoginForm() {
       const { state } = session;
       if (state === 'OK') {
         const { token } = session;
+        const { rol } = session;
         dispatch(login({
           username,
           password,
           token,
+          rol,
           loggedIn: true,
         }));
       } else {

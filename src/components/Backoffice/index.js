@@ -16,7 +16,7 @@ import useStyles from './styles-menu';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
 
-export default function Menu() {
+export default function Backoffice() {
   const [value, setValue] = useState(0);
   const classes = useStyles();
   const [stores, setStores] = useState(null);

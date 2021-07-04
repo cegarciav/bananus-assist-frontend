@@ -8,8 +8,6 @@ import { Redirect } from 'react-router-dom';
 import DeviceLoginForm from './device_login_form';
 
 export default function DeviceLogin() {
-  const token = Cookies.get('token');
-
   return (
         <div >
             <Grid
@@ -24,7 +22,7 @@ export default function DeviceLogin() {
                     <CardHeader title={'Login'} style={{ textAlign: 'center' }} />
                     <CardContent>
                         <Grid item >
-                            {token ? <Redirect to="/Catalog" /> : <DeviceLoginForm />}
+                            <DeviceLoginForm />
                         </Grid>
                     </CardContent>
                 </Card>

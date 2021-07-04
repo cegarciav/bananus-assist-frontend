@@ -13,7 +13,7 @@ import { apiGet } from '../../../services/api-service';
 import useStyles from './styles-user_list';
 
 export default function UserList() {
-  const userRoles = { supervisor: 'Supervisor', assistant: 'Asistente', administrator: 'Administrador' };
+  const userRoles = { supervisor: 'Supervisor', assistant: 'Asistente', administrator: 'Administrador', client: 'Cliente' };
   const [users, setUsers] = useState(null);
   const [reload, setReload] = useState(false);
   const [openModal, setOpenModal] = useState(false);

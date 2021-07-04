@@ -111,7 +111,7 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
-    history.push('/');
+    history.push('/catalog');
   };
 
   const handleLogIn = () => {
@@ -240,7 +240,7 @@ function Navbar() {
                                              className={classes.link}>
                                                 <MenuItem onClick={handleClose2}>
                                                    <Typography >
-                                                        Home
+                                                        Administración
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>
