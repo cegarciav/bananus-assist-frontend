@@ -44,6 +44,7 @@ const UploadProduct = (props) => {
       );
     }
     if (errors.length >= 1 && upload) {
+      console.log(errors);
       return (
           <Alert severity="error" className={classes.alert}>Las columnas con problemas son las siguientes:
           {errors.map((error, index) => <p key={index} >
