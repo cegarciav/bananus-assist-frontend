@@ -48,6 +48,9 @@ const useStyles = makeStyles((theme) => ({
   infoButton: {
     color: '#FFFFFF',
     marginLeft: '20%',
+    '@media only screen and (max-width: 1240px)': {
+      marginLeft: '15%',
+    },
   },
 }));
 

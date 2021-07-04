@@ -151,12 +151,12 @@ export default function VideoChat() {
   return (
         <div>
           <div >
-              <div className="video-container">
-                  <div className="video">
-                      {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: '500px' }} />}
+              <div className={classes.videoContainer}>
+                  <div className={classes.videoRight}>
+                      {stream && <video playsInline muted ref={myVideo} autoPlay style={{ width: 'auto', height: '33vh', borderRadius: '2vh', boxShadow: '0px 0px 5px 1px black' }} />}
                   </div>
-                  <div className="video">
-                      {callAccepted && !callEnded ? <video playsInline ref={userVideo} autoPlay style={{ width: '500px' }} />
+                  <div className={classes.videoLeft}>
+                      {callAccepted && !callEnded ? <video playsInline ref={userVideo} autoPlay style={{ width: 'auto', height: '33vh', borderRadius: '2vh', boxShadow: '0px 0px 5px 1px black' }} />
                         : null}
                   </div>
               </div>
@@ -172,7 +172,7 @@ export default function VideoChat() {
               </div>
               <div>
                   {receivingCall && !callAccepted ? (
-                          <div className="caller">
+                          <div className={classes.btn}>
                           <Button variant="contained" color="primary" onClick={answerCall}>
                               Answer
                           </Button>
