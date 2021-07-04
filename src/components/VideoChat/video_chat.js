@@ -1,9 +1,9 @@
-/* eslint-disable no-shadow */
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import TextField from '@material-ui/core/TextField';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import PhoneIcon from '@material-ui/icons/Phone';
+import { useHistory } from 'react-router-dom';
 
 import React, { useRef, useEffect, useState } from 'react';
 import { useCallbackRef } from 'use-callback-ref';
@@ -12,17 +12,14 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import Peer from 'simple-peer';
 
 import '../../assets/video.css';
+import { render } from '@testing-library/react';
 import socket from '../socket';
 
-// eslint-disable-next-line no-extend-native
 Array.prototype.remove = function () {
-  // eslint-disable-next-line prefer-rest-params
   let what; const a = arguments; let L = a.length; let
     ax;
   while (L && this.length) {
-    // eslint-disable-next-line no-plusplus
     what = a[--L];
-    // eslint-disable-next-line no-cond-assign
     while ((ax = this.indexOf(what)) !== -1) {
       this.splice(ax, 1);
     }
@@ -30,7 +27,7 @@ Array.prototype.remove = function () {
   return this;
 };
 
-export default function VideoChat() {
+export default function VideoChat(props) {
   const [me, setMe] = useState('');
   const [stream, setStream] = useState();
   const [receivingCall, setReceivingCall] = useState(false);
@@ -40,7 +37,6 @@ export default function VideoChat() {
   const [idToCall, setIdToCall] = useState('');
   const [callEnded, setCallEnded] = useState(false);
   const [name, setName] = useState('');
-  // eslint-disable-next-line no-unused-vars
   const [refUser, SetrefUser] = useState(null);
   const myVideo = useRef();
   const userVideo = useCallbackRef(null, (ref) => ref && ref.focus());

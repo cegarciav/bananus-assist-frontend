@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
+import Alert from '@material-ui/lab/Alert';
 import useStyles from './styles-modal';
 import { apiPostMassiveUpload } from '../../../../services/api-service';
-import Alert from '@material-ui/lab/Alert';
 
 const UploadProduct = (props) => {
   const classes = useStyles();
@@ -46,7 +46,9 @@ const UploadProduct = (props) => {
     if (errors.length >= 1 && upload) {
       return (
           <Alert severity="error" className={classes.alert}>Las columnas con problemas son las siguientes:
-          {errors.map((error, index) => <p key={index} > La columna {error.key} de la hoja de {excelPage[error.type]} </p>)}
+          {errors.map((error, index) => <p key={index} >
+          La columna {error.key} de la hoja de {excelPage[error.type]}
+          </p>)}
           </Alert>
       );
     }

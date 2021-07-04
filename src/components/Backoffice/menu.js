@@ -11,14 +11,21 @@ import Alert from '@material-ui/lab/Alert';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import ProductList from './Products/products-list';
-import UserList from './AsignAssistant/user_list';
+import AssistantList from './AsignAssistant/assistant-list';
+import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
 
-export default function Menu() {
-  const [value, setValue] = useState(0);
+export default function Menu(v) {
+  let val;
+  if (v.history.location.state === 2) {
+    val = 2;
+  } else {
+    val = 0;
+  }
+  const [value, setValue] = useState(val);
   const classes = useStyles();
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
@@ -114,7 +121,7 @@ export default function Menu() {
           { salePoints.result.map(
             (salePointOrdered) => < option className={classes.option}
                                            key={salePointOrdered.id}
-                                            value={salePointOrdered.department} >
+                                            value={salePointOrdered.id} >
                                       {salePointOrdered.storeName} / {salePointOrdered.department}
                                     </option>,
           )
@@ -158,6 +165,7 @@ export default function Menu() {
         <Tab label="Puntos de venta" />
         <Tab label="Usuarios" />
         <Tab label="Productos" />
+        <Tab label="Asistentes" />
       </Tabs>
       <Grid
       container
@@ -170,6 +178,7 @@ export default function Menu() {
                 { value === 1 ? <StoreList /> : <div/> }
                 { value === 2 ? <UserList /> : <div/> }
                 { value === 3 ? <ProductList /> : <div/> }
+                { value === 4 ? <AssistantList /> : <div/> }
                 </Paper>
         </Container>
       </Grid>

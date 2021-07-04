@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-const apiOrigin = process.env.REACT_APP_API_ORIGIN;
+const apiOrigin = 'http://localhost:3001';
 if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
 /**

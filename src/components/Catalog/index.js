@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import { useLocation } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import Product from './Product/product';
 import { apiGet } from '../../services/api-service';
 import FaceRecognition from '../FaceRecognition/video_stream';
@@ -18,13 +18,11 @@ function groupBy(objectArray, property) {
 }
 
 function Catalog() {
-  const data = useLocation();
-
   const [products, setProducts] = useState(null);
-  const [Location, setLocation] = useState(null);
   const [techChars, setTechChars] = useState(null);
   const [update, setUpdate] = useState(null);
   const [productsOrdered, setProductsOrdered] = useState(null);
+  const salePointId = Cookies.get('salePointId');
 
   useEffect(() => {
     if (!products) {
@@ -61,15 +59,9 @@ function Catalog() {
     }
   }, [update, products, techChars]);
 
-  useEffect(() => {
-    if (data.state) {
-      setLocation(data.state.location);
-    }
-  });
-
   return (
     <div>
-      {Location ? <FaceRecognition location={Location}/> : <> </>}
+      {<FaceRecognition location={salePointId}/>}
       <Box p={7}>
         <Grid container justify="center" spacing={3}>
           {
