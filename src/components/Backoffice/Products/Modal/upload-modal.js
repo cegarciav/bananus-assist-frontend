@@ -8,7 +8,7 @@ const UploadProduct = (props) => {
   const [file, setFile] = useState({ selectedFile: null });
   const [errors, setErrors] = useState([]);
   const [upload, setUpload] = useState(false);
-  const excelPage = { product: 'Productos', tech_char: 'Características técnicas', payment_methods: 'Medios de pago' };
+  const excelPage = { product: 'Productos', tech_char: 'Características técnicas', payment_method: 'Medios de pago' };
 
   const onFileChange = (event) => {
     setFile({ selectedFile: event.target.files[0] });
