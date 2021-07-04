@@ -30,12 +30,12 @@ function Product(props) {
   return (
         <Card className={classes.root}>
             <CardHeader
-            title={props[0].productName}
-            subheader={props[0].price + String(' CLP')}
+            title={props.name}
+            subheader={props.price + String(' CLP')}
             />
             <CardMedia
             className={classes.media}
-            image= {props[0].image}
+            image= {props.image}
             />
             <CardActions disableSpacing>
             <Typography variant="body2" color="textSecondary" component="h2" className={classes.product}>
@@ -56,14 +56,9 @@ function Product(props) {
             <CardContent>
               <Typography paragraph>Información técnica:</Typography>
                 {
-                  !qualities ? <></>
-                    : <>
-                    {
-                      qualities.map((element) => <Typography key = {element.id} paragraph>
+                  props.technical_chars.map((element) => <Typography key = {element.id} paragraph>
                         - {element.key}  {element.value}
                       </Typography>)
-                    }
-                  </>
                 }
             </CardContent>
             </Collapse>
