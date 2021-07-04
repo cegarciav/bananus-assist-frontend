@@ -2,6 +2,7 @@
 const apiOrigin = 'http://localhost:3001';
 if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
+
 /**
  * Realiza un HTTP GET a la API del sistema
  * @param {string} path La ruta al recurso que se quiere obtener
@@ -11,6 +12,8 @@ if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida
  */
 
 async function apiGet(path, params) {
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
   if (params) {
     Object.keys(params)
@@ -22,6 +25,7 @@ async function apiGet(path, params) {
       method: 'GET',
       mode: 'cors',
       headers: {
+        'Authorization' : token,
         'Content-Type': 'application/json',
       },
     },
@@ -43,6 +47,8 @@ async function apiGet(path, params) {
  * @returns La respuesta entregada por la API
  */
 async function apiPost(path, body, params) {
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
   let requestBody = {};
   if (params) {
@@ -57,6 +63,7 @@ async function apiPost(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
+        'Authorization' : token,
         'Content-Type': 'application/json',
       },
     },
@@ -77,6 +84,8 @@ async function apiPost(path, body, params) {
  * @returns La respuesta entregada por la API
  */
 async function apiPatch(path, body, params) {
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
   let requestBody = {};
   if (params) {
@@ -91,6 +100,7 @@ async function apiPatch(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
+        'Authorization' : token,
         'Content-Type': 'application/json',
       },
     },
@@ -111,6 +121,8 @@ async function apiPatch(path, body, params) {
  * @returns La respuesta entregada por la API
  */
 async function apiDelete(path, body, params) {
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
   let requestBody = {};
   if (params) {
@@ -125,6 +137,7 @@ async function apiDelete(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
+        'Authorization' : token,
         'Content-Type': 'application/json',
       },
     },

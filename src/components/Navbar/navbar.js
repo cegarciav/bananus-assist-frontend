@@ -115,6 +115,8 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    const TOKEN_KEY = 'token';
+    localStorage.removeItem(TOKEN_KEY);
     history.push('/');
   };
 

@@ -15,6 +15,7 @@ export default function LoginForm() {
   const [username, setUserame] = useState('');
   const [password, setPassword] = useState('');
   const [session, setSession] = useState(null);
+  const TOKEN_KEY = 'token';
   const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
@@ -41,6 +42,7 @@ export default function LoginForm() {
       const { state } = session;
       if (state === 'OK') {
         const { token } = session;
+        localStorage.setItem(TOKEN_KEY, token);
         dispatch(login({
           username,
           password,
