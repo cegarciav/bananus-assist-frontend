@@ -20,7 +20,6 @@ import Collapse from '@material-ui/core/Collapse';
 import CloseIcon from '@material-ui/icons/Close';
 import useStyles from './styles-locations_w_toggle';
 import { apiGet, apiPost, apiDelete } from '../../../services/api-service';
-import Menu from '../menu';
 
 function isStore(userStores, storeAddress) {
   for (let i = 0; i < userStores.length; i++) {

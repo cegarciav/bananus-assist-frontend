@@ -20,7 +20,11 @@ export default function AsignPage(props) {
       container
       >
         <Container maxWidth="sm">
-            <LocationListToggle userName = {userName} email = {email} rol = {rol} userStores = {stores}>
+            <LocationListToggle
+            userName = {userName}
+            email = {email} rol = {rol}
+            userStores = {stores}
+            >
             </LocationListToggle>
         </Container>
       </Grid>
