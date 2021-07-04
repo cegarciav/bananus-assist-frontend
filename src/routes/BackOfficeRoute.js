@@ -21,7 +21,7 @@ export default function BackOfficeRoute({exact, path, props, ...rest}) {
                         {
                         user?
                             (
-                            user.rol == "administrator" || user.rol == "supervisor"?
+                            user.rol == "administrator" || user.rol == "supervisor" || user.rol == "assistant"?
                                 <Backoffice {...props}/>
                             :
                                 <div className={classes.imageContainer}>
