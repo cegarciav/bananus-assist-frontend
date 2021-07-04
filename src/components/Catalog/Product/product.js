@@ -14,18 +14,11 @@ import useStyles from './styles-product';
 function Product(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  const [qualities, setQualities] = useState(null);
+  console.log(props);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
-
-  useEffect(() => {
-    if (!qualities) {
-      const array = Object.keys(props).map((k) => props[k]);
-      setQualities(array);
-    }
-  }, [qualities]);
 
   return (
         <Card className={classes.root}>
@@ -58,6 +51,14 @@ function Product(props) {
                 {
                   props.technical_chars.map((element) => <Typography key = {element.id} paragraph>
                         - {element.key}  {element.value}
+                      </Typography>)
+                }
+            </CardContent>
+            <CardContent>
+              <Typography paragraph>&#36; Métodos de pago:</Typography>
+                {
+                  props.payment_methods.map((element) => <Typography key = {element.id} paragraph>
+                        - {element.name}
                       </Typography>)
                 }
             </CardContent>
