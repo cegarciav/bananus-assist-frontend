@@ -16,8 +16,14 @@ import useStyles from './styles-menu';
 import { apiGet } from '../../services/api-service';
 import socket from '../socket';
 
-export default function Menu() {
-  const [value, setValue] = useState(0);
+export default function Menu(v) {
+  let val;
+  if (v.history.location.state === 2) {
+    val = 2;
+  } else {
+    val = 0;
+  }
+  const [value, setValue] = useState(val);
   const classes = useStyles();
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
@@ -155,7 +161,7 @@ export default function Menu() {
       >
         <Tab label="Tiendas" />
         <Tab label="Puntos de venta" />
-        <Tab label="Usuarios" />
+        <Tab label="Asistentes" />
       </Tabs>
       <Grid
       container

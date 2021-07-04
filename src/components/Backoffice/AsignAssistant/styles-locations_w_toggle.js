@@ -15,6 +15,13 @@ const useStyles = makeStyles(() => ({
       color: 'primary',
     },
   },
+  btn: {
+    color: 'primary',
+    margin: 10,
+  },
+  text: {
+    fontFamily: 'Arial',
+  },
 }));
 
 export default useStyles;
