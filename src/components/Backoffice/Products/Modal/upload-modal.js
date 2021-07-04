@@ -23,10 +23,6 @@ const UploadProduct = (props) => {
             <div>
               <h2>Detalles del archivo:</h2>
               <p>Nombre del archivo: {file.selectedFile.name}</p>
-              <p>
-                Ultima vez modificado:{''}
-                {file.selectedFile.lastModifiedDate.toDateString()}
-              </p>
             </div>
       );
     }

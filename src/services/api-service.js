@@ -145,16 +145,12 @@ async function apiDelete(path, body, params) {
  */
 async function apiPostMassiveUpload(path, body) {
   const url = new URL(`${apiOrigin}/${path}`);
-  const requestBody = body.getAll('excel')[0];
   const results = await fetch(
     url,
     {
       method: 'POST',
       mode: 'cors',
-      requestBody,
-      headers: {
-        'Content-type': 'multipart/form-data',
-      },
+      body,
     },
   )
     .then((r) => r.json())
