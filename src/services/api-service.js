@@ -62,8 +62,8 @@ async function apiPost(path, body, params) {
     },
   )
     .then((r) => r.json())
-    .catch(() => {
-      alert('Error de conexión inesperado. Por favor, inténtelo más tarde');
+    .catch((e) => {
+      alert(e);
       return null;
     });
   return results;
@@ -137,9 +137,34 @@ async function apiDelete(path, body, params) {
   return results;
 }
 
+/**
+ * Realiza un HTTP POST a la API del sistema
+ * @param {string} path La ruta para crear un recurso
+ * @param {Object} body El cuerpo de la request
+ * @returns La respuesta entregada por la API
+ */
+async function apiPostMassiveUpload(path, body) {
+  const url = new URL(`${apiOrigin}/${path}`);
+  const results = await fetch(
+    url,
+    {
+      method: 'POST',
+      mode: 'cors',
+      body,
+    },
+  )
+    .then((r) => r.json())
+    .catch((e) => {
+      alert(e);
+      return null;
+    });
+  return results;
+}
+
 export {
   apiGet,
   apiPost,
   apiPatch,
   apiDelete,
+  apiPostMassiveUpload,
 };

@@ -12,7 +12,9 @@ import { useSelector } from 'react-redux';
 import Cookies from 'js-cookie';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
-import UserList from './AsignAssistant/user_list';
+import ProductList from './Products/products-list';
+import AssistantList from './AsignAssistant/assistant-list';
+import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
 import { apiGet, apiPost } from '../../services/api-service';
@@ -176,6 +178,8 @@ export default function Menu(v) {
       >
         <Tab label="Tiendas" />
         <Tab label="Puntos de venta" />
+        <Tab label="Usuarios" />
+        <Tab label="Productos" />
         <Tab label="Asistentes" />
       </Tabs>
       <Grid
@@ -188,6 +192,8 @@ export default function Menu(v) {
                 { value === 0 ? <LocationList /> : <div/> }
                 { value === 1 ? <StoreList /> : <div/> }
                 { value === 2 ? <UserList /> : <div/> }
+                { value === 3 ? <ProductList /> : <div/> }
+                { value === 4 ? <AssistantList /> : <div/> }
                 </Paper>
         </Container>
       </Grid>
