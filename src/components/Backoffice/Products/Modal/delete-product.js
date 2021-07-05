@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import useStyles from './styles-modal';
 import { apiDelete } from '../../../../services/api-service';
 
 const DeleteProduct = (props) => {
   const classes = useStyles();
   const count = props.productsToDelete.length;
+  const [reload , setReload] = useState(false);
 
-  const callDeleteAPI = (sku) => {
+  async function callDeleteAPI(sku) {
     const body = { sku };
-    apiDelete('products', JSON.stringify(body), null);
-  };
+    const response = await apiDelete('products', JSON.stringify(body), null).then(setReload(true));
+  }
 
   const deleteProducts = () => {
     props.productsToDelete.forEach((element) => callDeleteAPI(element.sku));
     props.reload();
     props.hideModal();
   };
+
+  useEffect(() => {
+    if (!reload) {
+      props.reload();
+    }
+    setReload(false);
+  }, [reload]);
 
   if (count === 0) {
     return (
