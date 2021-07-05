@@ -13,13 +13,13 @@ export default function CatalogRoute({exact, path, props, ...rest}) {
             exact={exact} 
             path={path} {...rest}
             render={(props) =>
-                        /*token?*/
+                        token?
                         <>
                             <Navbar/>
                             <Catalog {...props}/>
                         </>
-                        /*:
-                        <DeviceLogin/>*/
+                        :
+                        <DeviceLogin/>
                     }
         />
   );
