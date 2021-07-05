@@ -67,28 +67,20 @@ export default function UserList() {
               {!users ? <>Loading...</>
                 : <>
                 {users.result.map((user) => (
-                  <Link
-                    to={{
-                      pathname: String('/backoffice/assign_location/') + user.id,
-                      state: {
-                        user: user.name,
-                      },
-                    }}
-                    key = {user.id}
-                  >
-                    <ListItem
-                      button
-                    >
-                      <ListItemAvatar>
-                        <Avatar>
-                          <AccountCircleIcon />
-                        </Avatar>
-                      </ListItemAvatar>
-                      <ListItemText
-                        primary={`${user.name} [${userRoles[user.rol]}]`}
-                      />
-                    </ListItem >
-                  </Link>
+                   <>
+                          <ListItem
+                             button
+                          >
+                            <ListItemAvatar>
+                                <Avatar>
+                                <AccountCircleIcon />
+                                </Avatar>
+                            </ListItemAvatar>
+                            <ListItemText
+                                primary={`${user.name} [${userRoles[user.rol]}]`}
+                            />
+                         </ListItem >
+                        </>
                 ))}
               </>}
             </List>

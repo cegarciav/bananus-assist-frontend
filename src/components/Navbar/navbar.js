@@ -14,6 +14,8 @@ import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import Alert from '@material-ui/lab/Alert';
+import Cookies from 'js-cookie';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
@@ -45,6 +47,9 @@ function Navbar() {
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
+  const [accepted, setAccepted] = useState(null);
+  const salePointId = Cookies.get('salePointId');
+
 
   useEffect(() => {
     if (!salePoints && !location) {
@@ -83,6 +88,13 @@ function Navbar() {
     });
   }, [Peticiones]);
 
+  useEffect(() => {
+    socket.on('accept_call', () => {
+      setAccepted(1);
+      setOpenModal(true);
+    });
+  }, [accepted]);
+
   const peticion = (idSalePoint) => {
     socket.emit('peticion_asistentes', idSalePoint);
   };
@@ -92,11 +104,13 @@ function Navbar() {
   };
 
   const handleOpenModal = (e) => {
-    peticion(e.target.value);
+    const value = Cookies.get('salePointId');
+    peticion(value);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
+    setAccepted(0);
     setOpenModal(false);
   };
 
@@ -132,33 +146,6 @@ function Navbar() {
         <div>
             <AppBar position="static" >
                 <Toolbar className={classes.navbar}>
-                { user ? <></>
-                  : <>{ location ? <Typography className={classes.location}>
-                                    <h3>Punto de venta:</h3>
-                                    <p>{location}</p>
-                                </Typography >
-                    : <FormControl variant="outlined" className={classes.location}>
-                         { (!salePoints && !user) ? <></>
-                           : <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={location}
-                                className={classes.location}
-                                onChange={handleChange}
-                            >
-                                { salePoints.result.map(
-                                  (salePointOrdered) => <option className={classes.option}
-                                                                key={salePointOrdered.id}
-                                                                value={`${salePointOrdered.storeName} / ${salePointOrdered.department}`} >
-                                                 {salePointOrdered.storeName} / {salePointOrdered.department}
-                                                        </option>,
-                                )
-                                }
-                            </Select>
-                        }
-                        </FormControl>
-                        } </>
-                    }
                     <div className={classes.item}>
                         {auth && (
                             <div className={classes.item}>
@@ -251,7 +238,7 @@ function Navbar() {
                         )}
                     {user ? <></>
                       : <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
-                          &#x2706; Solicitar asistencia
+                           &#x2706; Solicitar asistencia
                         </button>
                     }
 
@@ -264,7 +251,7 @@ function Navbar() {
                         open={openModal}
                         onClose={handleCloseModal}
                     >
-                         <Assistance hideModal ={() => setOpenModal(false) } />
+                         <Assistance hideModal ={() => setOpenModal(false) } state = {accepted} />
                     </Modal>
                 </Toolbar>
             </AppBar>

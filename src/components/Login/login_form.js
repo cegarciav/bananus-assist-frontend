@@ -5,6 +5,7 @@ import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 import { useDispatch } from 'react-redux';
+import Cookies from 'js-cookie';
 import { login } from '../../features/userSlice';
 import { apiPost } from '../../services/api-service';
 import useStyles from './styles-login_form';
@@ -26,6 +27,7 @@ export default function LoginForm() {
     });
     const result = await apiPost('sessions', raw, '');
     setSession(result);
+    Cookies.set('email', username);
   };
 
   const errors = (ers) => {

@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-
+import Cookies from 'js-cookie';
 import * as faceapi from 'face-api.js';
 import socket from '../socket';
 
@@ -12,7 +12,7 @@ const time = 5;
 export default function VideoFeed(props) {
   const videoEl = useRef(null);
   faceapi.nets.tinyFaceDetector.loadFromUri('/models');
-
+  const salePointId = Cookies.get('salePointId');
   useEffect(() => {
     // eslint-disable-next-line no-unused-vars
     socket.on('user_alert', (msge) => {});
@@ -39,7 +39,7 @@ export default function VideoFeed(props) {
             }
             if (count === time) {
               // ADD SOCKETS
-              socket.emit('face-detected', props.location);
+              socket.emit('face-detected', salePointId);
             }
           }, 1000);
         });

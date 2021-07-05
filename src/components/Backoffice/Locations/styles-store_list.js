@@ -19,6 +19,11 @@ const useStyles = makeStyles(() => ({
       color: 'white',
     },
   },
+  option: {
+    color: 'black',
+    fontFamily: 'Arial',
+    margin: '1em',
+  },
 }));
 
 export default useStyles;
