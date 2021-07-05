@@ -53,7 +53,7 @@ const useStyles = makeStyles({
       color: '#195E6D',
     },
   },
-  error: {
+  errors: {
     color: '#EF1717',
     fontSize: '14px',
     textAlign: 'center',

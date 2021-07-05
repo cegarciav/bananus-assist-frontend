@@ -53,22 +53,11 @@ const useStyles = makeStyles({
       color: '#195E6D',
     },
   },
-  error: {
-    backgroundColor: '#FFB9B9',
-    borderRadius: '5px',
-    border: 'solid 2px #EF1717',
+  errors: {
     color: '#EF1717',
     fontSize: '14px',
-    width: '200px',
-    height: '30px',
     textAlign: 'center',
     marginBottom: '10px',
-    marginLeft: '25%',
-    justifyItems: 'center',
-    msg: {
-      textAlign: 'center',
-      margin: '10px',
-    },
   },
 });
 

@@ -8,18 +8,22 @@ const AddStore = (props) => {
 
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
+  const [errors, setErrors] = React.useState('');
 
   const create = () => {
-    const body = {
-      name,
-      address,
-    };
-
-    apiPost('stores', JSON.stringify(body), null)
-      .then(() => {
-        props.reload();
-        props.hideModal();
-      });
+    setErrors('Debes rellenar todos los campos');
+    if (name && address) {
+      const body = {
+        name,
+        address,
+      };
+      apiPost('stores', JSON.stringify(body), null)
+        .then(() => {
+          props.reload();
+          props.hideModal();
+        });
+      setErrors('');
+    }
   };
 
   return (
@@ -29,6 +33,7 @@ const AddStore = (props) => {
         <h2 className={classes.header}>Agregar nueva Tienda</h2>
         <TextField id="standard-basic" label="Nombre Tienda" onChange={(e) => setName(e.target.value)} className={classes.input}/>
         <TextField id="standard-basic" label="Dirección Tienda" onChange={(e) => setAddress(e.target.value)} className={classes.input}/>
+        <p className={classes.errors} >{errors}</p>
         <button className={classes.add} onClick={create}>Agregar</button>
         </div>
       </div>
