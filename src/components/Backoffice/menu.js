@@ -17,7 +17,7 @@ import AssistantList from './AsignAssistant/assistant-list';
 import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
-import { apiGet, apiPost } from '../../services/api-service';
+import { apiGet, apiPatch, apiPost } from '../../services/api-service';
 import socket from '../socket';
 import { selectUser } from '../../features/userSlice';
 
@@ -108,6 +108,7 @@ export default function Menu(v) {
     setPeticiones([]);
     socket.emit('accept_videocall', argArray[0], argArray[1]);
     socket.emit('join_to_videocall_room', argArray[1]);
+    apiPatch('assistants').then( res => console.log(res));
     // eslint-disable-next-line no-restricted-globals
     history.push({
       pathname: '/videocall/'.concat(location),
