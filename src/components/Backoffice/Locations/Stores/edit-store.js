@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import TextField from '@material-ui/core/TextField';
 import useStyles from './styles-add-store';
@@ -13,6 +13,11 @@ const EditStore = (props) => {
   const [address, setAddress] = React.useState('');
   const history = useHistory();
   const [errors, setErrors] = React.useState('');
+
+  useEffect(() => {
+    setName(store.name);
+    setAddress(store.address);
+  }, []);
 
   const edit = () => {
     setErrors('Debes rellenar todos los campos');
