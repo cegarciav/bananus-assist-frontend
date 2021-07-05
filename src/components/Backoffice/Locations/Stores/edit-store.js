@@ -12,18 +12,22 @@ const EditStore = (props) => {
   const [name, setName] = React.useState('');
   const [address, setAddress] = React.useState('');
   const history = useHistory();
+  const [errors, setErrors] = React.useState('');
 
   const edit = () => {
-    const body = {
-      name,
-      new_address: address,
-      address: store.address,
-    };
-
-    apiPatch('stores', JSON.stringify(body), null)
-      .then(() => {
-        props.hideModal();
-      });
+    setErrors('Debes rellenar todos los campos');
+    if (name && address) {
+      const body = {
+        name,
+        new_address: address,
+        address: store.address,
+      };
+      apiPatch('stores', JSON.stringify(body), null)
+        .then(() => {
+          props.hideModal();
+        });
+      setErrors('');
+    }
     let edit_name = name;
     let edit_address = address;
     if (name !== '') {
@@ -55,6 +59,7 @@ const EditStore = (props) => {
         <h2 className={classes.header}>Editar Tienda</h2>
         <TextField id="standard-basic" label="Nombre Tienda" defaultValue={store.name} onChange={(e) => setName(e.target.value)} className={classes.input}/>
         <TextField id="standard-basic" label="Dirección Tienda" defaultValue={store.address} onChange={(e) => setAddress(e.target.value)} className={classes.input}/>
+        <p className={classes.errors} >{errors}</p>
         <button className={classes.add} onClick={edit}>Editar Tienda</button>
         </div>
       </div>
