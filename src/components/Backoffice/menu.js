@@ -13,7 +13,7 @@ import StoreList from './Locations/store_list';
 import UserList from './AsignAssistant/user_list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
-import { apiGet } from '../../services/api-service';
+import { apiGet, apiPatch } from '../../services/api-service';
 import socket from '../socket';
 
 export default function Menu() {
@@ -81,6 +81,7 @@ export default function Menu() {
     setPeticiones([]);
     socket.emit('accept_videocall', argArray[0], argArray[1]);
     socket.emit('join_to_videocall_room', argArray[1]);
+    apiPatch('assistants').then( res => console.log(res));
     // eslint-disable-next-line no-restricted-globals
     history.push({
       pathname: '/videocall/'.concat(location),
