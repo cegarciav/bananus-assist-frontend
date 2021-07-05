@@ -15,12 +15,12 @@ const useStyles = makeStyles(() => ({
       color: 'primary',
     },
   },
-  btn: {
-    color: 'primary',
-    margin: 10,
-  },
-  text: {
-    fontFamily: 'Arial',
+  item: {
+    minHeight: '80vh',
+    spacing: 0,
+    direction: 'column',
+    alignItems: 'center',
+    justify: 'center',
   },
 }));
 
