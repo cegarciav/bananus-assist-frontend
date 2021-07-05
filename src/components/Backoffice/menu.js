@@ -8,13 +8,16 @@ import Grid from '@material-ui/core/Grid';
 import Select from '@material-ui/core/Select';
 import FormControl from '@material-ui/core/FormControl';
 import Alert from '@material-ui/lab/Alert';
+import { useSelector } from 'react-redux';
+import Cookies from 'js-cookie';
 import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import UserList from './AsignAssistant/user_list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
-import { apiGet } from '../../services/api-service';
+import { apiGet, apiPost } from '../../services/api-service';
 import socket from '../socket';
+import { selectUser } from '../../features/userSlice';
 
 export default function Menu(v) {
   let val;
@@ -23,9 +26,11 @@ export default function Menu(v) {
   } else {
     val = 0;
   }
+  const email = Cookies.get('email');
   const [value, setValue] = useState(val);
   const classes = useStyles();
   const [stores, setStores] = useState(null);
+  const [assistantStores, setAssistantStores] = useState([]);
   const [update, setUpdate] = useState(null);
   const [inCall, setInCall] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
@@ -46,6 +51,15 @@ export default function Menu(v) {
   }, reconocimiento);
 
   useEffect(() => {
+    apiPost('users/show', JSON.stringify({ email })).then((result) => {
+      if (result.stores) {
+        const arr = [];
+        result.stores.forEach((store) => {
+          arr.push(store.id);
+        });
+        setAssistantStores(arr);
+      }
+    });
     if (!salePoints) {
       apiGet('sale-points').then((result) => setSalePoints(
         { result },
@@ -117,11 +131,12 @@ export default function Menu(v) {
               onChange={handleChangeLocation}
           >
           { salePoints.result.map(
-            (salePointOrdered) => < option className={classes.option}
+            (salePointOrdered) => (assistantStores.includes(salePointOrdered.storeId)
+              ? < option className={classes.option}
                                            key={salePointOrdered.id}
                                             value={salePointOrdered.id} >
                                       {salePointOrdered.storeName} / {salePointOrdered.department}
-                                    </option>,
+                                    </option> : null),
           )
           }
           </Select>
