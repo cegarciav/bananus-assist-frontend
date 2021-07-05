@@ -80,9 +80,14 @@ export default function Menu(v) {
       setUpdate(false);
       salePoints.result.map((salePoint) => {
         const store = stores.result.find((u) => u.id === salePoint.storeId);
+        if (!store) {
+          return null;
+        // eslint-disable-next-line no-else-return
+        } else {
         // eslint-disable-next-line no-param-reassign
-        salePoint.storeName = store.name;
-        return salePoint;
+          salePoint.storeName = store.name;
+          return salePoint;
+        }
       });
     }
   }, [update, stores, salePoints]);

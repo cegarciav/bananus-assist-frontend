@@ -59,11 +59,6 @@ const useStyles = makeStyles({
     textAlign: 'center',
     marginBottom: '10px',
   },
-  option: {
-    color: 'black',
-    fontFamily: 'Arial',
-    margin: '1em',
-  },
 });
 
 export default useStyles;
