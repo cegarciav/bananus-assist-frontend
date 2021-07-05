@@ -17,7 +17,7 @@ import AssistantList from './AsignAssistant/assistant-list';
 import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
-import { apiGet, apiPatc, apiPost } from '../../services/api-service';
+import { apiGet, apiPatch, apiPost } from '../../services/api-service';
 import socket from '../socket';
 import { selectUser } from '../../features/userSlice';
 
