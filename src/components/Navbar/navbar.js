@@ -69,9 +69,14 @@ function Navbar() {
       setUpdate(false);
       salePoints.result.map((salePoint) => {
         const store = stores.result.find((u) => u.id === salePoint.storeId);
+        if (!store) {
+          return null;
+        // eslint-disable-next-line no-else-return
+        } else {
         // eslint-disable-next-line no-param-reassign
-        salePoint.storeName = store.name;
-        return salePoint;
+          salePoint.storeName = store.name;
+          return salePoint;
+        }
       });
     }
   }, [update, stores, salePoints, location]);
@@ -116,6 +121,8 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    const TOKEN_KEY = 'token';
+    localStorage.removeItem(TOKEN_KEY);
     history.push('/');
   };
 

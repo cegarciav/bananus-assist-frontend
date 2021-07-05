@@ -17,7 +17,7 @@ const AddStore = (props) => {
         name,
         address,
       };
-      apiPatch('stores', JSON.stringify(body), null)
+      apiPost('stores', JSON.stringify(body), null)
         .then(() => {
           props.reload();
           props.hideModal();

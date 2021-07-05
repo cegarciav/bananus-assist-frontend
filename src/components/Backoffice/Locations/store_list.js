@@ -77,6 +77,7 @@ export default function StoreList() {
   };
 
   return (
+  <div>
       <div style={{ minHeight: '100vh' }} className={classes.item}>
         <button type="button" onClick={handleOpenModal} className={classes.button} >
             + Agregar punto de venta
@@ -101,6 +102,7 @@ export default function StoreList() {
               }
             </>
       }
+      </div>
       </div>
   );
 }

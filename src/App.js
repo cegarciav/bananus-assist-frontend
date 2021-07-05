@@ -21,6 +21,7 @@ import Information from './components/Information/information';
 import VideoStream from './components/FaceRecognition/video_stream';
 import VideoChat2 from './components/VideoChat/video_chat';
 import VideoChat from './components/Backoffice/video-chat';
+import ShowStorePage from './components/Backoffice/Locations/Stores/show-store-page';
 
 function App(props) {
   const RouteWithNavbar = ({
@@ -33,6 +34,7 @@ function App(props) {
         <Switch>
           <RouteWithNavbar exact path="/backoffice" component={Menu} />
           <RouteWithNavbar path="/backoffice/assign_location/:userId" component={AssignPage } />
+          <RouteWithNavbar path="/backoffice/store/:storeId" component={ShowStorePage } />
           <RouteWithNavbar exact path="/catalog" component={() => <Catalog {...props} />} />
           <RouteWithNavbar exact path="/home" component={() => <Home {...props} />} />
           <RouteWithNavbar exact path="/" component={() => <Catalog {...props} />} />
