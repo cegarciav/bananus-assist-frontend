@@ -32,11 +32,11 @@ export default function Statistics() {
         qtyAnswered.push(parseInt(dataObj.calls, 10));
       }
       setChartData({
-        labels: dateCalls,
+        labels: dateCalls.reverse().slice(dateCalls.length - 12, dateCalls.length),
         datasets: [
           {
             label: 'Llamadas contestadas por asistentes al mes',
-            data: qtyAnswered,
+            data: qtyAnswered.reverse().slice(qtyAnswered.length - 12, qtyAnswered.length),
             backgroundColor: ['rgba(75, 192, 192, 0.6)'],
             borderWidth: 4,
           },
@@ -75,6 +75,11 @@ export default function Statistics() {
             ],
             xAxes: [
               {
+                ticks: {
+                  autoSkip: true,
+                  maxTicksLimit: 10,
+                  beginAtZero: true,
+                },
                 gridLines: {
                   display: false,
                 },
