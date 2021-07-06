@@ -5,10 +5,11 @@ import { apiDelete } from '../../../../services/api-service';
 const DeleteProduct = (props) => {
   const classes = useStyles();
   const count = props.productsToDelete.length;
-  const [reload , setReload] = useState(false);
+  const [reload, setReload] = useState(false);
 
   async function callDeleteAPI(sku) {
     const body = { sku };
+    // eslint-disable-next-line no-unused-vars
     const response = await apiDelete('products', JSON.stringify(body), null).then(setReload(true));
   }
 

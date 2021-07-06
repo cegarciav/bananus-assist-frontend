@@ -14,6 +14,7 @@ import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import ProductList from './Products/products-list';
 import AssistantList from './AsignAssistant/assistant-list';
+import Statistics from './statistics';
 import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
@@ -187,6 +188,7 @@ export default function Menu(v) {
         <Tab label="Usuarios" />
         <Tab label="Productos" />
         <Tab label="Asistentes" />
+        <Tab label="Estadísticas" />
       </Tabs>
       <Grid
       container
@@ -200,6 +202,7 @@ export default function Menu(v) {
                 { value === 2 ? <UserList /> : <div/> }
                 { value === 3 ? <ProductList /> : <div/> }
                 { value === 4 ? <AssistantList /> : <div/> }
+                { value === 5 ? <Statistics /> : <div/> }
                 </Paper>
         </Container>
       </Grid>
