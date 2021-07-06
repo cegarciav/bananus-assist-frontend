@@ -45,10 +45,12 @@ export default function LoginForm() {
       if (state === 'OK') {
         const { token } = session;
         localStorage.setItem(TOKEN_KEY, token);
+        const { rol } = session;
         dispatch(login({
           username,
           password,
           token,
+          rol,
           loggedIn: true,
         }));
       } else {
