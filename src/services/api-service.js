@@ -2,7 +2,6 @@
 const apiOrigin = 'http://localhost:3001';
 if (!apiOrigin) alert('La conexión con el servidor no ha podido ser establecida');
 
-
 /**
  * Realiza un HTTP GET a la API del sistema
  * @param {string} path La ruta al recurso que se quiere obtener
@@ -25,7 +24,7 @@ async function apiGet(path, params) {
       method: 'GET',
       mode: 'cors',
       headers: {
-        'Authorization' : token,
+        Authorization: token,
         'Content-Type': 'application/json',
       },
     },
@@ -63,7 +62,7 @@ async function apiPost(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
-        'Authorization' : token,
+        Authorization: token,
         'Content-Type': 'application/json',
       },
     },
@@ -100,7 +99,7 @@ async function apiPatch(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
-        'Authorization' : token,
+        Authorization: token,
         'Content-Type': 'application/json',
       },
     },
@@ -137,7 +136,7 @@ async function apiDelete(path, body, params) {
       mode: 'cors',
       body: requestBody,
       headers: {
-        'Authorization' : token,
+        Authorization: token,
         'Content-Type': 'application/json',
       },
     },
@@ -167,7 +166,7 @@ async function apiPostMassiveUpload(path, body) {
       mode: 'cors',
       body,
       headers: {
-        'Authorization' : token,
+        Authorization: token,
       },
     },
   )

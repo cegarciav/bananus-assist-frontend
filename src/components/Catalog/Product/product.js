@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
@@ -14,7 +14,6 @@ import useStyles from './styles-product';
 function Product(props) {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
-  console.log(props);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);

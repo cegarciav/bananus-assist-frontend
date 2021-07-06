@@ -41,9 +41,7 @@ export default function AcceptedCalls() {
         ],
       });
     })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => { });
   };
 
   useEffect(() => {
