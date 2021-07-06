@@ -5,7 +5,7 @@ const useStyles = makeStyles({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: '5rem' 
+    marginTop: '5rem',
   },
 });
 

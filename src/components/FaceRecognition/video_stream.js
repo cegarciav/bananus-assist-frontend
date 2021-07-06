@@ -9,7 +9,7 @@ let count = 0;
 
 const time = 5;
 
-export default function VideoFeed(props) {
+export default function VideoFeed() {
   const videoEl = useRef(null);
   faceapi.nets.tinyFaceDetector.loadFromUri('/models');
   const salePointId = Cookies.get('salePointId');

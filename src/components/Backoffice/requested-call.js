@@ -41,9 +41,7 @@ export default function RequestedCalls() {
         ],
       });
     })
-      .catch((err) => {
-        console.log(err);
-      });
+      .catch(() => { });
   };
 
   useEffect(() => {
