@@ -5,16 +5,13 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
-import Alert from '@material-ui/lab/Alert';
 import Cookies from 'js-cookie';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
@@ -42,13 +39,13 @@ function Navbar() {
   const user = useSelector(selectUser);
   const history = useHistory();
   const [openModal, setOpenModal] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [location, setLocation] = React.useState(null);
   const [Peticiones, SetPeticiones] = useState([]);
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
   const [accepted, setAccepted] = useState(null);
-  const salePointId = Cookies.get('salePointId');
 
   useEffect(() => {
     if (!salePoints && !location) {
@@ -98,11 +95,7 @@ function Navbar() {
     socket.emit('peticion_asistentes', idSalePoint);
   };
 
-  const handleChange = (event) => {
-    setLocation(event.target.value);
-  };
-
-  const handleOpenModal = (e) => {
+  const handleOpenModal = () => {
     const value = Cookies.get('salePointId');
     const body = { kpis: 0 };
     apiPost('assistants/call', JSON.stringify(body), null);
@@ -121,9 +114,10 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+
     const TOKEN_KEY = 'token';
     localStorage.removeItem(TOKEN_KEY);
-    history.push('/');
+    history.push('/catalog');
   };
 
   const handleLogIn = () => {
@@ -225,7 +219,7 @@ function Navbar() {
                                              className={classes.link}>
                                                 <MenuItem onClick={handleClose2}>
                                                    <Typography >
-                                                        Home
+                                                        Administración
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>

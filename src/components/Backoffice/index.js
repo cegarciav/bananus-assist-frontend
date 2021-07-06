@@ -22,7 +22,7 @@ import { apiGet, apiPatch, apiPost } from '../../services/api-service';
 import socket from '../socket';
 import { selectUser } from '../../features/userSlice';
 
-export default function Menu(v) {
+export default function Backoffice(v) {
   let val;
   if (v.history.location.state === 2) {
     val = 2;
@@ -41,6 +41,7 @@ export default function Menu(v) {
   const [reconocimiento, setReconocimiento] = useState(false);
   const [Peticiones, setPeticiones] = useState([]);
   const history = useHistory();
+  const user = useSelector(selectUser);
 
   const callUser = (idSocket) => {
     socket.emit('assistant_alert', idSocket, 'Hay un asistente disponible para atenderte, pide asistencia para contacto');
@@ -109,7 +110,7 @@ export default function Menu(v) {
     setPeticiones([]);
     socket.emit('accept_videocall', argArray[0], argArray[1]);
     socket.emit('join_to_videocall_room', argArray[1]);
-    apiPatch('assistants').then( res => console.log(res));
+    apiPatch('assistants');
     // eslint-disable-next-line no-restricted-globals
     history.push({
       pathname: '/videocall/'.concat(location),
@@ -172,40 +173,45 @@ export default function Menu(v) {
             </Alert>
         }
       </div>
-
-      <Tabs
-      variant="scrollable"
-      scrollButtons="on"
-      value={value}
-      onChange={handleChange}
-      indicatorColor="primary"
-      textColor="primary"
-      centered
-      className={classes.tab}
-      >
-        <Tab label="Tiendas" />
-        <Tab label="Puntos de venta" />
-        <Tab label="Usuarios" />
-        <Tab label="Productos" />
-        <Tab label="Asistentes" />
-        <Tab label="Estadísticas" />
-      </Tabs>
-      <Grid
-      container
-      spacing={0}
-      className={classes.menu}
-      >
-        <Container xs={12} sm={6} md={4} >
-            <Paper >
-                { value === 0 ? <LocationList /> : <div/> }
-                { value === 1 ? <StoreList /> : <div/> }
-                { value === 2 ? <UserList /> : <div/> }
-                { value === 3 ? <ProductList /> : <div/> }
-                { value === 4 ? <AssistantList /> : <div/> }
-                { value === 5 ? <Statistics /> : <div/> }
+      {
+        user.rol === 'administrator' || user.rol === 'supervisor'
+          ? <>
+            <Tabs
+            variant="scrollable"
+            scrollButtons="on"
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+            className={classes.tab}
+            >
+              <Tab label="Tiendas" />
+              <Tab label="Puntos de venta" />
+              <Tab label="Usuarios" />
+              <Tab label="Productos" />
+              <Tab label="Asistentes" />
+              <Tab label="Estadísticas" />
+            </Tabs>
+            <Grid
+              container
+              spacing={0}
+              className={classes.menu}
+            >
+              <Container xs={12} sm={6} md={4} >
+                <Paper >
+                  { value === 0 ? <LocationList /> : <div/> }
+                  { value === 1 ? <StoreList /> : <div/> }
+                  { value === 2 ? <UserList /> : <div/> }
+                  { value === 3 ? <ProductList /> : <div/> }
+                  { value === 4 ? <AssistantList /> : <div/> }
+                  { value === 5 ? <Statistics /> : <div/> }
                 </Paper>
-        </Container>
-      </Grid>
+              </Container>
+            </Grid>
+          </>
+          : <h3 className={classes.location}>Esperando solicitud de asistencia...</h3>
+      }
      </>
      }
     </div>
