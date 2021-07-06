@@ -25,7 +25,7 @@ export default function Login() {
                     <CardHeader title={'Login'} style={{ textAlign: 'center' }} />
                     <CardContent>
                         <Grid item >
-                            {user ? <Redirect to="/catalog" /> : <LoginForm /> }
+                            {user ? <Redirect to="/backoffice" /> : <LoginForm /> }
                         </Grid>
                     </CardContent>
                 </Card>
