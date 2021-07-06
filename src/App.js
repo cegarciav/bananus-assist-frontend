@@ -16,6 +16,7 @@ import CatalogRoute from './routes/CatalogRoute';
 import InformationRoute from './routes/InformationRoute';
 import LoginRoute from './routes/LoginRoute';
 import VideoCallRoute from './routes/VideoCallRoute';
+import StoreRoute from './routes/StoreRoute';
 
 function App(props) {
   return (
@@ -27,6 +28,7 @@ function App(props) {
           <InformationRoute exact path="/Information" props={props} />
           <LoginRoute exact path="/login" props={props} />
           <VideoCallRoute exact path="/videocall/:id" props={props} />
+          <StoreRoute exact path="/backoffice/store/:id" props={props} />
           <Route
             exact
             path="/"
