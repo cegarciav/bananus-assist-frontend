@@ -16,7 +16,7 @@ import Cookies from 'js-cookie';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
-import { apiGet } from '../../services/api-service';
+import { apiGet, apiPost } from '../../services/api-service';
 import socket from '../socket';
 
 // eslint-disable-next-line no-unused-vars
@@ -97,6 +97,8 @@ function Navbar() {
 
   const handleOpenModal = () => {
     const value = Cookies.get('salePointId');
+    const body = { kpis: 0 };
+    apiPost('assistants/call', JSON.stringify(body), null);
     peticion(value);
     setOpenModal(true);
   };

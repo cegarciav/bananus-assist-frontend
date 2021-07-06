@@ -157,6 +157,8 @@ async function apiDelete(path, body, params) {
  * @returns La respuesta entregada por la API
  */
 async function apiPostMassiveUpload(path, body) {
+  const TOKEN_KEY = 'token';
+  const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
   const results = await fetch(
     url,
@@ -164,6 +166,9 @@ async function apiPostMassiveUpload(path, body) {
       method: 'POST',
       mode: 'cors',
       body,
+      headers: {
+        'Authorization' : token,
+      },
     },
   )
     .then((r) => r.json())

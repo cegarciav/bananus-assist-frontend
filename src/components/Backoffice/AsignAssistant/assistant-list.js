@@ -26,6 +26,7 @@ export default function AssistantList() {
           if (result) setUsers({ result });
         });
     }
+    console.log(users);
   }, [users]);
 
   useEffect(() => {

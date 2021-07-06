@@ -14,6 +14,7 @@ import LocationList from './Locations/locations';
 import StoreList from './Locations/store_list';
 import ProductList from './Products/products-list';
 import AssistantList from './AsignAssistant/assistant-list';
+import Statistics from './statistics';
 import UserList from './AsignAssistant/user-list';
 import VideoChat from './video-chat';
 import useStyles from './styles-menu';
@@ -174,42 +175,42 @@ export default function Backoffice(v) {
       </div>
       {
         user.rol === 'administrator' || user.rol === 'supervisor'
-          ?
-        <>
-          <Tabs
-          variant="scrollable"
-          scrollButtons="on"
-          value={value}
-          onChange={handleChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-          className={classes.tab}
-          >
-            <Tab label="Tiendas" />
-            <Tab label="Puntos de venta" />
-            <Tab label="Usuarios" />
-            <Tab label="Productos" />
-            <Tab label="Asistentes" />
-          </Tabs>
-          <Grid
-          container
-          spacing={0}
-          className={classes.menu}
-          >
-            <Container xs={12} sm={6} md={4} >
+          ? <>
+            <Tabs
+            variant="scrollable"
+            scrollButtons="on"
+            value={value}
+            onChange={handleChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+            className={classes.tab}
+            >
+              <Tab label="Tiendas" />
+              <Tab label="Puntos de venta" />
+              <Tab label="Usuarios" />
+              <Tab label="Productos" />
+              <Tab label="Asistentes" />
+              <Tab label="Estadísticas" />
+            </Tabs>
+            <Grid
+              container
+              spacing={0}
+              className={classes.menu}
+            >
+              <Container xs={12} sm={6} md={4} >
                 <Paper >
-                    { value === 0 ? <LocationList /> : <div/> }
-                    { value === 1 ? <StoreList /> : <div/> }
-                    { value === 2 ? <UserList /> : <div/> }
-                    { value === 3 ? <ProductList /> : <div/> }
-                    { value === 4 ? <AssistantList /> : <div/> }
-                    </Paper>
-            </Container>
-          </Grid>
-        </>
-          :
-        <h3 className={classes.location}>Esperando solicitud de asistencia...</h3>
+                  { value === 0 ? <LocationList /> : <div/> }
+                  { value === 1 ? <StoreList /> : <div/> }
+                  { value === 2 ? <UserList /> : <div/> }
+                  { value === 3 ? <ProductList /> : <div/> }
+                  { value === 4 ? <AssistantList /> : <div/> }
+                  { value === 5 ? <Statistics /> : <div/> }
+                </Paper>
+              </Container>
+            </Grid>
+          </>
+          : <h3 className={classes.location}>Esperando solicitud de asistencia...</h3>
       }
      </>
      }

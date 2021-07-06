@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { apiGet } from '../../services/api-service';
+import React from 'react';
+import AcceptedCalls from './accepted-call';
+import RequestedCalls from './requested-call';
+import useStyles from './styles-statistics';
 
 export default function Statistics() {
-  const [data, setData] = useState();
-
-  useEffect(() => {
-    if (!data) {
-      apiGet('kpis').then((result) => setData(
-        result.data,
-      ));
-    }
-  }, [data]);
-
+  const classes = useStyles();
   return (
-    <div >
+    <div className="App">
+    <div>
+      <h2 className={classes.header}>Llamadas aceptadas por los asistentes</h2>
+      <AcceptedCalls />
+      <h2 className={classes.header}>Llamadas solicitadas por los clientes</h2>
+      <RequestedCalls />
     </div>
+  </div>
   );
 }

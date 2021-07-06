@@ -7,7 +7,6 @@ import Avatar from '@material-ui/core/Avatar';
 import Grid from '@material-ui/core/Grid';
 import Modal from '@material-ui/core/Modal';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import { Link } from 'react-router-dom';
 import AddUser from './AddUser/add_user';
 import { apiGet } from '../../../services/api-service';
 import useStyles from './styles-user_list';
