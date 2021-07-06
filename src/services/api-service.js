@@ -97,7 +97,7 @@ async function apiPatch(path, body, params) {
     {
       method: 'PATCH',
       mode: 'cors',
-      body: requestBody,
+      body: JSON.stringify(requestBody),
       headers: {
         Authorization: token,
         'Content-Type': 'application/json',
