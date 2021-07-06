@@ -62,23 +62,6 @@ function Navbar() {
   }, [salePoints, stores, location]);
 
   useEffect(() => {
-    if (update && stores && salePoints && !location) {
-      setUpdate(false);
-      salePoints.result.map((salePoint) => {
-        const store = stores.result.find((u) => u.id === salePoint.storeId);
-        if (!store) {
-          return null;
-        // eslint-disable-next-line no-else-return
-        } else {
-        // eslint-disable-next-line no-param-reassign
-          salePoint.storeName = store.name;
-          return salePoint;
-        }
-      });
-    }
-  }, [update, stores, salePoints, location]);
-
-  useEffect(() => {
     socket.on('llegada_peticion', (idClientSocket) => {
       SetPeticiones([...Peticiones, idClientSocket]);
     });
