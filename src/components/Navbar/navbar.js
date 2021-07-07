@@ -1,27 +1,28 @@
+/* eslint-disable max-len */
 import React, { useState, useEffect } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import FormControl from '@material-ui/core/FormControl';
 import Modal from '@material-ui/core/Modal';
 import { Link, useHistory } from 'react-router-dom';
 import Menu from '@material-ui/core/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import { useDispatch, useSelector } from 'react-redux';
 import InfoOutlinedIcon from '@material-ui/icons/InfoOutlined';
+import Cookies from 'js-cookie';
 import useStyles from './styles-navbar';
 import Assistance from './Modal/assistance';
 import { logout, selectUser } from '../../features/userSlice';
-import { apiGet } from '../../services/api-service';
+import { apiGet, apiPost } from '../../services/api-service';
 import socket from '../socket';
 
+// eslint-disable-next-line no-unused-vars
 function groupBy(objectArray, property) {
-  return objectArray.reduce(function (acc, obj) {
-    var key = obj[property];
+  return objectArray.reduce((acc, obj) => {
+    const key = obj[property];
     if (!acc[key]) {
       acc[key] = [];
     }
@@ -38,11 +39,13 @@ function Navbar() {
   const user = useSelector(selectUser);
   const history = useHistory();
   const [openModal, setOpenModal] = React.useState(false);
+  // eslint-disable-next-line no-unused-vars
   const [location, setLocation] = React.useState(null);
   const [Peticiones, SetPeticiones] = useState([]);
   const [stores, setStores] = useState(null);
   const [update, setUpdate] = useState(null);
   const [salePoints, setSalePoints] = useState(null);
+  const [accepted, setAccepted] = useState(null);
 
   useEffect(() => {
     if (!salePoints && !location) {
@@ -59,37 +62,32 @@ function Navbar() {
   }, [salePoints, stores, location]);
 
   useEffect(() => {
-    if (update && stores && salePoints && !location) {
-      setUpdate(false);
-      salePoints.result.map((salePoint) => {
-        const store = stores.result.find((u) => u.id === salePoint.storeId);
-        // eslint-disable-next-line no-param-reassign
-        salePoint.storeName = store.name;
-        return salePoint;
-      });
-    }
-  }, [update, stores, salePoints, location]);
-
-  useEffect(() => {
     socket.on('llegada_peticion', (idClientSocket) => {
       SetPeticiones([...Peticiones, idClientSocket]);
     });
   }, [Peticiones]);
 
+  useEffect(() => {
+    socket.on('accept_call', () => {
+      setAccepted(1);
+      setOpenModal(true);
+    });
+  }, [accepted]);
+
   const peticion = (idSalePoint) => {
     socket.emit('peticion_asistentes', idSalePoint);
   };
 
-  const handleChange = (event) => {
-    setLocation(event.target.value);
-  };
-
-  const handleOpenModal = (e) => {
-    peticion(e.target.value);
+  const handleOpenModal = () => {
+    const value = Cookies.get('salePointId');
+    const body = { kpis: 0 };
+    apiPost('assistants/call', JSON.stringify(body), null);
+    peticion(value);
     setOpenModal(true);
   };
 
   const handleCloseModal = () => {
+    setAccepted(0);
     setOpenModal(false);
   };
 
@@ -99,10 +97,14 @@ function Navbar() {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+
+    const TOKEN_KEY = 'token';
+    localStorage.removeItem(TOKEN_KEY);
+    history.push('/catalog');
   };
 
   const handleLogIn = () => {
-    history.push('/backoffice');
+    history.push('/login');
   };
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
@@ -124,33 +126,6 @@ function Navbar() {
         <div>
             <AppBar position="static" >
                 <Toolbar className={classes.navbar}>
-                { user ? <></>
-                  : <>{ location ? <Typography className={classes.location}>
-                                    <h3>Punto de venta:</h3>
-                                    <p>{location}</p>
-                                </Typography >
-                    : <FormControl variant="outlined" className={classes.location}>
-                         { (!salePoints && !user) ? <></>
-                           : <Select
-                                labelId="demo-simple-select-outlined-label"
-                                id="demo-simple-select-outlined"
-                                value={location}
-                                className={classes.location}
-                                onChange={handleChange}
-                            >
-                                { salePoints.result.map(
-                                  (salePointOrdered) => <option className={classes.option}
-                                                                key={salePointOrdered.id}
-                                                                value={salePointOrdered.id} >
-                                                 {salePointOrdered.storeName} {salePointOrdered.id}
-                                                        </option>,
-                                )
-                                }
-                            </Select>
-                        }
-                        </FormControl>
-                        } </>
-                    }
                     <div className={classes.item}>
                         {auth && (
                             <div className={classes.item}>
@@ -227,7 +202,7 @@ function Navbar() {
                                              className={classes.link}>
                                                 <MenuItem onClick={handleClose2}>
                                                    <Typography >
-                                                        Home
+                                                        Administración
                                                     </Typography>
                                                 </MenuItem>
                                             </Link>
@@ -243,7 +218,7 @@ function Navbar() {
                         )}
                     {user ? <></>
                       : <button type="button" value = {location} onClick={(e) => handleOpenModal(e)} className={classes.assistButton}>
-                          &#x2706; Solicitar asistencia
+                           &#x2706; Solicitar asistencia
                         </button>
                     }
 
@@ -256,13 +231,13 @@ function Navbar() {
                         open={openModal}
                         onClose={handleCloseModal}
                     >
-                         <Assistance hideModal ={() => setOpenModal(false) } />
+                         <Assistance hideModal ={() => setOpenModal(false) } state = {accepted} />
                     </Modal>
                 </Toolbar>
             </AppBar>
 
         </div>
-        );
+  );
 }
 
 export default Navbar;

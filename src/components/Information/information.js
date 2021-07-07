@@ -52,12 +52,12 @@ const steps = [
   },
   {
     title: '3.',
-    description: 'En caso de haber asistentes disponibles, se desplegará un mensaje para que el cliente se acerque al tablet central, en donde se podrá contactar por medio de una videollamada con el asistente y resolver sus consultas.',
+    description: 'En caso de ser atendida la llamada, se desplegará un mensaje para que el cliente se acerque al tablet central, en donde se podrá contactar por medio de una videollamada con el asistente y resolver sus consultas.',
     img: 'https://res.cloudinary.com/pethelp/image/upload/v1621734566/how-3_y58ysg.png',
   },
   {
     title: '4.',
-    description: 'Si no hay asistentes disponibles, se desplegará un mensaje informandole al cliente. Este podrá continuar con su proceso de compra y cuando se desocupe el asistente solicitar que le asista.',
+    description: 'Si no hay asistentes disponibles el cliente podrá continuar con su proceso de compra y cuando se desocupe el asistente solicitar que le asista.',
     img: 'https://res.cloudinary.com/pethelp/image/upload/v1621734565/how-4_ugcllu.png',
   },
 ];

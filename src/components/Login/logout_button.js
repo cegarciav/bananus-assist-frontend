@@ -6,6 +6,8 @@ import { logout } from '../../features/userSlice';
 
 export default function Logout() {
   const dispatch = useDispatch();
+  const TOKEN_KEY = 'token';
+  localStorage.removeItem(TOKEN_KEY);
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
