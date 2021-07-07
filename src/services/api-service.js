@@ -86,7 +86,7 @@ async function apiPatch(path, body, params) {
   const TOKEN_KEY = 'token';
   const token = localStorage.getItem(TOKEN_KEY);
   const url = new URL(`${apiOrigin}/${path}`);
-  let requestBody = {};
+  let requestBody = JSON.stringify({});
   if (params) {
     Object.keys(params)
       .forEach((key) => url.searchParams.append(key, params[key]));

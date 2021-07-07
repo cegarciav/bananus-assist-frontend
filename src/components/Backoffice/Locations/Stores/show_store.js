@@ -17,7 +17,7 @@ export default function ShowStoreToggle(store) {
 /* To do: link para ver supervisores y asistentes. */
 
   const classes = useStyles();
-  const currentStore = store.store;
+  const currentStore = store.location.state.store_prop;
   const history = useHistory();
   const [openModal, setOpenModal] = useState(false);
 
